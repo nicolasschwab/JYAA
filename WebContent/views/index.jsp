@@ -14,21 +14,17 @@ Bienvenido a JRuteros
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
     <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="resources/img/bike-0.jpg" alt="Chania">
+    <div class="item active" style="background-image:url('resources/img/bike-3.jpg'); background-repeat:no-repeat ;">
     </div>
 
-    <div class="item">
-      <img src="resources/img/bike-1.jpg" alt="Chania">
+    <div class="item" style="background-image:url('resources/img/bike-1.jpg') ; background-repeat:no-repeat;">
     </div>
 
-    <div class="item">
-      <img src="resources/img/bike-2.jpg" alt="Flower">
+    <div class="item" style="background-image:url('resources/img/bike-2.jpg') ; background-repeat:no-repeat;">
     </div>
 
   </div>
