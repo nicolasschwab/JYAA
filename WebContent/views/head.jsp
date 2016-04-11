@@ -11,5 +11,4 @@
 <link href="${pageContext.request.contextPath}/resources/css/fronted.css" rel="stylesheet">
 
 <!-- Bootstrap JS -->
-<script
-	src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
