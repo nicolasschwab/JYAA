@@ -61,8 +61,7 @@ public class LoginServlet extends HttpServlet {
 				return;				
 			}
 		}		
-		response.sendRedirect("/");
-		return;
+		doGet(request, response);
 
 	}
 

@@ -60,8 +60,11 @@
 
 	<div class="container">
 
-<div><input type="button" class="btn btn-primary"
-						value="Crear actividad" /></div>
+		<div>
+			<a href="altaActividad"
+				class="btn btn-primary" role="button">Crear actividad</a>
+
+		</div>
 		<h4>Actividades Habilitadas</h4>
 		<table class="table table-striped">
 			<thead>
@@ -69,8 +72,9 @@
 					<th>Actividad</th>
 					<th>Cantidad de rutas asociadas</th>
 					<th>Detalle rutas</th>
-					<th></th>
-					<th></th>
+					<th>Modificacion</th>
+					<th>Deshabilitacion</th>
+					<th>Eliminacion</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -90,9 +94,12 @@
 								<li>To the hell</li>
 							</ul>
 						</div></td>
+					<td><input type="button" class="btn btn-warning"
+						value="Modificar" /></td>
 					<td><input type="button" class="btn btn-default"
 						value="Deshabilitar" /></td>
-					<td></td>
+					<td><input type="button" class="btn btn-default"
+						value="Eliminar" disabled="disabled" /></td>
 				</tr>
 				<tr>
 					<td>Actividad 3</td>
@@ -111,9 +118,12 @@
 								<li>Al glaciar</li>
 							</ul>
 						</div></td>
+					<td><input type="button" class="btn btn-warning"
+						value="Modificar" /></td>
 					<td><input type="button" class="btn btn-default"
 						value="Deshabilitar" /></td>
-					<td></td>
+					<td><input type="button" class="btn btn-default"
+						value="Eliminar" disabled="disabled" /></td>
 				</tr>
 				<tr>
 					<td>Actividad 5</td>
@@ -129,6 +139,8 @@
 								<li>No posee rutas</li>
 							</ul>
 						</div></td>
+					<td><input type="button" class="btn btn-warning"
+						value="Modificar" /></td>
 					<td><input type="button" class="btn btn-default"
 						value="Deshabilitar" /></td>
 					<td><input type="button" class="btn btn-default"
@@ -144,8 +156,9 @@
 					<th>Actividad</th>
 					<th>Cantidad de rutas asociadas</th>
 					<th>Detalle rutas</th>
-					<th></th>
-					<th></th>
+					<th>Modificacion</th>
+					<th>Habilitacion</th>
+					<th>Eliminacion</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -166,12 +179,13 @@
 								<li>A las cataratas</li>
 								<li>A casa</li>
 							</ul>
-						</div>
-					</td>
-					<td>
-						<input type="button" class="btn btn-default" value="Habilitar" />
-					</td>
-					<td></td>
+						</div></td>
+					<td><input type="button" class="btn btn-warning"
+						value="Modificar" /></td>
+					<td><input type="button" class="btn btn-default"
+						value="Habilitar" /></td>
+					<td><input type="button" class="btn btn-default"
+						value="Eliminar" disabled="disabled" /></td>
 				</tr>
 				<tr>
 					<td>Actividad 4</td>
@@ -186,14 +200,13 @@
 								<li class="dropdown-header">Rutas</li>
 								<li>No posee rutas</li>
 							</ul>
-						</div>
-					</td>
-					<td>
-						<input type="button" class="btn btn-default" value="Habilitar" />
-					</td>
-					<td>
-						<input type="button" class="btn btn-default" value="Eliminar" />
-					</td>
+						</div></td>
+					<td><input type="button" class="btn btn-warning"
+						value="Modificar" /></td>
+					<td><input type="button" class="btn btn-default"
+						value="Habilitar" /></td>
+					<td><input type="button" class="btn btn-default"
+						value="Eliminar" /></td>
 				</tr>
 				<tr>
 					<td>Actividad 6</td>
@@ -209,12 +222,13 @@
 								<li>A la montaña</li>
 								<li>Al bosque</li>
 							</ul>
-						</div>
-					</td>
-					<td>
-					<input type="button" class="btn btn-default" value="Habilitar" />
-						</td>
-					<td></td>
+						</div></td>
+					<td><input type="button" class="btn btn-warning"
+						value="Modificar" /></td>
+					<td><input type="button" class="btn btn-default"
+						value="Habilitar" /></td>
+					<td><input type="button" class="btn btn-default"
+						value="Eliminar" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
