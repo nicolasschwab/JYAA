@@ -53,16 +53,16 @@
 </div>
 <div class="container">
 	<div class="form-login">
-		<form class="form-signin">
+		<form class="form-signin" action="login" method="post">
 			<fieldset class="login">
 			<legend>Inicia Sesión</legend>
 			<div class="form-group row">
 				<div class="col-md-4"><label>Usuario</label></div>				
-				<div class="col-md-8"><input type="text"></div>
+				<div class="col-md-8"><input type="text" name="username"></div>
 			</div>
 			<div class="form-group row">
 				<div class="col-md-4"><label>Contraseña</label></div>
-				<div class="col-md-8"><input type="password"></div>
+				<div class="col-md-8"><input type="password" name="password"></div>
 			</div>
 			<div class="form-group floatLeft">
 				<input type="submit" value="Iniciar Sesión">
