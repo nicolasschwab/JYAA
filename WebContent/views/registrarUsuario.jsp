@@ -26,8 +26,10 @@
 <!-- Bootstrap JS -->
 <script
 	src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
-	
-<link href="${pageContext.request.contextPath}/resources/css/registro.css" rel="stylesheet">
+
+<link
+	href="${pageContext.request.contextPath}/resources/css/registro.css"
+	rel="stylesheet">
 
 </head>
 <body>
@@ -120,7 +122,9 @@
 
 
 	</div>
-
+	<footer class="footer">
+		<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
+	</footer>
 	<script type="text/javascript">
 		$(function() {
 			$('#nacimiento').datepicker();
