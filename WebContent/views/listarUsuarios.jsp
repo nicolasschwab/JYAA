@@ -36,14 +36,14 @@
 			<ul class="nav navbar-nav">
 				<li><a href="#"><span class="fa fa-user" aria-hidden="true">
 					</span>Administrador</a></li>
-				<li><a href="#"><span class="fa fa-road" aria-hidden="true">
+				<li><a href="listarUsuarios"><span class="fa fa-road" aria-hidden="true">
 					</span>Usuarios</a></li>
-				<li><a href="#"><span class="fa fa-road" aria-hidden="true">
+				<li><a href="listarActividades"><span class="fa fa-road" aria-hidden="true">
 					</span>Actividades</a></li>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" class="salir">Salir</a></li>
+				<li><a href="logout" class="salir">Salir</a></li>
 			</ul>
 		</div>
 	</div>

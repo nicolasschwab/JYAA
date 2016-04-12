@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AdminServlet
  */
-@WebServlet(urlPatterns = { "/listarUsuarios" })
+@WebServlet(urlPatterns = { "/listarUsuarios", "/listarActividades" })
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +37,9 @@ public class AdminServlet extends HttpServlet {
 		switch (uri[uri.length-1]) {
 		case "listarUsuarios":
 			dispatcher = getServletContext().getRequestDispatcher("/views/listarUsuarios.jsp");
+			break;
+		case "listarActividades":
+			dispatcher = getServletContext().getRequestDispatcher("/views/listarActividades.jsp");
 			break;
 		default:
 			dispatcher = getServletContext().getRequestDispatcher("/views/indexAdministrador.jsp");
