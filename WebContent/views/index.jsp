@@ -67,7 +67,7 @@
 			<div class="form-group floatLeft">
 				<input type="submit" value="Iniciar Sesión">
 			</div>
-			<a class="registrate">Registrate!</a>
+			<a href="registrarUsuario" class="registrate">Registrate!</a>
 			</fieldset>
 		</form>		
 	</div>

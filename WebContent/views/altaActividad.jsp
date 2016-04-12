@@ -68,7 +68,7 @@
 
 		<form role="form" type="post">
 			<div class="form-group">
-				<label for="ejemplo_email_1">Nombre</label> <input type="email"
+				<label for="ejemplo_email_1">Nombre</label> <input type="text"
 					class="form-control" placeholder="Nombre de la nueva actividad">
 			</div>
 			<div class="form-group">
