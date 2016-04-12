@@ -31,7 +31,8 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/index.jsp");
+		dispatcher.forward(request, response);
 		return;
 	}
 
@@ -54,8 +55,9 @@ public class LoginServlet extends HttpServlet {
 					dispatcher.forward(request, response);
 					break;
 				case 2:
-					dispatcher = getServletContext().getRequestDispatcher("/views/indexUsuario.jsp");
-					dispatcher.forward(request, response);
+					response.sendRedirect("listarRutasUsuario");
+					//dispatcher = getServletContext().getRequestDispatcher("/views/listarRutas.jsp");
+					//dispatcher.forward(request, response);
 					break;
 				}
 				return;				

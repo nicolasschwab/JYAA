@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/UserServlet")
+@WebServlet(urlPatterns = { "/listarRutasUsuario" })
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +28,18 @@ public class UserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		RequestDispatcher dispatcher;
+		
+		String[] uri = request.getRequestURI().split("/");
+		switch (uri[uri.length-1]) {
+		case "listarRutasUsuario":
+			dispatcher = getServletContext().getRequestDispatcher("/views/listarRutasUsuario.jsp");
+			break;
+		default:
+			dispatcher = getServletContext().getRequestDispatcher("/views/listarRutasUsuario.jsp");
+			break;
+		}
+		dispatcher.forward(request, response);
 	}
 
 	/**
