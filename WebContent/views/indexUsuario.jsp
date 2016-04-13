@@ -25,7 +25,7 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="#"><span class="fa fa-road" aria-hidden="true"> </span>Ruta Nueva</a>
+					<a href="altaRuta"><span class="fa fa-road" aria-hidden="true"> </span>Ruta Nueva</a>
 				</li>
 				<li>
 					<a href="#"><span class="fa fa-road" aria-hidden="true"> </span>Buscar una Ruta</a>
