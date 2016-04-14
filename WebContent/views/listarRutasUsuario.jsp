@@ -22,7 +22,9 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/fronted.css"
 	rel="stylesheet">
-
+<!-- iconos  -->
+<link href="./resources/fonts/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resources/fonts/css/font-awesome.min.css" rel="stylesheet">
 <!-- Bootstrap JS -->
 <script
 	src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -47,10 +49,10 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="altaRuta"><span class="fa fa-road" aria-hidden="true"> </span>Ruta Nueva</a>
+					<a href="altaRuta"><span class="fa fa-plus" aria-hidden="true"> </span>Ruta Nueva</a>
 				</li>
 				<li>
-					<a href="buscarRuta"><span class="fa fa-road" aria-hidden="true"> </span>Buscar una Ruta</a>
+					<a href="buscarRuta"><span class="fa fa-search" aria-hidden="true"> </span>Buscar una Ruta</a>
 				</li>
 				<li>
 					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a>
@@ -68,7 +70,7 @@
 				<li><a href="logout" class="salir">Salir</a></li>
 			</ul>
 		</div>
-	</div>
+	</div>	
 </nav>
 
 	<div class="container">
