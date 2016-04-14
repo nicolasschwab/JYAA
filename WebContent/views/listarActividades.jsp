@@ -71,9 +71,23 @@
 			<li class="active" id="liHab"><a href="#">Actividades
 					Habilitadas</a></li>
 			<li id="liDes"><a href="#">Actividades Deshabilitadas</a></li>
-			<li><div>
-					<a href="altaActividad" class="btn btn-primary">Crear actividad</a>
-				</div></li>
+			<li class="nav navbar-nav navbar-right ">
+				<form class="form-inline" action="login" method="post">
+
+					<div class="form-group">
+						<input type="text" name="username"
+							placeholder="Nombre actividad nueva" class="form-control">
+					</div>
+					<div class="form-group">
+						<label><input type="checkbox" name="habilitada">
+							Habilitada</label>
+					</div>
+					<input class="btn btn-primary" type="button"
+						value="Crear Actividad">
+
+				</form>
+
+			</li>
 		</ul>
 
 		<div class="well well-lg" id="tablaHabilitada">
@@ -81,184 +95,121 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="thumbnail col-md-3">
-						<img alt="Actividad" src="resources/img/bike-3.jpg">
-					</div>
-					<div class="col-md-6">
-						<h3>Actividad 1</h3>
-						<h4>Mountain bike - Ciclismo - Cicloturismo - Senderismo</h4>
+					<div class="col-md-5">
+						<h4>Mountain Bike</h4>
 					</div>
 					<div class="col-md-2 btn-group-vertical">
-						<div class="btn-group">
-							<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Deshabilitar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Eliminar"
-								disabled="disabled" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-success" value="Detalle" />
-						</div>
 
+						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
 					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Deshabilitar" />
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Eliminar" disabled="disabled" />
+					</div>
+
 				</div>
 			</div>
-
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="thumbnail col-md-3">
-						<img alt="Actividad" src="resources/img/none.png">
-					</div>
-					<div class="col-md-6">
-						<h3>Actividad 3</h3>
-						<h4>- No se encontraron rutas asociadas -</h4>
+					<div class="col-md-5">
+						<h4>Cicloturismo</h4>
 					</div>
 					<div class="col-md-2 btn-group-vertical">
-						<div class="btn-group">
-							<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Deshabilitar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Eliminar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-success" value="Detalle" />
-						</div>
 
+						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
 					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Deshabilitar" />
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Eliminar"
+							disabled="disabled" />
+					</div>
+
 				</div>
 			</div>
-
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="thumbnail col-md-3">
-						<img alt="Actividad" src="resources/img/bike-1.jpg">
-					</div>
-					<div class="col-md-6">
-						<h3>Actividad 5</h3>
-						<h4>Alpinismo - Motociclismo - Kayac</h4>
+					<div class="col-md-5">
+						<h4>Senderismo</h4>
 					</div>
 					<div class="col-md-2 btn-group-vertical">
-						<div class="btn-group">
-							<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Deshabilitar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Eliminar"
-								disabled="disabled" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-success" value="Detalle" />
-						</div>
 
+						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
 					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Deshabilitar" />
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Eliminar" />
+					</div>
+
 				</div>
 			</div>
-
 		</div>
-
+		
+		
 
 		<div class="well well-lg" style="display: none"
 			id="tablaDeshabilitada">
-
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="thumbnail col-md-3">
-						<img alt="Actividad" src="resources/img/none.png">
-					</div>
-					<div class="col-md-6">
-						<h3>Actividad 2</h3>
-						<h4>- No se encontraron rutas asociadas -</h4>
+					<div class="col-md-5">
+						<h4>Esquí</h4>
 					</div>
 					<div class="col-md-2 btn-group-vertical">
-						<div class="btn-group">
-							<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Deshabilitar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Eliminar"
-								disabled="disabled" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-success" value="Detalle" />
-						</div>
-
+						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Habilitar" />
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Eliminar" />
 					</div>
 				</div>
 			</div>
-
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="thumbnail col-md-3">
-						<img alt="Actividad" src="resources/img/bike-1.jpg">
-					</div>
-					<div class="col-md-6">
-						<h3>Actividad 4</h3>
-						<h4>Ciclismo - Senderismo - Kayac</h4>
+					<div class="col-md-5">
+						<h4>Kayac</h4>
 					</div>
 					<div class="col-md-2 btn-group-vertical">
-						<div class="btn-group">
-							<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Deshabilitar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Eliminar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-success" value="Detalle" />
-						</div>
-
+						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Habilitar" />
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Eliminar" disabled="disabled"/>
 					</div>
 				</div>
 			</div>
-
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="thumbnail col-md-3">
-						<img alt="Actividad" src="resources/img/bike-3.jpg">
-					</div>
-					<div class="col-md-6">
-						<h3>Actividad 6</h3>
-						<h4>Alpinismo - Cicloturismo - Senderismo</h4>
+					<div class="col-md-5">
+						<h4>Motociclismo</h4>
 					</div>
 					<div class="col-md-2 btn-group-vertical">
-						<div class="btn-group">
-							<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Deshabilitar" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-default" value="Eliminar"
-								disabled="disabled" />
-						</div>
-						<div class="btn-group">
-							<input type="button" class="btn btn-success" value="Detalle" />
-						</div>
-
+						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Habilitar" />
+					</div>
+					<div class="col-md-2 btn-group-vertical">
+						<input type="button" class="btn btn-default" value="Eliminar" />
 					</div>
 				</div>
 			</div>
-
 		</div>
 
+
 	</div>
 
+
 	<footer class="footer">
-	<div class="container">
-		<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
-	</div>
+	<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
 	</footer>
 
 	<script type="text/javascript">

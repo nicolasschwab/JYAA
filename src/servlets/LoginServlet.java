@@ -52,13 +52,9 @@ public class LoginServlet extends HttpServlet {
 				switch (usuario.getType()) {
 				case 1:
 					response.sendRedirect("listarActividades");
-//					dispatcher = getServletContext().getRequestDispatcher("/views/indexAdministrador.jsp");
-//					dispatcher.forward(request, response);
 					break;
 				case 2:
 					response.sendRedirect("listarRutasUsuario");
-					//dispatcher = getServletContext().getRequestDispatcher("/views/listarRutas.jsp");
-					//dispatcher.forward(request, response);
 					break;
 				}
 				return;				
