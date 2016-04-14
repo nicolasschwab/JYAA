@@ -1,0 +1,67 @@
+.formBusqueda{
+	text-align: center;
+	background: #37454d;
+    padding: 10px;
+}
+.busquedaFecha{
+	line-height: inherit !important;
+}
+.buscarNombre{
+	width:250px;
+}
+.left{
+	text-align: left;
+}
+.segundaFila{
+	width:200px;
+}
+.botonBuscar{
+	width: 150px;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #007fad;
+    color: #fff;
+    cursor: pointer;
+    outline: 0;
+}
+.busquedaArriba{
+	margin-bottom: 10px;
+}
+section{
+	padding: 12px 5px 10px;
+	border-top: 1px solid #cdd0d2;
+    position: relative;
+}
+.contenedor{
+	border: 1px solid #cdd0d2;
+	border-radius: 5px;
+}
+.menuFiltros{
+	border-bottom: 0;
+    color: #007fad;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    font-weight: 700;
+}
+.resultados{
+	margin-top:20px;
+}
+.img{
+	height:150px;
+	margin-top:10px;
+	margin-left:10px;
+}
+.unaRuta{
+	height:170px;
+}
+.borderBottom{
+	border-bottom:1px solid #cdd0d2;	
+}
+.tamanioLetra{
+	line-height: 30px;
+    font-size: large;
+}
+.paddingTop{
+	padding-top: 10px;
+}

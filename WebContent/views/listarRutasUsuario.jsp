@@ -50,7 +50,7 @@
 					<a href="altaRuta"><span class="fa fa-road" aria-hidden="true"> </span>Ruta Nueva</a>
 				</li>
 				<li>
-					<a href="#"><span class="fa fa-road" aria-hidden="true"> </span>Buscar una Ruta</a>
+					<a href="buscarRuta"><span class="fa fa-road" aria-hidden="true"> </span>Buscar una Ruta</a>
 				</li>
 				<li>
 					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a>

@@ -16,7 +16,7 @@
 .floatRight{
 	float:right;
 }
-input, textarea{
+input, textarea, select{
 	border: 1px solid #ccc;
     border-radius: 4px;
     padding: 6px 12px;
