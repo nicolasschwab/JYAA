@@ -17,27 +17,7 @@ var data = {};
 function inicializarRegistroViaje() {
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);  
   directionsDisplay.setMap(map);
-  directionsDisplay.addListener('directions_changed', function() {
-	  //ACA SE DEBERIAN ACTUALIZAR LOS WAYPOINTS Y EL KM
-	  actualizarTrayecto(directionsDisplay.getDirections());
-  });
   
-  var inputO = (document.getElementById('dirOrigen')); 
-  var searchBoxO = new google.maps.places.SearchBox(inputO);  
-  google.maps.event.addListener(searchBoxO, 'places_changed', function() {
-    var places = searchBoxO.getPlaces();
-    if (places.length == 0) {
-      return;
-    }
-  });
-  var inputD = (document.getElementById('dirDestino')); 
-  var searchBoxD = new google.maps.places.SearchBox(inputD);  
-  google.maps.event.addListener(searchBoxD, 'places_changed', function() {
-    var places = searchBoxD.getPlaces();
-    if (places.length == 0) {
-      return;
-    }
-  });
 }
 
 function inicializarEdicionViaje(wp){

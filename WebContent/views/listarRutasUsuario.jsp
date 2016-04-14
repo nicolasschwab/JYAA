@@ -107,8 +107,8 @@
 						</div></td>
 					<td><input type="button" class="btn btn-default"
 						value="Ver fotos" /></td>
-					<td><input type="button" class="btn btn-warning"
-						value="Modificar" /></td>
+					<td><form action="altaRuta"><input type="submit" class="btn btn-warning"
+						value="Modificar" /> </form></td>
 					<td><input type="button" class="btn btn-default"
 						value="Eliminar" /></td>
 					<td>
@@ -135,8 +135,8 @@
 						</div></td>
 					<td><input type="button" class="btn btn-default"
 						value="Ver fotos" /></td>
-					<td><input type="button" class="btn btn-warning"
-						value="Modificar" /></td>
+					<td><form action="altaRuta"><input type="submit" class="btn btn-warning"
+						value="Modificar" /> </form></td>
 					<td><input type="button" class="btn btn-default"
 						value="Eliminar" /></td>
 					<td>
@@ -163,8 +163,8 @@
 						</div></td>
 					<td><input type="button" class="btn btn-default"
 						value="Ver fotos" /></td>
-					<td><input type="button" class="btn btn-warning"
-						value="Modificar" /></td>
+					<td><form action="altaRuta"><input type="submit" class="btn btn-warning"
+						value="Modificar" /> </form></td>
 					<td><input type="button" class="btn btn-default"
 						value="Eliminar" /></td>
 					<td>
