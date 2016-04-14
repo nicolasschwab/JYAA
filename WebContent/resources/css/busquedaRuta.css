@@ -39,7 +39,6 @@ section{
 .menuFiltros{
 	border-bottom: 0;
     color: #007fad;
-    height: 45px;
     line-height: 45px;
     text-align: center;
     font-weight: 700;
@@ -64,4 +63,13 @@ section{
 }
 .paddingTop{
 	padding-top: 10px;
+}
+.ordenar{
+	margin-bottom: 10px;
+}
+.radioCalificacion:checked ~ label {
+  color: orange;
+}
+.radioCalificacion {
+  display: none;
 }

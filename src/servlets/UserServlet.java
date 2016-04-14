@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet(urlPatterns = { "/listarRutasUsuario", "/altaRuta", "/buscarRuta" })
+@WebServlet(urlPatterns = { "/listarRutasUsuario", "/altaRuta", "/buscarRuta", "/detalleRuta" })
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,6 +40,9 @@ public class UserServlet extends HttpServlet {
 			break;
 		case "buscarRuta":
 			dispatcher = getServletContext().getRequestDispatcher("/views/busquedaRuta.html");
+			break;
+		case "detalleRuta":
+			dispatcher = getServletContext().getRequestDispatcher("/views/detalleRuta.html");
 			break;
 		default:
 			dispatcher = getServletContext().getRequestDispatcher("/views/listarRutasUsuario.jsp");

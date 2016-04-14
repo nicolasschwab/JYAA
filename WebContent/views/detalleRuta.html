@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>JRuteros</title>
+<!-- jQuery y sus css -->
+<link href="./resources/js/jquery-ui-1.11.4.custom/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript"	src="./resources/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript"	src="./resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+
+<!-- iconos  -->
+<link href="./resources/fonts/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resources/fonts/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="./resources/css/fronted.css" rel="stylesheet">
+
+<!-- Bootstrap JS -->
+<script	src="./resources/bootstrap/js/bootstrap.min.js"></script>
+
+<link href="./resources/css/registro.css" rel="stylesheet">
+<link href="./resources/css/nuevaRuta.css" rel="stylesheet">
+<link href="./resources/css/busquedaRuta.css" rel="stylesheet">
+
+<!-- mapa -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+<script type="text/javascript"	src="./resources/js/configuracionmap.js"></script>
+</head>
+<body onload="inicializarRegistroViaje()">
+
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+			data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand aLogo" href="#"><div class="logo"></div></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="altaRuta"><span class="fa fa-plus" aria-hidden="true"> </span>Ruta Nueva</a>
+				</li>
+				<li>
+					<a href="buscarRuta"><span class="fa fa-search" aria-hidden="true"> </span>Buscar una Ruta</a>
+				</li>
+				<li>
+					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a>
+				</li>				
+			</ul>
+			<ul class="nav navbar-nav navbar-right ">
+				<li>
+					<a href="#"><span class="fa fa-user" aria-hidden="true"> </span> Nombre Usuario</a>
+				</li>
+				<li>
+					<a href="#" class="dropdown-toggle"	role="button" aria-haspopup="true" aria-expanded="false"> 
+						<img class="img-perfil" src="#" alt="Foto Perfil">
+					</a>
+				</li>
+				<li><a href="logout" class="salir">Salir</a></li>
+			</ul>
+		</div>
+	</div>	
+</nav>
+
+<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="col-md-2">
+						<div class="form-group">
+							<div clas="row">
+								<label>Subi fotos de la ruta!</label>
+							</div>
+							<ul class="columImg">
+								<li>				
+									<div class="img" style="background:url('resources/img/bike-3.jpg'); background-size: cover;  background-repeat:no-repeat; height:96px; width:96px;">
+									</div>
+								</li>
+								<li>
+									<div class="img" style="background:url('resources/img/bike-1.jpg'); background-size: cover;  background-repeat:no-repeat; height:96px; width:96px;">
+									</div>
+								</li>
+							</ul>				
+						</div>
+					</div>
+					<div class="col-md-5">
+						<fieldset class="fieldSetNuevaRuta">
+							<legend>Informacion General</legend>
+							<div class="row center ">
+								<div class="form-group">
+									<div class="row">
+										<label for="nombre">Dele un nombre a su ruta!</label>
+									</div>
+									<div>
+										<span>Nombre de la ruta</span>
+									</div>	
+								</div>
+							</div>
+							<div class="row center ">
+								<div class="form-group">
+									<div class="row">
+										<label for="descripcion">Comentá un poco sobre su viaje</label>
+									</div>
+									<div>
+										<span>Esta es la descripcion de la ruta</span>
+									</div>	
+								</div>
+							</div>
+						</fieldset>
+						<fieldset class="fieldSetNuevaRuta">
+							<legend>Fechas</legend>
+							<div class="row  center">
+								<div class="form-group ">
+									<div class="row">
+										<label>Tiempo estimado</label>
+									</div>
+									<div>
+										<span>19:00</span>
+									</div>							
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<label>¿Que dia es el viaje?</label>
+									</div>
+									<div>
+										<span>03/02/2016</span>
+									</div>						
+									
+								</div>
+							</div>
+						</fieldset>
+					</div>
+					<div class="col-md-5">
+						<fieldset class="fieldSetNuevaRuta">
+							<legend>Caracteristicas</legend>
+							<div class="row center">
+								<div class="form-group">
+									<div>
+										<label>Actividad</label>
+									</div>
+									<div>
+										<span>Ciclismo</span>
+									</div>
+								</div>
+								<div class="form-group ">
+									<div>
+										<label>Dificultad</label>
+									</div>
+									<div>
+										<span>Facil</span>
+									</div>						
+								</div>
+								<div class="form-group">
+									<div>
+										<label>Tipo de viaje</label>
+									</div>
+									<div>										
+										<label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label>
+									</div>						
+								</div>
+							</div>
+							<div class="row center">
+								<div class="form-group ">
+									<div class="row">
+										<label>Cantidad de km</label>
+									</div>
+									<div>
+										<span>10km</span>
+									</div>							
+								</div>								
+							</div>
+						</fieldset>
+						<fieldset class="fieldSetNuevaRuta">
+							<legend>Califícalo!</legend>
+							<form>
+								<div class="col-md-6 calificacion">											
+									<input class="radioCalificacion" id="radio1" type="radio" name="calificacionnro" value="5">
+								    <label class="labelCalificacion" for="radio1"><i class="fa fa-star"></i></label>
+								    <input class="radioCalificacion" id="radio2" type="radio" name="calificacionnro" value="4">
+								    <label class="labelCalificacion" for="radio2"><i class="fa fa-star"></i></label>
+								    <input class="radioCalificacion" id="radio3" type="radio" name="calificacionnro" value="3">
+								    <label class="labelCalificacion" for="radio3"><i class="fa fa-star"></i></label>
+								    <input class="radioCalificacion" id="radio4" type="radio" name="calificacionnro" value="2">
+								    <label class="labelCalificacion" for="radio4"><i class="fa fa-star"></i></label>
+								    <input class="radioCalificacion" id="radio5" type="radio" name="calificacionnro" value="1">
+								    <label class="labelCalificacion" for="radio5"><i class="fa fa-star"></i></label>
+								</div>
+								<div class="col-md-6">
+									<label>Yo lo recorri!</label>
+									<input type="checkbox">									
+									<input type="submit" value="Enviar">									
+								</div>
+							</form>
+						</fieldset>
+					</div>								
+				</div>
+			</div>
+			<div class="row">		
+				<div class="col-md-12">
+					<div id="map-canvas" style="height: 500px"></div>
+				</div>
+			</div>
+	</div>
+	
+	<footer class="footer">
+	<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
+	</footer>
+</body>
+</html>
