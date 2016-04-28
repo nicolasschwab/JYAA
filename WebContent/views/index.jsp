@@ -10,6 +10,7 @@
 	rel="stylesheet" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 
@@ -142,7 +143,7 @@
 						placeholder="Correo electrónico" class="form-control">
 				</div>
 				<div class="form-group col-md-offset-3">
-					<button type="button" class="btn btn-default">Registrarme</button>
+					<button type="button" class="btn btn-default" id="registrar">Registrarme</button>
 				</div>
 			</fieldset>
 		</form>
