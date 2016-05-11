@@ -20,6 +20,7 @@ public class Ruta {
 	private Actividad actividad;
 	private List<Foto> fotos;
 	private Map<Usuario, Integer> hacedores;
+	private List<Punto> puntos;
 	
 	public Ruta() {
 		super();
@@ -42,6 +43,7 @@ public class Ruta {
 		setActividad(actividad);
 		setFotos(new ArrayList<Foto>());
 		setHacedores(new HashMap<Usuario, Integer>());
+		setPuntos(new ArrayList<Punto>());
 	}
 	
 	
@@ -143,6 +145,18 @@ public class Ruta {
 	}
 	public void setFotos(List<Foto> fotos) {
 		this.fotos = fotos;
+	}
+
+	public List<Punto> getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(List<Punto> puntos) {
+		this.puntos = puntos;
+	}
+
+	public void setHacedores(Map<Usuario, Integer> hacedores) {
+		this.hacedores = hacedores;
 	}
 	
 	
