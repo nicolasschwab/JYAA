@@ -1,27 +1,21 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Punto {
 
-	private Long longitud;
+	@Id
+	private Long id;
 	private Long latitud;
+	private Long longitud;
 	private String descripcion;
-	
-	public Punto(){
-		super();
+	public Long getId() {
+		return id;
 	}
-	
-	public Punto(Long longitud, Long latitud, String descripcion) {
-		super();
-		this.longitud = longitud;
-		this.latitud = latitud;
-		this.descripcion = descripcion;
-	}
-	
-	public Long getLongitud() {
-		return longitud;
-	}
-	public void setLongitud(Long longitud) {
-		this.longitud = longitud;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public Long getLatitud() {
 		return latitud;
@@ -29,11 +23,18 @@ public class Punto {
 	public void setLatitud(Long latitud) {
 		this.latitud = latitud;
 	}
+	public Long getLongitud() {
+		return longitud;
+	}
+	public void setLongitud(Long longitud) {
+		this.longitud = longitud;
+	}
 	public String getDescripcion() {
 		return descripcion;
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+	 
 }
+

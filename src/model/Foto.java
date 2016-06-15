@@ -1,25 +1,37 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+
+@Entity
 public class Foto {
 
+	@Id
+	private long id;
 	private String nombre;
-	private Byte[] contenido;
+	@Lob
+	@Column(length = 16777215)
+	private byte[] contenido;
 
-	public Foto(){
-		super();
-	}
-	
-	public Foto(String nombre, Byte[] contenido) {
-		super();
-		this.nombre = nombre;
-		this.contenido = contenido;
+	public Foto() {
+
 	}
 
-	public Byte[] getContenido() {
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public byte[] getContenido() {
 		return contenido;
 	}
 
-	public void setContenido(Byte[] contenido) {
+	public void setContenido(byte[] contenido) {
 		this.contenido = contenido;
 	}
 

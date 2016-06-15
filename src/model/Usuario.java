@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Usuario extends Perfil {
 	
-	private String nombreUsuario;
 	private String dni;
-	private String apellido;
-	private String nombre;
 	private String domicilio;
 	private Date fechaNacimiento;
 	private String sexo;
 	private String email;
+	@OneToMany
 	private List<Ruta> misRutas;
 	
 	public Usuario(){
@@ -40,30 +43,11 @@ public class Usuario extends Perfil {
 		getMisRutas().add(ruta);
 	}
 	
-	
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
 	public String getDni() {
 		return dni;
 	}
 	public void setDni(String dni) {
 		this.dni = dni;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 	public String getDomicilio() {
 		return domicilio;

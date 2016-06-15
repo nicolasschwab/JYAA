@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		ArrayList<Usuario> usuarios = (ArrayList<Usuario>)this.getServletContext().getAttribute("usuarios");
 		
 		for (Usuario usuario : usuarios) {
-			if ( usuario.getUsername().equals(username) && usuario.getPassword().equals(password) ){
+			if ( usuario.getNombreUsuario().equals(username) && usuario.getContrasenia().equals(password) ){
 				RequestDispatcher dispatcher;
 				switch (usuario.getType()) {
 				case 1:

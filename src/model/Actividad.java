@@ -1,12 +1,14 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Actividad {
 
+	@Id
+	private long id;
 	private String nombre;
-	private List<Ruta> rutas;
 	
 	public Actividad(){
 		super();
@@ -14,11 +16,6 @@ public class Actividad {
 	
 	public Actividad(String nombre){
 		setNombre(nombre);
-		setRutas(new ArrayList<Ruta>());
-	}
-	
-	public void addRuta(Ruta ruta){
-		getRutas().add(ruta);	
 	}
 	
 	public String getNombre() {
@@ -27,11 +24,14 @@ public class Actividad {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public List<Ruta> getRutas() {
-		return rutas;
+
+	public long getId() {
+		return id;
 	}
-	public void setRutas(List<Ruta> rutas) {
-		this.rutas = rutas;
+
+	public void setId(long id) {
+		this.id = id;
 	}
+	
 	
 }
