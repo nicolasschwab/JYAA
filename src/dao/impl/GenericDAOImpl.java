@@ -104,6 +104,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		}finally{
 			em.close();
 		}
+		System.out.println(resultado);
 		return resultado;
 	}
 
@@ -118,7 +119,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 					"select e from " + getPersistentClass().getSimpleName()
 							+ " e where e.nombre = :nombre");
 			consulta.setParameter("nombre", nombre);
-			resultado = (List<T>) consulta.getSingleResult();
+			resultado = (List<T>) consulta.getResultList();
 			em.flush();
 			etx.commit();
 		}catch(PersistenceException e){

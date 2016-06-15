@@ -11,7 +11,7 @@ import javax.persistence.Lob;
 public class Foto {
 
 	@Id @GeneratedValue(strategy=GenerationType.TABLE)
-	private long id;
+	private Long id;
 	private String nombre;
 	@Lob
 	@Column(length = 16777215)
@@ -21,11 +21,11 @@ public class Foto {
 
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

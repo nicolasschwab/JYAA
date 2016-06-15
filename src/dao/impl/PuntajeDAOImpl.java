@@ -6,7 +6,7 @@ import model.Puntaje;
 public class PuntajeDAOImpl extends GenericDAOImpl<Puntaje> implements PuntajeDAO{
 	
 	public PuntajeDAOImpl(){
-		super();
+		super(Puntaje.class);
 	}
 
 }

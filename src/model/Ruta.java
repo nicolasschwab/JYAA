@@ -37,6 +37,7 @@ public class Ruta {
 	
 	public Ruta() {
 		super();
+		setFotos(new ArrayList<Foto>());
 	}
 	
 	public Ruta(String nombre, String descripcion, String privacidad,
