@@ -4,19 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
-@Entity
-public class Usuario extends Perfil {
+
+public class Usuario{
 
 	private Integer type;
-	String dni;
-	String domicilio;
-	Date fechaNacimiento;
-	String sexo;
-	String email;
-	
-	public Usuario(){
-		
-	}
+	private String nombreUsuario;
+	private String contrasenia;
 	
 	public Usuario(String username, String password, Integer type){
 		setNombreUsuario(username);
@@ -31,44 +24,20 @@ public class Usuario extends Perfil {
 		this.type = type;
 	}
 
-	public String getDni() {
-		return dni;
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getDomicilio() {
-		return domicilio;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
-	public void setDomicilio(String domicilio) {
-		this.domicilio = domicilio;
-	}
-
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 	
 	
