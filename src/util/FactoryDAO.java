@@ -14,24 +14,31 @@ import dao.impl.RutaDAOImpl;
 import dao.impl.UsuarioDAOImpl;
 
 public class FactoryDAO {
+	
+	static ActividadDAO actividad=new ActividadDAOImpl();
+	static AdministradorDAO administrador=new AdministradorDAOImpl();
+	static FotoDAO foto=new FotoDAOImpl();
+	static PuntoDAO punto=new PuntoDAOImpl();
+	static RutaDAO ruta=new RutaDAOImpl();
+	static UsuarioDAO usuario=new UsuarioDAOImpl();
 
 	public static ActividadDAO getActividadDAO(){
-		return new ActividadDAOImpl();
+		return actividad;
 	}
 	public static AdministradorDAO getAdministradorDAO(){
-		return new AdministradorDAOImpl();
+		return administrador;
 	}
 	public static FotoDAO getFotoDAO(){
-		return new FotoDAOImpl();
+		return foto;
 	}
 	public static PuntoDAO getPuntoDAO(){
-		return new PuntoDAOImpl();
+		return punto;
 	}
 	public static RutaDAO getRutaDAO(){
-		return new RutaDAOImpl();
+		return ruta;
 	}
 	public static UsuarioDAO getUsuarioDAO(){
-		return new UsuarioDAOImpl();
+		return usuario;
 	}
 	
 }
