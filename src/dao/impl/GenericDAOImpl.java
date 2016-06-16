@@ -3,7 +3,10 @@ package dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
 
 import util.EntityManagerUtil;
 import dao.GenericDAO;
@@ -23,54 +26,129 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	@Override
 	public T save(T entity) {
-		this.getEntityManager().persist(entity);
+		EntityManager em = getEntityManager();
+		EntityTransaction etx = em.getTransaction();
+		try{			
+			etx.begin();
+			em.persist(entity);
+			em.flush();
+			etx.commit();
+		}catch(PersistenceException e){
+			System.out.println("Error al registrar el objeto");
+			System.out.println(e.getMessage());
+			etx.rollback();
+		}finally{
+			em.close();
+		}
 		return entity;
 	}
 
 	@Override
 	public T edit(T entity) {
-		this.getEntityManager().merge(entity);
+		EntityManager em = getEntityManager();
+		EntityTransaction etx = em.getTransaction();
+		try{			
+			etx.begin();
+			em.merge(entity);
+			em.flush();
+			etx.commit();
+		}catch(PersistenceException e){
+			System.out.println("Error al modificar el objeto");
+			System.out.println(e.getMessage());
+			etx.rollback();
+		}finally{
+			em.close();
+		}
 		return entity;
 	}
 
 	@Override
 	public List<T> getAll() {
-		Query consulta = getEntityManager().createQuery(
-				"select e from " + getPersistentClass().getSimpleName() + " e");
-		@SuppressWarnings("unchecked")
-		List<T> resultado = (List<T>) consulta.getResultList();
+		EntityManager em = getEntityManager();
+		EntityTransaction etx = em.getTransaction();
+		List<T> resultado=null;
+		try{			
+			etx.begin();
+			Query consulta = em.createQuery(
+					"select e from " + getPersistentClass().getSimpleName() + " e");
+			em.flush();
+			resultado = (List<T>) consulta.getResultList();
+			etx.commit();
+		}catch(PersistenceException e){
+			System.out.println("Error al modificar el objeto");
+			System.out.println(e.getMessage());
+			etx.rollback();
+		}finally{
+			em.close();
+		}		
 		return resultado;
 	}
 
 	@Override
 	public T get(Long id) {
-		try {
-			Query consulta = getEntityManager().createQuery(
+		EntityManager em = getEntityManager();
+		EntityTransaction etx = em.getTransaction();
+		T resultado =null;
+		try{			
+			etx.begin();
+			Query consulta = em.createQuery(
 					"select e from " + getPersistentClass().getSimpleName()
 							+ " e where e.id = " + id);
-			@SuppressWarnings("unchecked")
-			T resultado = (T) consulta.getSingleResult();
-			return resultado;
-		} catch (Exception e) {
-			return null;
+			resultado = (T) consulta.getSingleResult();
+			em.flush();
+			etx.commit();
+		}catch(PersistenceException e){
+			System.out.println("Error al modificar el objeto");
+			System.out.println(e.getMessage());
+			etx.rollback();
+		}finally{
+			em.close();
 		}
+		return resultado;
 	}
 
 	@Override
 	public List<T> get(String nombre) {
-		Query consulta = getEntityManager().createQuery(
-				"select e from " + getPersistentClass().getSimpleName()
-						+ " e where e.nombre = :nombre");
-		consulta.setParameter("nombre", nombre);
-		@SuppressWarnings("unchecked")
-		List<T> resultado = (List<T>) consulta.getResultList();
+		EntityManager em = getEntityManager();
+		EntityTransaction etx = em.getTransaction();
+		List<T> resultado =null;
+		try{			
+			etx.begin();
+			Query consulta = em.createQuery(
+					"select e from " + getPersistentClass().getSimpleName()
+							+ " e where e.nombre = :nombre");
+			consulta.setParameter("nombre", nombre);
+			resultado = (List<T>) consulta.getSingleResult();
+			em.flush();
+			etx.commit();
+		}catch(PersistenceException e){
+			System.out.println("Error al modificar el objeto");
+			System.out.println(e.getMessage());
+			etx.rollback();
+		}finally{
+			em.close();
+		}
 		return resultado;
 	}
 
 	@Override
 	public void delete(Long id) {
-		getEntityManager().remove(
-				getEntityManager().find(getPersistentClass(), id));
+		EntityManager em = getEntityManager();
+		EntityTransaction etx = em.getTransaction();
+		try{			
+			etx.begin();
+			em.remove(
+					em.find(getPersistentClass(), id));
+			em.flush();
+			etx.commit();
+		}catch(PersistenceException e){
+			System.out.println("Error al modificar el objeto");
+			System.out.println(e.getMessage());
+			etx.rollback();
+		}finally{
+			em.close();
+		}
+		
 	}
 
 	public Class<T> getPersistentClass() {
