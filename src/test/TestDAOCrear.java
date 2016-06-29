@@ -20,7 +20,8 @@ public class TestDAOCrear extends TestCase{
 	private Administrador administrador;
 	private Foto foto;
 	private Puntaje puntaje;
-	private Punto punto;
+	private Punto puntoInicial;
+	private Punto puntoFinal;
 	private Ruta ruta;
 	private Usuario usuario;
 	
@@ -36,8 +37,10 @@ public class TestDAOCrear extends TestCase{
 		foto = new Foto();
 		foto.setNombre("Una foto para una ruta");
 		puntaje = new Puntaje();
-		punto = new Punto();
-		punto.setDescripcion("Un punto en la ruta");	
+		puntoInicial = new Punto();
+		puntoInicial.setDescripcion("Punto de inicio de la ruta");
+		puntoFinal = new Punto();
+		puntoFinal.setDescripcion("Punto de finalización de la ruta");
 		ruta = new Ruta();
 		ruta.setActividad(actividad);
 		ruta.setDescripcion("Una ruta de prueba");
@@ -49,6 +52,8 @@ public class TestDAOCrear extends TestCase{
 		ruta.setPrivacidad("privada");
 		ruta.setTiempoEstimado("24hrs");
 		ruta.addFoto(foto);
+		ruta.addPunto(puntoFinal);
+		ruta.addPunto(puntoInicial);
 		usuario = new Usuario("Pepe","3333","Luis","Pepe","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
 		puntaje.setCalificacion(4);
 		puntaje.setCalificador(usuario);
@@ -61,14 +66,16 @@ public class TestDAOCrear extends TestCase{
 		FactoryDAO.getAdministradorDAO().save(administrador);
 		FactoryDAO.getUsuarioDAO().save(usuario);
 		FactoryDAO.getFotoDAO().save(foto);
-		FactoryDAO.getPuntoDAO().save(punto);
+		FactoryDAO.getPuntoDAO().save(puntoInicial);
+		FactoryDAO.getPuntoDAO().save(puntoFinal);
 		FactoryDAO.getRutaDAO().save(ruta);
 		FactoryDAO.getPuntajeDAO().save(puntaje);
 		
 		assertNotNull(FactoryDAO.getActividadDAO().get(actividad.getId()));
 		assertNotNull(FactoryDAO.getAdministradorDAO().get(administrador.getId()));
 		assertNotNull(FactoryDAO.getFotoDAO().get(foto.getId()));
-		assertNotNull(FactoryDAO.getPuntoDAO().get(punto.getId()));
+		assertNotNull(FactoryDAO.getPuntoDAO().get(puntoInicial.getId()));
+		assertNotNull(FactoryDAO.getPuntoDAO().get(puntoFinal.getId()));
 		assertNotNull(FactoryDAO.getRutaDAO().get(ruta.getId()));
 		assertNotNull(FactoryDAO.getUsuarioDAO().get(usuario.getId()));
 		assertNotNull(FactoryDAO.getPuntajeDAO().get(puntaje.getId()));

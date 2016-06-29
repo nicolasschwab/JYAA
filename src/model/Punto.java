@@ -4,15 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Punto {
 
-	@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	//@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private Long latitud;
 	private Long longitud;
 	private String descripcion;
+	
+	public Punto(){
+		super();
+	}
+	
+	public Punto(Long latitud, Long longitud){
+		this.latitud = latitud;
+		this.longitud = longitud;
+	}
+	
 	public Long getId() {
 		return id;
 	}

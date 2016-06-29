@@ -3,21 +3,22 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Ruta {
 
-	@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	//@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String nombre;
 	private String descripcion;
@@ -27,17 +28,17 @@ public class Ruta {
 	private String dificultad;
 	private String tiempoEstimado;
 	private Date fechaRealizacion;
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Actividad actividad;
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	private Collection<Foto> fotos;
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	private Collection<Punto> puntos;
-	//private Map<Usuario, Integer> hacedores;
 	
 	public Ruta() {
 		super();
 		setFotos(new ArrayList<Foto>());
+		setPuntos(new ArrayList<Punto>());
 	}
 	
 	public Ruta(String nombre, String descripcion, String privacidad,
@@ -55,23 +56,9 @@ public class Ruta {
 		setFechaRealizacion(fechaRealizacion);
 		setActividad(actividad);
 		setFotos(new ArrayList<Foto>());
-		//setHacedores(new HashMap<Usuario, Integer>());
+		setPuntos(new ArrayList<Punto>());
 	}
 	
-	
-	/*public Integer cantidadHacedores() {
-		return getHacedores().size();
-	}*/
-	
-	/*public Double puntajePromedio() {
-		Double sumaTotal = 0.0;
-		Integer cantidadPuntuadores = 0;
-		for ( Integer i : getHacedores().values() ){
-			cantidadPuntuadores += ( i < 0 ) ? 0 : 1;
-			sumaTotal += ( i < 0 ) ? 0 : i;
-		}
-		return sumaTotal / cantidadPuntuadores;
-	}*/
 	
 	public void hiceEstaRuta(Usuario usuario){
 		//getHacedores().put(usuario, -1);
@@ -84,7 +71,9 @@ public class Ruta {
 	public void addFoto(Foto foto){
 		getFotos().add(foto);
 	}
-	
+	public void addPunto(Punto punto){
+		getPuntos().add(punto);
+	}
 	
 	public Long getId() {
 		return id;
@@ -140,12 +129,6 @@ public class Ruta {
 	public void setFechaRealizacion(Date fechaRealizacion) {
 		this.fechaRealizacion = fechaRealizacion;
 	}
-	/*public HashMap<Usuario, Integer> getHacedores() {
-		return (HashMap<Usuario, Integer>) hacedores;
-	}
-	public void setHacedores(HashMap<Usuario, Integer> hacedores) {
-		this.hacedores = hacedores;
-	}*/
 	public Actividad getActividad() {
 		return actividad;
 	}
@@ -158,6 +141,11 @@ public class Ruta {
 	public void setFotos(Collection<Foto> fotos) {
 		this.fotos = fotos;
 	}
-	
+	public Collection<Punto> getPuntos() {
+		return puntos;
+	}
+	public void setPuntos(Collection<Punto> puntos) {
+		this.puntos = puntos;
+	}
 	
 }

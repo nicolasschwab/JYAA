@@ -5,17 +5,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 public class Puntaje {
 
-	@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	//@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private int calificacion;
 	@OneToOne
 	private Usuario calificador;
 	@OneToOne
 	private Ruta ruta;
+	
+	public Puntaje(){
+		super();
+	}
+	
 	public Long getId() {
 		return id;
 	}
