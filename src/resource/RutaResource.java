@@ -1,20 +1,26 @@
 package resource;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.JAXBElement;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import model.Punto;
 import model.Ruta;
@@ -43,8 +49,8 @@ public class RutaResource {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Ruta getRuta() {
-		return rutaService.getRuta(id);
+	public Collection<Punto> getRuta() {
+		return rutaService.getRuta(id).getPuntos();
 	}
 
 	@PUT
@@ -58,13 +64,32 @@ public class RutaResource {
 	}
 	
 	@POST
-	@Produces(MediaType.TEXT_HTML)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public void createPunto(@FormParam("id") String id,
-			@FormParam("latitud") Long latitud,
-			@FormParam("longitud") Long longitud) throws IOException {
-		Punto punto = new Punto(latitud, longitud);
-		puntoResource.crearPunto(punto);
+	@Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+	public void createPunto(@FormParam("lat") double latitud, @FormParam("lon") double longitud  ) throws IOException {
+		Punto punto= new Punto(latitud,longitud);
+		Ruta ruta=rutaService.getRuta(id);
+		ruta.agregarPunto(punto);
+		this.rutaService.editRuta(ruta);
+		//puntoResource.crearPunto(punto);
 	}
 
+	@DELETE
+	@Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+	public void borrarPunto(@FormParam("id") int idPunto){
+		Ruta ruta=rutaService.getRuta(id);
+		if(idPunto==0){
+			//Significa que apretaron el boton de borrar todos los puntos
+			Collection<Punto> puntos=ruta.borrarTodosPuntos();
+			this.rutaService.editRuta(ruta);
+			for(Punto punto:puntos){
+				this.puntoResource.borrar(punto.getId());
+			}			
+		}else{			
+			ruta.borrarPunto(this.puntoResource.get(idPunto));
+			this.rutaService.editRuta(ruta);
+			this.puntoResource.borrar(idPunto);
+		}
+		
+	}
+	
 }

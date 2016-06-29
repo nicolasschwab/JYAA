@@ -36,5 +36,12 @@ public class PuntoResource {
 	public void crearPunto(Punto punto){
 		this.puntoService.createPunto(punto);
 	}
+
+	public void borrar(long idPunto) {
+		this.puntoService.deletePunto((long) idPunto);		
+	}
+	public Punto get(int idPunto){
+		return this.puntoService.getPunto((long) idPunto);
+	}
 	
 }

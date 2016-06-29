@@ -27,6 +27,12 @@ public class RutasResource {
 		return new RutaResource(uriInfo, request, id);
 	}
 	
+	/*@POST
+	@Path("{ruta}")
+	public RutaResource getRuta(@PathParam("ruta") Long id){
+		return new RutaResource(uriInfo, request, id);
+	}*/
+	
 	@Path("/puntos")
 	public PuntosResource getPunto(){
 		return new PuntosResource();

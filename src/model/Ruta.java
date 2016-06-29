@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @XmlRootElement
 @Entity
@@ -29,10 +33,13 @@ public class Ruta {
 	private String tiempoEstimado;
 	private Date fechaRealizacion;
 	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
 	private Actividad actividad;
 	@OneToMany(fetch = FetchType.LAZY)
+	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
 	private Collection<Foto> fotos;
 	@OneToMany(fetch = FetchType.LAZY)
+	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
 	private Collection<Punto> puntos;
 	
 	public Ruta() {
@@ -146,6 +153,25 @@ public class Ruta {
 	}
 	public void setPuntos(Collection<Punto> puntos) {
 		this.puntos = puntos;
+	}
+
+	public void agregarPunto(Punto punto) {
+		this.getPuntos().add(punto);
+	}
+
+	public void borrarPunto(Punto punto) {
+		for(Punto unPunto:this.getPuntos()){
+			if(unPunto.getId()==punto.getId()){
+				this.getPuntos().remove(unPunto);
+				break;
+			}
+		}
+	}
+
+	public Collection<Punto> borrarTodosPuntos() {
+		Collection<Punto> puntos=this.getPuntos();
+		this.setPuntos(new ArrayList<Punto>());
+		return puntos;
 	}
 	
 }
