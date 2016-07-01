@@ -12,8 +12,8 @@ public class PuntoService {
 		this.puntoDAO = FactoryDAO.getPuntoDAO();
 	}
 	
-	public void createPunto(Punto punto){
-		this.puntoDAO.save(punto);
+	public Punto createPunto(Punto punto){
+		return this.puntoDAO.save(punto);
 	}
 	
 	public Punto getPunto(Long id){
