@@ -5,10 +5,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
 import model.Usuario;
+import service.UsuarioService;
+import util.FactoryService;
 import util.Validator;
 
 @ManagedBean
@@ -16,8 +22,9 @@ import util.Validator;
 public class UsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private String contraseña="cambiala123";
 
-	private String username;
+	private String username;	
 	private String dni;
 	private String nombreCompleto;
 	private String domicilio;
@@ -38,13 +45,15 @@ public class UsuarioBean implements Serializable {
 		         e.printStackTrace();
 		    }
 			Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
-			System.out.println("Se creÃ³ un nuevo usuario!");
-			/**
-			 * TODO contectar esto con la bd y hacer andar el datepicker de jquery
-			 */
+			//se crea una contrasenia por defecto
+			usuarioNuevo.setContrasenia(contraseña);
+			FactoryService.getUsuarioService().persistirUsuario(usuarioNuevo);
+			FacesContext context=FacesContext.getCurrentInstance();
+			context.addMessage("loginForm:message", new FacesMessage("Felicidades tu nueva contrasenia es: "+contraseña));
 			
+			System.out.println("Se creÃ³ un nuevo usuario!");			
 		}
-		return "";
+		return "index.xhtml?faces-redirect=true";
 	}
 
 	private boolean validarVariables(){
@@ -124,5 +133,5 @@ public class UsuarioBean implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
+	}	
 }
