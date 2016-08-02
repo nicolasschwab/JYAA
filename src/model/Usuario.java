@@ -26,13 +26,14 @@ public class Usuario extends Perfil {
 	}
 	
 	public Usuario(String nombreUsuario, String dni, 
-			String apellido, String nombre, String domicilio,
+			/*String apellido, String nombre,*/String nombreCompleto, String domicilio,
 			Date fechaNacimiento, String sexo, String email){
 		super();
 		setNombreUsuario(nombreUsuario);
 		setDni(dni);
-		setApellido(apellido);
-		setNombre(nombre);
+		setNombreCompleto(nombreCompleto);
+		/*setApellido(apellido);
+		setNombre(nombre);*/
 		setDomicilio(domicilio);
 		setFechaNacimiento(fechaNacimiento);
 		setSexo(sexo);

@@ -1,3 +1,6 @@
+.classpath
+.settings
+.project
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -13,6 +16,4 @@ hs_err_pid*
 /build/
 /target/
 /bin/
-.classpath
-.settings
-.project
+

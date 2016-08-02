@@ -19,8 +19,9 @@ public abstract class Perfil {
 	Long id;
 	private String nombreUsuario;
 	private String contrasenia;
-	private String nombre;
-	private String apellido;
+	private String nombreCompleto;
+	/*private String nombre;
+	private String apellido;*/
 
 	public Perfil(){
 		
@@ -41,7 +42,7 @@ public abstract class Perfil {
 		this.contrasenia = contrasenia;
 	}
 
-	public String getNombre() {
+	/*public String getNombre() {
 		return nombre;
 	}
 
@@ -55,12 +56,18 @@ public abstract class Perfil {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
-	}
+	}*/
 
 	public Long getId() {
 		return id;
 	}
 
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}

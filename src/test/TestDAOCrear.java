@@ -32,8 +32,9 @@ public class TestDAOCrear extends TestCase{
 		administrador = new Administrador();
 		administrador.setNombreUsuario("admin");
 		administrador.setContrasenia("1234");
-		administrador.setNombre("juan");
-		administrador.setApellido("perez");
+		administrador.setNombreCompleto("juan perez");
+		/*administrador.setNombre("juan");
+		administrador.setApellido("perez");*/
 		foto = new Foto();
 		foto.setNombre("Una foto para una ruta");
 		puntaje = new Puntaje();
@@ -54,7 +55,8 @@ public class TestDAOCrear extends TestCase{
 		ruta.addFoto(foto);
 		ruta.addPunto(puntoFinal);
 		ruta.addPunto(puntoInicial);
-		usuario = new Usuario("Pepe","3333","Luis","Pepe","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
+		//usuario = new Usuario("Pepe","3333","Luis","Pepe","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
+		usuario = new Usuario("Pepe","3333","Jose Luis","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
 		puntaje.setCalificacion(4);
 		puntaje.setCalificador(usuario);
 		puntaje.setRuta(ruta);
