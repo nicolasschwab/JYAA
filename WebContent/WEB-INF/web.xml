@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 
 	<welcome-file-list>
-		<welcome-file>/views/index2.xhtml</welcome-file>
+		<welcome-file>/views/index.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<display-name>jRuteros</display-name>

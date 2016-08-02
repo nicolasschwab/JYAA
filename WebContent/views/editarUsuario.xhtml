@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>JRuteros | Editar Usuario</title>
+
+
+<link
+	href="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.css"
+	rel="stylesheet" />
+
+<script type="text/javascript"
+	src="../resources/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript"
+	src="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+<!-- Bootstrap CSS -->
+<link
+	href="../resources/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet"/>
+<link
+	href="../resources/css/fronted.css"
+	rel="stylesheet"/>
+<!-- iconos  -->
+<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet"/>
+<!-- Bootstrap JS -->
+<script
+	src="../resources/bootstrap/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+			data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand aLogo" href="#"><div class="logo"></div></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="altaRuta"><span class="fa fa-plus" aria-hidden="true"> </span>Ruta Nueva</a>
+				</li>
+				<li>
+					<a href="buscarRuta"><span class="fa fa-search" aria-hidden="true"> </span>Buscar una Ruta</a>
+				</li>
+				<li>
+					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a>
+				</li>				
+			</ul>
+			<ul class="nav navbar-nav navbar-right ">
+				<li>
+					<a href="#"><span class="fa fa-user" aria-hidden="true"> </span> Nombre Usuario</a>
+				</li>
+				<li>
+					<a href="#" class="dropdown-toggle"	role="button" aria-haspopup="true" aria-expanded="false"> 
+						<img class="img-perfil" src="#" alt="Foto Perfil"/>
+					</a>
+				</li>
+				<li><a href="logout" class="salir">Salir</a></li>
+			</ul>
+		</div>
+	</div>	
+</nav>
+
+	<div class="container">
+		<div class="col-md-5">
+		<fieldset class="fieldSetNuevaRuta">
+			<legend>Edita tus datos</legend>			
+			<div class="form-group">
+					<label for="username">Nombre de Usuario</label> <h:inputText value="#{usuarioBean.usr.nombreUsuario}"
+						placeholder="Nombre de Usuario" 
+						class="form-control"></h:inputText>
+				</div>
+				<div class="form-group">
+					<label for="dni">DNI</label> <h:inputText  value="#{usuarioBean.usr.dni}"
+						placeholder="DNI" class="form-control"></h:inputText>
+				</div>
+				<div class="form-group">
+					<label for="nomyape">Nombre y apellido</label> <h:inputText value="#{usuarioBean.usr.nombreCompleto}"
+						placeholder="Nombre y apellido" class="form-control"></h:inputText>
+				</div>
+				<div class="form-group">
+					<label for="domicilio">Domicilio</label> <h:inputText value="#{usuarioBean.usr.domicilio}"
+						placeholder="Domicilio"  class="form-control"></h:inputText>
+				</div>
+				<div class="form-group">
+					<label for="nacimiento">Fecha de nacimiento</label> <h:inputText value="#{usuarioBean.usr.fechaNacimiento}"
+						placeholder="Fecha de nacimiento" 
+						id="nacimiento" class="form-control nacimiento"></h:inputText>
+				</div>
+				<div class="form-group ">
+					<label for="sexo">Sexo</label>
+					<h:selectOneRadio id="sexo" value="#{usuarioBean.usr.sexo}" styleClass="checkbox-inline">
+			   			<f:selectItem itemValue="m" itemLabel="Masculino" styleClass="from-control" />
+			   			<f:selectItem itemValue="f" itemLabel="Femenino" styleClass="form-control" />
+			   		</h:selectOneRadio>
+				</div>
+				<div class="form-group">
+					<label for="email">Correo electrónico</label> <h:inputText value="#{usuarioBean.usr.email}"
+						placeholder="Correo electrónico" class="form-control"></h:inputText>
+				</div>
+				<div class="form-group col-md">
+					<h:commandButton class="btn btn-default" action="#{usuarioBean.Modificar}"
+									value="Modificar" id="registrar"></h:commandButton>
+				</div>
+		</fieldset>
+		</div>
+		<div class="col-md-5">
+			<fieldset>
+				<legend>Cambia tu contraseña</legend>
+				<h:form>
+				<h:messages/>
+					<div class="form-group">
+						<label for="email">Contrasenia actual</label> <h:inputSecret value="#{usuarioBean.contrasenaVieja}"
+							placeholder="Correo electrónico" class="form-control"></h:inputSecret>
+					</div>
+					<div class="form-group">
+						<label for="email">Nueva Contrasena</label> <h:inputSecret value="#{usuarioBean.nuevaContrasena}"
+							placeholder="Correo electrónico" class="form-control nueva"></h:inputSecret>
+					</div>
+					<div class="form-group">
+						<label for="email">Repeti la contrasena</label> <h:inputSecret value="#{usuarioBean.nuevaAgain}"
+							placeholder="Correo electrónico" class="form-control nuevaAgain"></h:inputSecret>
+					</div>
+					<div class="form-group col-md">
+					<h:commandButton class="btn btn-default" action="#{usuarioBean.modificarContrasena}"
+									value="Modificar Contrasena" id="modificarContrasena"></h:commandButton>
+				</div>	
+				</h:form>
+			</fieldset>
+		
+		</div>
+	</div>
+
+	<footer class="footer">
+		<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
+	</footer>
+	<script type="text/javascript">
+		$(function() {
+			$('.nacimiento').datepicker();
+		});
+	</script>
+</body>
+</html>

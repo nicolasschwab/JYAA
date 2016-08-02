@@ -8,29 +8,29 @@
 	<title>JRuteros</title>
 	<!-- jQuery y sus css -->
 	<link
-		href="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.css"
+		href="#{request.contextPath}/resources/js/jquery-ui-1.11.4.custom/jquery-ui.css"
 		rel="stylesheet" />
 	<script type="text/javascript"
-		src="../resources/js/jquery-1.12.0.min.js"></script>
+		src="#{request.contextPath}/resources/js/jquery-1.12.0.min.js"></script>
 	<script type="text/javascript" 
-		src="../resources/js/index.js"></script>
+		src="#{request.contextPath}/resources/js/index.js"></script>
 	<script type="text/javascript"
-		src="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+		src="#{request.contextPath}/resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 	
 	<!-- Bootstrap CSS -->
 	<link 
-		href="../resources/bootstrap/css/bootstrap.min.css" 
+		href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" 
 		rel="stylesheet" />
 	<link
-		href="../resources/css/fronted.css"
+		href="#{request.contextPath}/resources/css/fronted.css"
 		rel="stylesheet" />
 	
 	<!-- Bootstrap JS -->
 	<script
-		src="../resources/bootstrap/js/bootstrap.min.js"></script>
+		src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 	
 	<link
-		href="../resources/css/registro.css"
+		href="#{request.contextPath}/resources/css/registro.css"
 		rel="stylesheet" />
 		
 </h:head>
@@ -50,6 +50,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="#">¿Qué es?</a></li>
 				<li><a href="#">¿Cómo funciona?</a></li>
+				<li><h:messages/></li>
 			</ul>
 
 			<div class="nav navbar-nav navbar-right ">
@@ -91,10 +92,10 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active"
-				style="background-image: url('../resources/img/bike-3.jpg'); background-repeat: no-repeat;">
+				style="background-image: url('#{request.contextPath}/resources/img/bike-3.jpg'); background-repeat: no-repeat;">
 			</div>
 			<div class="item"
-				style="background-image: url('../resources/img/bike-1.jpg'); background-repeat: no-repeat;">
+				style="background-image: url('#{request.contextPath}/resources/img/bike-1.jpg'); background-repeat: no-repeat;">
 			</div>
 		</div>
 
