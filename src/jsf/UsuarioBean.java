@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import model.Usuario;
+import util.Validator;
 
 @ManagedBean
 @SessionScoped
@@ -25,24 +26,46 @@ public class UsuarioBean implements Serializable {
 	private String email;
 	
 	public String registrar(){
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-	    Date nacimientoDate = null;
-	    try
-	    {
-	    	nacimientoDate = formatter.parse(getNacimiento());           
-	    } 
-	    catch (java.text.ParseException e)
-	    {
-	         e.printStackTrace();
-	    }
-		Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
-		System.out.println("Se creó un nuevo usuario!");
-		/**
-		 * TODO contectar esto con la bd y hacer andar el datepicker de jquery
-		 */
-		return ""; // "registroExitoso?faces-redirect=true" donde registroExitoso es un xhtml 
+		if(this.validarVariables()){			
+			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		    Date nacimientoDate = null;
+		    try
+		    {
+		    	nacimientoDate = formatter.parse(getNacimiento());           
+		    } 
+		    catch (java.text.ParseException e)
+		    {
+		         e.printStackTrace();
+		    }
+			Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
+			System.out.println("Se creó un nuevo usuario!");
+			/**
+			 * TODO contectar esto con la bd y hacer andar el datepicker de jquery
+			 */
+			
+		}
+		return "";
 	}
 
+	private boolean validarVariables(){
+		if(Validator.stringNoVacio(this.getUsername())){
+			if(Validator.stringNoVacio(this.getDni())){
+				if(Validator.stringNoVacio(this.getDomicilio())){
+					if(Validator.stringNoVacio(this.getEmail())){
+						if(Validator.stringNoVacio(this.getNacimiento())){
+							if(Validator.stringNoVacio(this.getNombreCompleto())){
+								if(Validator.stringNoVacio(this.getSexo())){
+									return true;
+								}
+							}
+						}						
+					}
+				}
+			}			
+		}
+		return false;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
