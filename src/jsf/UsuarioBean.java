@@ -90,6 +90,10 @@ public class UsuarioBean implements Serializable {
 		return "listarRutasUsuario?faces-redirect=true";
 	}
 	
+	public String redireccionarDetalleRuta(){
+		return "detalleRuta?faces-redirect=true";
+	}
+	
 	public String modificarContrasena(){
 		if(this.validarVariablesContrasena()){
 			if(this.getContrasenaVieja().equals(this.getUsr().getContrasenia())){
