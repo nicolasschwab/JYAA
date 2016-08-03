@@ -19,18 +19,19 @@ public class AdminBean implements Serializable{
 	private List<Usuario> listadoDeUsuariosDeshabilitados;
 	
 	public AdminBean(){
-		listadoDeUsuariosHabilitados = FactoryService.getUsuarioService().getAllByActivo(true);
-		listadoDeUsuariosDeshabilitados = FactoryService.getUsuarioService().getAllByActivo(false);
+		this.asignarListadosUsuario();
 	}
 	
 	public String deshabilitar(Long id){
 		FactoryService.getUsuarioService().deshabilitarUsuario(id);
-		return "listarUsuarios?faces-redirect=true";
+		this.asignarListadosUsuario();
+		return null;
 	}
 	
 	public String habilitar(Long id){
 		FactoryService.getUsuarioService().habilitarUsuario(id);
-		return "listarUsuarios?faces-redirect=true";
+		this.asignarListadosUsuario();
+		return null;
 	}
 
 	public String listarUsuarios(){
@@ -53,6 +54,11 @@ public class AdminBean implements Serializable{
 	public void setListadoDeUsuariosDeshabilitados(
 			List<Usuario> listadoDeUsuariosDeshabilitados) {
 		this.listadoDeUsuariosDeshabilitados = listadoDeUsuariosDeshabilitados;
+	}
+	
+	private void asignarListadosUsuario(){
+		listadoDeUsuariosHabilitados = FactoryService.getUsuarioService().getAllByActivo(true);
+		listadoDeUsuariosDeshabilitados = FactoryService.getUsuarioService().getAllByActivo(false);
 	}
 
 

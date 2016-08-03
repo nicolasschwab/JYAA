@@ -75,12 +75,12 @@
 			<thead>
 				<tr>
 					<th>DNI</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
+					<th>Nombre y Apellido</th>
 					<th>Domicilio</th>
 					<th>Fecha Nacimiento</th>
 					<th>Sexo</th>
 					<th>Email</th>
+					<th>Accion</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -93,9 +93,9 @@
 						<td>#{usuarioHabilitado.fechaNacimiento}</td>
 						<td>#{usuarioHabilitado.sexo}</td>
 						<td>#{usuarioHabilitado.email}</td>
-						<td><h:commandButton
+						<td><h:form><h:commandButton
 								action="#{adminBean.deshabilitar(usuarioHabilitado.id)}"
-								class="btn btn-default" value="Deshabilitar" /></td>
+								class="btn btn-default" value="Deshabilitar" /></h:form></td>
 					</tr>
 				</ui:repeat>
 			</tbody>
@@ -107,12 +107,12 @@
 			<thead>
 				<tr>
 					<th>DNI</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
+					<th>Nombre y Apellido</th>
 					<th>Domicilio</th>
 					<th>Fecha Nacimiento</th>
 					<th>Sexo</th>
 					<th>Email</th>
+					<th>Accion</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -125,9 +125,9 @@
 						<td>#{usuarioDeshabilitado.fechaNacimiento}</td>
 						<td>#{usuarioDeshabilitado.sexo}</td>
 						<td>#{usuarioDeshabilitado.email}</td>
-						<td><h:commandButton
+						<td><h:form><h:commandButton
 								action="#{adminBean.habilitar(usuarioDeshabilitado.id)}"
-								class="btn btn-default" value="Habilitar" /></td>
+								class="btn btn-default" value="Habilitar" /></h:form></td>
 					</tr>
 				</ui:repeat>
 				<!-- <tr>

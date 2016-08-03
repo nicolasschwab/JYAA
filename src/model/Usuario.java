@@ -47,7 +47,7 @@ public class Usuario extends Perfil {
 	}
 	
 	public Usuario habilitar(){
-		setActivo(false);
+		setActivo(true);
 		return this;
 	}
 	
