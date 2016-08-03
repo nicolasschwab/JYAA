@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>JRuteros | Administrador</title>
+
+
+	<link href="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.css"
+		rel="stylesheet" />
+
+	<script type="text/javascript"
+		src="../resources/js/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript"
+		src="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+	<!-- Bootstrap CSS -->
+	<link href="../resources/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link href="../resources/css/fronted.css" rel="stylesheet" />
+
+	<!-- Bootstrap JS -->
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+
+
+</h:head>
+<h:body>
+
+
+	<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand aLogo" href="#"><div class="logo"></div></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#"><span class="fa fa-user" aria-hidden="true">
+					</span>Administrador</a></li>
+				<li><a href="listarUsuarios"><span class="fa fa-road"
+						aria-hidden="true"> </span>Usuarios</a></li>
+				<li><a href="listarActividades"><span class="fa fa-road"
+						aria-hidden="true"> </span>Actividades</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right ">
+				<li><a href="#" class="dropdown-toggle" role="button"
+					aria-haspopup="true" aria-expanded="false"> <img
+						class="img-perfil" src="#" alt="Foto Perfil"/></a></li>
+				<li><h:form>
+						<h:commandLink value="Salir" action="#{loginBean.logout}"
+							styleClass="salir" />
+					</h:form></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+
+	<div class="container">
+
+		<ul class="nav nav-tabs">
+			<li class="active" id="liHab"><a href="#">Usuarios
+					Habilitados</a></li>
+			<li id="liDes"><a href="#">Usuarios Deshabilitados</a></li>
+		</ul>
+		<table class="table table-striped" id="tablaHabilitada">
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nombre y Apellido</th>
+					<th>Domicilio</th>
+					<th>Fecha Nacimiento</th>
+					<th>Sexo</th>
+					<th>Email</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat value="#{adminBean.listadoDeUsuariosHabilitados}"
+					var="usuarioHabilitado">
+					<tr>
+						<td>#{usuarioHabilitado.dni}</td>
+						<td>#{usuarioHabilitado.nombreCompleto}</td>
+						<td>#{usuarioHabilitado.domicilio}</td>
+						<td>#{usuarioHabilitado.fechaNacimiento}</td>
+						<td>#{usuarioHabilitado.sexo}</td>
+						<td>#{usuarioHabilitado.email}</td>
+						<td><h:form><h:commandButton
+								action="#{adminBean.deshabilitar(usuarioHabilitado.id)}"
+								class="btn btn-default" value="Deshabilitar" /></h:form></td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+
+
+		<table class="table table-striped" style="display: none"
+			id="tablaDeshabilitada">
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nombre y Apellido</th>
+					<th>Domicilio</th>
+					<th>Fecha Nacimiento</th>
+					<th>Sexo</th>
+					<th>Email</th>
+					<th>Accion</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat value="#{adminBean.listadoDeUsuariosDeshabilitados}"
+					var="usuarioDeshabilitado">
+					<tr>
+						<td>#{usuarioDeshabilitado.dni}</td>
+						<td>#{usuarioDeshabilitado.nombreCompleto}</td>
+						<td>#{usuarioDeshabilitado.domicilio}</td>
+						<td>#{usuarioDeshabilitado.fechaNacimiento}</td>
+						<td>#{usuarioDeshabilitado.sexo}</td>
+						<td>#{usuarioDeshabilitado.email}</td>
+						<td><h:form><h:commandButton
+								action="#{adminBean.habilitar(usuarioDeshabilitado.id)}"
+								class="btn btn-default" value="Habilitar" /></h:form></td>
+					</tr>
+				</ui:repeat>
+				<!-- <tr>
+					<td>21564721</td>
+					<td>Ramon</td>
+					<td>Díaz</td>
+					<td>Calle 3 n°600</td>
+					<td>11/06/87</td>
+					<td>M</td>
+					<td>ramon@diaz.com</td>
+					<td><input type="button" class="btn btn-default"
+						value="Habilitar" /></td>
+					<td>
+				</tr>
+				<tr>
+					<td>38284923</td>
+					<td>Pedro</td>
+					<td>Asnar</td>
+					<td>Calle 6 n°800</td>
+					<td>17/03/77</td>
+					<td>M</td>
+					<td>pedro@asnar.com</td>
+					<td><input type="button" class="btn btn-default"
+						value="Habilitar" /></td>
+					<td>
+				</tr>
+				<tr>
+					<td>287627283</td>
+					<td>Ruben</td>
+					<td>Martinez</td>
+					<td>Calle 12 n°1800</td>
+					<td>26/05/47</td>
+					<td>M</td>
+					<td>ruben@martinez.com</td>
+					<td><input type="button" class="btn btn-default"
+						value="Habilitar" /></td>
+					<td>
+				</tr>-->
+			</tbody>
+		</table>
+
+	</div>
+
+	<footer class="footer">
+	<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
+	</footer>
+
+	<script type="text/javascript">
+		$("#liDes").click(function() {
+			$("#liHab").removeClass("active");
+			$("#tablaHabilitada").hide();
+			$(this).addClass("active");
+			$("#tablaDeshabilitada").show();
+		});
+		$("#liHab").click(function() {
+			$("#liDes").removeClass("active");
+			$("#tablaDeshabilitada").hide();
+			$(this).addClass("active");
+			$("#tablaHabilitada").show();
+		});
+	</script>
+
+</h:body>
+</html>

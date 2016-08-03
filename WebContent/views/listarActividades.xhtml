@@ -45,8 +45,10 @@
 			<ul class="nav navbar-nav">
 				<li><a href="#"><span class="fa fa-user" aria-hidden="true">
 					</span>Administrador</a></li>
-				<li><a href="listarUsuarios"><span class="fa fa-road"
-						aria-hidden="true"> </span>Usuarios</a></li>
+				<li><h:form><h:commandLink value="Usuarios" action="#{adminBean.listarUsuarios}"
+						styleClass="salir"/></h:form></li>
+					<!-- <a href="listarUsuarios"><span class="fa fa-road"
+						aria-hidden="true"> </span>Usuarios</a></li>-->
 				<li><a href="listarActividades"><span class="fa fa-road"
 						aria-hidden="true"> </span>Actividades</a></li>
 			</ul>
@@ -56,7 +58,7 @@
 						class="img-perfil" src="#" alt="Foto Perfil" />
 				</a></li>
 				<li><h:form><h:commandLink value="Salir" action="#{loginBean.logout}"
-						styleClass="salir"/></h:form></li>
+							styleClass="salir" /></h:form></li>
 			</ul>
 		</div>
 	</div>
