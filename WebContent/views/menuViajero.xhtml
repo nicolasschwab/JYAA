@@ -8,7 +8,7 @@
 <head></head>
 <body>
 	<ui:composition>
-		<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -25,32 +25,28 @@
 			<ul class="nav navbar-nav">
 				<li>
 					<h:form>
-						<span class="fa fa-plus" aria-hidden="true">
-							<h:commandLink value="Nueva Ruta" action="#{usuarioBean.redireccionarRutaNueva}" styleClass="salir" />
-						</span>
+						<span class="fa fa-plus" aria-hidden="true"></span>
+						<h:commandLink value="Nueva Ruta" action="#{usuarioBean.redireccionarRutaNueva}" styleClass="salir" />
 					</h:form>
 				</li>
 				<li>
 					<h:form>
-						<span class="fa fa-search" aria-hidden="true">
-							<h:commandLink value="Busqueda Ruta" action="#{usuarioBean.redireccionarBusquedaRuta}" styleClass="salir" />
-						</span>
+						<span class="fa fa-search" aria-hidden="true"></span>
+						<h:commandLink value="Busqueda Ruta" action="#{usuarioBean.redireccionarBusquedaRuta}" styleClass="salir" />						
 					</h:form>
 				</li>
 				<li>
 					<h:form>
-						<span class="fa fa-road" aria-hidden="true">
-							<h:commandLink value="Mis Rutas" action="#{usuarioBean.redireccionarListadoRutas}" styleClass="salir" />
-						</span>
+						<span class="fa fa-road" aria-hidden="true"></span>
+						<h:commandLink value="Mis Rutas" action="#{usuarioBean.redireccionarListadoRutas}" styleClass="salir" />						
 					</h:form>
 				</li>				
 			</ul>
 			<ul class="nav navbar-nav navbar-right ">
 				<li>
 					<h:form>
-						<span class="fa fa-user" aria-hidden="true">
-							<h:commandLink action="#{usuarioBean.redireccionModificar}">Perfil</h:commandLink>
-						</span>
+						<span class="fa fa-user" aria-hidden="true"></span>
+						<h:commandLink action="#{usuarioBean.redireccionModificar}">Perfil</h:commandLink>						
 					</h:form>
 				</li>
 				<li>
@@ -61,7 +57,7 @@
 				<li>
 					<h:form>
 						<span class="fa fa-sign-out" aria-hidden="true"></span>
-							<h:commandLink value="Salir" action="#{loginBean.logout}" styleClass="salir" />						
+						<h:commandLink value="Salir" action="#{loginBean.logout}" styleClass="salir" />						
 					</h:form>
 				</li>
 			</ul>

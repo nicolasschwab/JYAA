@@ -22,24 +22,28 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="#"><span class="fa fa-user" aria-hidden="true">
-						</span>Administrador</a></li>
-					<li><h:form><h:commandLink value="Usuarios" action="#{adminBean.listarUsuarios}"
-							styleClass="salir"/></h:form></li>
-						<!-- <a href="listarUsuarios"><span class="fa fa-road"
-							aria-hidden="true"> </span>Usuarios</a></li>-->
-					<li><h:form><h:commandLink value="Actividades" action="#{adminBean.listarActividades}"
-							styleClass="salir"/></h:form></li>
+
+					<li>
+						<h:form>
+							<h:commandLink value="Usuarios" action="#{adminBean.listarUsuarios}" styleClass="salir"/>
+						</h:form>
+					</li>
+					<li>
+						<h:form>
+							<h:commandLink value="Actividades" action="#{adminBean.listarActividades}" styleClass="salir"/>
+						</h:form>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right ">
-					<li><a href="#" class="dropdown-toggle" role="button"
-						aria-haspopup="true" aria-expanded="false"> <img
-							class="img-perfil" src="#" alt="Foto Perfil" />
-					</a></li>
+					<li>
+						<a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+							<img class="img-perfil" src="#" alt="Foto Perfil" />
+						</a>
+					</li>
 					<li>
 						<h:form>
 							<span class="fa fa-sign-out" aria-hidden="true"></span>
-								<h:commandLink value="Salir" action="#{loginBean.logout}" styleClass="salir" />							
+							<h:commandLink value="Salir" action="#{loginBean.logout}" styleClass="salir" />							
 						</h:form>
 					</li>
 				</ul>

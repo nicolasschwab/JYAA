@@ -35,23 +35,23 @@
 	position: absolute;
     left: 35%;
 }
-.navbar-default .navbar-nav>li>a
+.navbar-default .navbar-nav>li>form>a
 {
 color: #777;
 }
 @media (min-width: 768px){
-	.navbar-nav>li>a {
+	.navbar-nav>li>form>a {
 	    padding-top: 15px;
 	    padding-bottom: 15px;
 	}
 }
-.navbar-nav>li>a {
+.navbar-nav>li>form>a {
     padding-top: 10px;
     padding-bottom: 10px;
     line-height: 20px;
 }
-.nav>li>a {
+.nav>li>form>a {
     position: relative;
-    display: block;
+    display: inline-block;
     padding: 10px 15px;
 }
