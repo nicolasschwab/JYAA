@@ -3,35 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">      
 <h:head>
 	<title>JRuteros</title>
-	<!-- jQuery y sus css -->
-	<link
-		href="#{request.contextPath}/resources/js/jquery-ui-1.11.4.custom/jquery-ui.css"
-		rel="stylesheet" />
-	<script type="text/javascript"
-		src="#{request.contextPath}/resources/js/jquery-1.12.0.min.js"></script>
-	<script type="text/javascript" 
-		src="#{request.contextPath}/resources/js/index.js"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-	
-	<!-- Bootstrap CSS -->
-	<link 
-		href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" 
-		rel="stylesheet" />
-	<link
-		href="#{request.contextPath}/resources/css/fronted.css"
-		rel="stylesheet" />
-	
-	<!-- Bootstrap JS -->
-	<script
-		src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
-	
-	<link
-		href="#{request.contextPath}/resources/css/registro.css"
-		rel="stylesheet" />
+	<ui:insert name="heads">
+		<ui:include src="head.xhtml"/>
+	</ui:insert>
 		
 </h:head>
 <h:body>
@@ -152,11 +130,11 @@
 			</fieldset>
 		</h:form>
 
-
+	<ui:insert name="footer">
+		<ui:include src="footer.xhtml"/>
+	</ui:insert>
 	</div>
-	<footer class="footer">
-	<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
-	</footer>
+	
 	<script type="text/javascript">
 		$(function() {
 			$('.nacimiento').datepicker();

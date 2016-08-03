@@ -3,74 +3,19 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 <title>JRuteros</title>
-<!-- jQuery y sus css -->
-<link href="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.css" rel="stylesheet" />
-<script type="text/javascript"	src="../resources/js/jquery-1.12.0.min.js"></script>
-<script type="text/javascript"	src="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-
-<!-- iconos  -->
-<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet" />
-<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet" />
-
-<!-- Bootstrap CSS -->
-<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="../resources/css/fronted.css" rel="stylesheet" />
-
-<!-- Bootstrap JS -->
-<script	src="../resources/bootstrap/js/bootstrap.min.js"></script>
-
-<link href="../resources/css/registro.css" rel="stylesheet" />
-<link href="../resources/css/nuevaRuta.css" rel="stylesheet" />
-
-<!-- mapa -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places"></script>
-<script type="text/javascript"	src="../resources/js/configuracionmap.js"></script>
+	<ui:insert name="heads">
+		<ui:include src="head.xhtml"/>
+	</ui:insert>
 </h:head>
 <h:body>
 
-<nav class="navbar navbar-default">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-			data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-			aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand aLogo" href="#"><div class="logo"></div></a>
-		</div>
-		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li>
-					<a href="altaRuta"><span class="fa fa-plus" aria-hidden="true"> </span>Ruta Nueva</a>
-				</li>
-				<li>
-					<a href="buscarRuta"><span class="fa fa-search" aria-hidden="true"> </span>Buscar una Ruta</a>
-				</li>
-				<li>
-					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a>
-				</li>				
-			</ul>
-			<ul class="nav navbar-nav navbar-right ">
-				<li>
-					<a href="#"><span class="fa fa-user" aria-hidden="true"> </span> Nombre Usuario</a>
-				</li>
-				<li>
-					<a href="#" class="dropdown-toggle"	role="button" aria-haspopup="true" aria-expanded="false"> 
-						<img class="img-perfil" src="#" alt="Foto Perfil" />
-					</a>
-				</li>
-				<li><a href="logout" class="salir">Salir</a></li>
-			</ul>
-		</div>
-	</div>	
-</nav>
-
+<ui:insert name="menuAdmin">
+		<ui:include src="menuViajero.xhtml"/>
+	</ui:insert>
 <div class="container">
 		
 		
@@ -240,9 +185,9 @@
 		</form>		
 	</div>
 	
-	<footer class="footer">
-	<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
-	</footer>
+	<ui:insert name="footer">
+		<ui:include src="footer.xhtml"/>
+	</ui:insert>
 	<script type="text/javascript">
 		$(function() {
 			$('#fecha').datepicker();

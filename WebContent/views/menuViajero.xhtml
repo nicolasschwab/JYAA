@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<head></head>
+<body>
+	<ui:composition>
+		<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+			data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand aLogo" href="#"><div class="logo"></div></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li>
+					<h:form>
+						<span class="fa fa-plus" aria-hidden="true">
+							<h:commandLink value="Nueva Ruta" action="#{usuarioBean.redireccionarRutaNueva}" styleClass="salir" />
+						</span>
+					</h:form>
+				</li>
+				<li>
+					<h:form>
+						<span class="fa fa-search" aria-hidden="true">
+							<h:commandLink value="Busqueda Ruta" action="#{usuarioBean.redireccionarBusquedaRuta}" styleClass="salir" />
+						</span>
+					</h:form>
+				</li>
+				<li>
+					<h:form>
+						<span class="fa fa-road" aria-hidden="true">
+							<h:commandLink value="Mis Rutas" action="#{usuarioBean.redireccionarListadoRutas}" styleClass="salir" />
+						</span>
+					</h:form>
+				</li>				
+			</ul>
+			<ul class="nav navbar-nav navbar-right ">
+				<li>
+					<h:form>
+						<span class="fa fa-user" aria-hidden="true">
+							<h:commandLink action="#{usuarioBean.redireccionModificar}">Perfil</h:commandLink>
+						</span>
+					</h:form>
+				</li>
+				<li>
+					<a href="#" class="dropdown-toggle"	role="button" aria-haspopup="true" aria-expanded="false"> 
+						<img class="img-perfil" src="#" alt="Foto Perfil" />
+					</a>
+				</li>
+				<li>
+					<h:form>
+						<span class="fa fa-sign-out" aria-hidden="true"></span>
+							<h:commandLink value="Salir" action="#{loginBean.logout}" styleClass="salir" />						
+					</h:form>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</nav>
+	</ui:composition>
+</body>
+</html>

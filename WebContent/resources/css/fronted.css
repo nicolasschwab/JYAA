@@ -35,3 +35,23 @@
 	position: absolute;
     left: 35%;
 }
+.navbar-default .navbar-nav>li>a
+{
+color: #777;
+}
+@media (min-width: 768px){
+	.navbar-nav>li>a {
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	}
+}
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
