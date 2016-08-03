@@ -51,13 +51,22 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="altaRuta"><span class="fa fa-plus" aria-hidden="true"> </span>Ruta Nueva</a>
+					<h:form>
+						<h:commandLink action="#{usuarioBean.redireccionarRutaNueva}">Ruta Nueva</h:commandLink>
+					</h:form>
+<!-- 					<a href="altaRuta"><span class="fa fa-plus" aria-hidden="true"> </span>Ruta Nueva</a> -->
 				</li>
 				<li>
-					<a href="busquedaRuta"><span class="fa fa-search" aria-hidden="true"> </span>Buscar una Ruta</a>
+					<h:form>
+						<h:commandLink action="#{usuarioBean.redireccionarBusquedaRuta}">Buscar una Ruta</h:commandLink>
+					</h:form>
+<!-- 					<a href="busquedaRuta"><span class="fa fa-search" aria-hidden="true"> </span>Buscar una Ruta</a> -->
 				</li>
 				<li>
-					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a>
+					<h:form>
+						<h:commandLink action="#{usuarioBean.redireccionarListadoRutas}">Mis Rutas</h:commandLink>
+					</h:form>
+<!-- 					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a> -->
 				</li>				
 			</ul>
 			<ul class="nav navbar-nav navbar-right ">

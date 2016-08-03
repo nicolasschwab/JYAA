@@ -23,7 +23,7 @@ import util.Validator;
 public class UsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String contraseña="cambiala123";
+	private String contrasena="cambiala123";
 	private Usuario usr;
 
 	private String username;	
@@ -52,10 +52,10 @@ public class UsuarioBean implements Serializable {
 		    }
 			Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
 			//se crea una contrasenia por defecto
-			usuarioNuevo.setContrasenia(contraseña);
+			usuarioNuevo.setContrasenia(contrasena);
 			FactoryService.getUsuarioService().persistirUsuario(usuarioNuevo);
 			this.crearMensaje("El usuario se creo correctamente!");
-			this.crearMensaje("La contrasena es '"+contraseña+"'");
+			this.crearMensaje("La contrasena es '"+contrasena+"'");
 			System.out.println("Se creÃ³ un nuevo usuario!");			
 		}else{
 			this.crearMensaje("debes completar todos los campos");
@@ -78,6 +78,17 @@ public class UsuarioBean implements Serializable {
 		return null;
 	}
 	
+	public String redireccionarRutaNueva(){
+		return "altaRuta?faces-redirect=true";
+	}
+	
+	public String redireccionarBusquedaRuta(){
+		return "busquedaRuta?faces-redirect=true";
+	}
+	
+	public String redireccionarListadoRutas(){
+		return "listarRutasUsuario?faces-redirect=true";
+	}
 	
 	public String modificarContrasena(){
 		if(this.validarVariablesContrasena()){
@@ -86,9 +97,9 @@ public class UsuarioBean implements Serializable {
 					if(!this.getContrasenaVieja().equals(this.getNuevaAgain())){
 						this.getUsr().setContrasenia(this.getNuevaAgain());
 						FactoryService.getUsuarioService().modificar(usr);
-						this.crearMensaje("Se cambio la contraseña cn exito!");
+						this.crearMensaje("Se cambio la contraseï¿½a cn exito!");
 					}else{
-						this.crearMensaje("Las contraseñas nuevas y viejas no pueden coincidir");
+						this.crearMensaje("Las contraseï¿½as nuevas y viejas no pueden coincidir");
 					}
 				}else{
 					this.crearMensaje("Las nuevas contrasenas no coinciden");

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<title>JRuteros</title>
+<!-- jQuery y sus css -->
+<link href="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript"	src="../resources/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript"	src="../resources/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+
+<!-- iconos  -->
+<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet" />
+<link href="../resources/fonts/css/font-awesome.min.css" rel="stylesheet" />
+
+<!-- Bootstrap CSS -->
+<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../resources/css/fronted.css" rel="stylesheet" />
+
+<!-- Bootstrap JS -->
+<script	src="../resources/bootstrap/js/bootstrap.min.js"></script>
+
+<link href="../resources/css/registro.css" rel="stylesheet" />
+<link href="../resources/css/nuevaRuta.css" rel="stylesheet" />
+<link href="../resources/css/busquedaRuta.css" rel="stylesheet" />
+
+<!-- mapa -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places"></script>
+<script type="text/javascript"	src="../resources/js/configuracionmap.js"></script>
+</h:head>
+<h:body onload="">
+
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+			data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand aLogo" href="#"><div class="logo"></div></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="altaRuta"><span class="fa fa-plus" aria-hidden="true"> </span>Ruta Nueva</a>
+				</li>
+				<li>
+					<a href="buscarRuta"><span class="fa fa-search" aria-hidden="true"> </span>Buscar una Ruta</a>
+				</li>
+				<li>
+					<a href="listarRutasUsuario"><span class="fa fa-road" aria-hidden="true"> </span>Mis Rutas</a>
+				</li>				
+			</ul>
+			<ul class="nav navbar-nav navbar-right ">
+				<li>
+					<a href="#"><span class="fa fa-user" aria-hidden="true"> </span> Nombre Usuario</a>
+				</li>
+				<li>
+					<a href="#" class="dropdown-toggle"	role="button" aria-haspopup="true" aria-expanded="false"> 
+						<img class="img-perfil" src="#" alt="Foto Perfil" />
+					</a>
+				</li>
+				<li><a href="logout" class="salir">Salir</a></li>
+			</ul>
+		</div>
+	</div>	
+</nav>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 formBusqueda">
+			<form>
+				<div class="row busquedaArriba">
+					<div class="col-md-4"></div>
+					<div class="col-md-6 left">
+						<input placeholder="Nombre de la ruta" class="buscarNombre" />
+						<input type="submit" value="Buscar" class="botonBuscar" />
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-6 left">
+						<select class="segundaFila">
+							<option>Elige una actividad</option>
+							<option>Mountain bike</option>
+							<option>Ciclismo</option>
+							<option>Cicloturismo</option>
+							<option>Senderismo</option>
+							<option>Alpinismo</option>
+							<option>Motociclismo</option>
+							<option>Cuatriciclo</option>
+							<option>Esqu�</option>
+							<option>Kayac</option>
+							<option>Vela</option>
+							<option>A caballo</option>			
+						</select>
+						<input placeholder="Fecha del viaje" type="date" class="busquedaFecha segundaFila" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="row resultados">
+		<div class="col-md-3 contenedor">
+			<div class="row menuFiltros">				
+					<span>Filtros</span>
+			</div>
+			<div class="col-md-12">
+				<section>
+					<div>
+						<label>Dificultad</label>
+					</div>
+					<div>
+						<select>
+							<option>Facil</option>
+							<option>Moderado</option>
+							<option>Dificil</option>
+							<option>Muy Dificil</option>
+							<option>Solo expertos</option>
+						</select>
+					</div>
+				</section>
+				<section>			
+					<div>
+						<label>�viaje de ida o circular?</label>
+					</div>
+					<div>
+						<input class="formatoRuta" id="ida" type="radio" name="viajeForma" value="ida" />
+						<label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label>
+						<input class="formatoRuta" id="circular" type="radio" name="viajeForma" value="circular" />
+						<label for="circular" title="circular"><i class="fa fa-refresh"></i></label>
+					</div>
+				</section>
+				<section>
+					<div class="row">
+						<label>Cantidad de Km</label>
+					</div>
+					<div>
+						<input type="number" />
+					</div>
+				</section>
+				<section>
+					<div class="row">
+						<label>Tiempo estimado</label>
+					</div>
+					<div>
+						<input type="text"  name="timepo" placeholder="hrs:mins" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$" />
+					</div>	
+				</section>
+			</div>
+			
+		</div>
+		<div class="col-md-7 contenedor">
+			<div class="row unaRuta">
+				<div class="col-md-3 img" style="background:url('#{request.contextPath}/resources/img/bike-3.jpg'); background-size: cover;  background-repeat:no-repeat;">
+				</div>
+				<div class="col-md-6 img">
+					<div class="row">
+						<div class="col-md-12 borderBottom tamanioLetra">
+							<b>Ruta los 7 lagos</b>
+						</div>
+					</div>
+					
+					<div class="col-md-12">						
+						<div class="col-md-6">Dificultad</div>
+						<div class="col-md-6">Alta</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-6">Actividad</div>
+						<div class="col-md-6">Ciclismo</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-6">Tipo</div>
+						<div class="col-md-6"><label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label></div>
+					</div>
+					<div class="col-md-12 borderBottom">				
+						<div class="col-md-6">Veces realizado</div>
+						<div class="col-md-6"> 10</div>
+					</div>
+					
+					<div class="col-md-12">
+						<div class="col-md-6"><label for="ida" title="Fecha"><i class="fa fa-calendar"></i></label> 18/05/2016</div>
+						<div class="col-md-6"><label for="ida" title="Hora"><i class="fa fa-clock-o"></i></label> 05:00</div>
+					</div>
+					
+				</div>
+				<div class="col-md-2 paddingTop">
+					<form action="detalleRuta">
+						<input type="hidden" />
+						<input type="submit" value="ver detalle" />
+					</form>
+				</div>
+			</div>
+			<div class="row unaRuta">
+				<div class="col-md-3 img" style="background:url('#{request.contextPath}/resources/img/bike-1.jpg'); background-size: cover;  background-repeat:no-repeat;">
+				</div>
+				<div class="col-md-6 img">
+					<div class="row">
+						<div class="col-md-12 borderBottom tamanioLetra">
+							<b>Ruta los 7 lagos</b>
+						</div>
+					</div>
+					
+					<div class="col-md-12">						
+						<div class="col-md-6">Dificultad</div>
+						<div class="col-md-6">Alta</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-6">Actividad</div>
+						<div class="col-md-6">Ciclismo</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-6">Tipo</div>
+						<div class="col-md-6"><label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label></div>
+					</div>
+					<div class="col-md-12 borderBottom">				
+						<div class="col-md-6">Veces realizado</div>
+						<div class="col-md-6"> 10</div>
+					</div>
+					
+					<div class="col-md-12">
+						<div class="col-md-6"><label for="ida" title="Fecha"><i class="fa fa-calendar"></i></label> 18/05/2016</div>
+						<div class="col-md-6"><label for="ida" title="Hora"><i class="fa fa-clock-o"></i></label> 05:00</div>
+					</div>
+					
+				</div>
+				<div class="col-md-2 paddingTop">
+					<form action="detalleRuta">
+						<input type="hidden" />
+						<input type="submit" value="ver detalle" />
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<!-- Order -->
+			<div class="row menuFiltros">				
+					<span>Ordenar por</span>
+			</div>
+			<div class="col-md-12">
+				<section>
+					<div>
+						<form action="">
+							<select class="ordenar">
+								<option>Distancia</option>
+								<option>Dificultad</option>
+								<option>Puntuacion</option>
+								<option>Veces realizada</option>
+							</select>
+							<input type="submit" value="ordenar" />
+						</form>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer">
+	<p>&#169; Java y Aplicaciones Avanzadas en Internet | 2016</p>
+</footer>
+</h:body>
+</html>

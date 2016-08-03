@@ -37,6 +37,10 @@ public class AdminBean implements Serializable{
 	public String listarUsuarios(){
 		return "listarUsuarios?faces-redirect";
 	}
+	
+	public String listarActividades(){
+		return "listarActividades?faces-redirect=true";
+	}
 
 	public List<Usuario> getListadoDeUsuariosHabilitados() {
 		return listadoDeUsuariosHabilitados;
