@@ -33,8 +33,6 @@ public class TestDAOCrear extends TestCase{
 		administrador.setNombreUsuario("admin");
 		administrador.setContrasenia("1234");
 		administrador.setNombreCompleto("juan perez");
-		/*administrador.setNombre("juan");
-		administrador.setApellido("perez");*/
 		foto = new Foto();
 		foto.setNombre("Una foto para una ruta");
 		puntaje = new Puntaje();
@@ -42,20 +40,10 @@ public class TestDAOCrear extends TestCase{
 		puntoInicial.setDescripcion("Punto de inicio de la ruta");
 		puntoFinal = new Punto();
 		puntoFinal.setDescripcion("Punto de finalización de la ruta");
-		ruta = new Ruta();
-		ruta.setActividad(actividad);
-		ruta.setDescripcion("Una ruta de prueba");
-		ruta.setDificultad("Normal");
-		ruta.setDistancia(33.3);
-		ruta.setFechaRealizacion(new Date());
-		ruta.setFormato("Ida");
-		ruta.setNombre("Ruta1");
-		ruta.setPrivacidad("privada");
-		ruta.setTiempoEstimado("24hrs");
+		ruta = new Ruta("Ruta1", "Una ruta de prueba", "privada", "Ida", 33.3, "Normal", "24hrs", new Date(), actividad);
 		ruta.addFoto(foto);
 		ruta.addPunto(puntoFinal);
 		ruta.addPunto(puntoInicial);
-		//usuario = new Usuario("Pepe","3333","Luis","Pepe","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
 		usuario = new Usuario("Pepe","3333","Jose Luis","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
 		puntaje.setCalificacion(4);
 		puntaje.setCalificador(usuario);
@@ -63,13 +51,9 @@ public class TestDAOCrear extends TestCase{
 	}
 	
 	public void testPersistir() {		
-		FactoryDAO.getActividadDAO().save(actividad);
 		FactoryDAO.getActividadDAO().save(actividad2);
 		FactoryDAO.getAdministradorDAO().save(administrador);
 		FactoryDAO.getUsuarioDAO().save(usuario);
-		FactoryDAO.getFotoDAO().save(foto);
-		FactoryDAO.getPuntoDAO().save(puntoInicial);
-		FactoryDAO.getPuntoDAO().save(puntoFinal);
 		FactoryDAO.getRutaDAO().save(ruta);
 		FactoryDAO.getPuntajeDAO().save(puntaje);
 		

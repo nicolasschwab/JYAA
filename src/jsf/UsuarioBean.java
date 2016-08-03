@@ -22,7 +22,7 @@ import util.Validator;
 public class UsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String contraseña="cambiala123";
+	private String contrasena="cambiala123";
 
 	private String username;	
 	private String dni;
@@ -46,10 +46,10 @@ public class UsuarioBean implements Serializable {
 		    }
 			Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
 			//se crea una contrasenia por defecto
-			usuarioNuevo.setContrasenia(contraseña);
+			usuarioNuevo.setContrasenia(contrasena);
 			FactoryService.getUsuarioService().persistirUsuario(usuarioNuevo);
 			FacesContext context=FacesContext.getCurrentInstance();
-			context.addMessage("loginForm:message", new FacesMessage("Felicidades tu nueva contrasenia es: "+contraseña));
+			context.addMessage("loginForm:message", new FacesMessage("Felicidades tu nueva contrasenia es: "+contrasena));
 			
 			System.out.println("Se creÃ³ un nuevo usuario!");			
 		}

@@ -18,6 +18,7 @@ public class Usuario extends Perfil {
 	private Date fechaNacimiento;
 	private String sexo;
 	private String email;
+	private Boolean activo;
 	@OneToMany
 	private List<Ruta> misRutas;
 	
@@ -26,21 +27,29 @@ public class Usuario extends Perfil {
 	}
 	
 	public Usuario(String nombreUsuario, String dni, 
-			/*String apellido, String nombre,*/String nombreCompleto, String domicilio,
+			String nombreCompleto, String domicilio,
 			Date fechaNacimiento, String sexo, String email){
 		super();
 		setNombreUsuario(nombreUsuario);
 		setDni(dni);
 		setNombreCompleto(nombreCompleto);
-		/*setApellido(apellido);
-		setNombre(nombre);*/
 		setDomicilio(domicilio);
 		setFechaNacimiento(fechaNacimiento);
 		setSexo(sexo);
 		setEmail(email);
 		setMisRutas(new ArrayList<Ruta>());
+		setActivo(true);
 	}
 	
+	public Usuario deshabilitar(){
+		setActivo(false);
+		return this;
+	}
+	
+	public Usuario habilitar(){
+		setActivo(false);
+		return this;
+	}
 	
 	public void addRuta(Ruta ruta){
 		getMisRutas().add(ruta);
@@ -81,5 +90,13 @@ public class Usuario extends Perfil {
 	}
 	public void setMisRutas(List<Ruta> misRutas) {
 		this.misRutas = misRutas;
+	}
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
 	}
 }

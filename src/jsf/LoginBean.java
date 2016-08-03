@@ -24,7 +24,14 @@ public class LoginBean implements Serializable {
 		if (getUsername().equals("usuario") && getPassword().equals("usuario")){
 			return "listarRutasUsuario?faces-redirect=true";
 		}
-		return "index.xhtml?faces-redirect=true";
+		try {
+			logout();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+		//return "index.xhtml?faces-redirect=true";
 	}
 	
 	public void logout() throws IOException{
