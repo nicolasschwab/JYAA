@@ -76,9 +76,15 @@
 </nav>
 
 	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h:messages/>
+			</div>
+		</div>
 		<div class="col-md-5">
 		<fieldset class="fieldSetNuevaRuta">
-			<legend>Edita tus datos</legend>			
+			<legend>Edita tus datos</legend>
+			<h:form>			
 			<div class="form-group">
 					<label for="username">Nombre de Usuario</label> <h:inputText value="#{usuarioBean.usr.nombreUsuario}"
 						placeholder="Nombre de Usuario" 
@@ -99,7 +105,9 @@
 				<div class="form-group">
 					<label for="nacimiento">Fecha de nacimiento</label> <h:inputText value="#{usuarioBean.usr.fechaNacimiento}"
 						placeholder="Fecha de nacimiento" 
-						id="nacimiento" class="form-control nacimiento"></h:inputText>
+						id="nacimiento" class="form-control nacimiento">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:inputText>
 				</div>
 				<div class="form-group ">
 					<label for="sexo">Sexo</label>
@@ -113,16 +121,16 @@
 						placeholder="Correo electrónico" class="form-control"></h:inputText>
 				</div>
 				<div class="form-group col-md">
-					<h:commandButton class="btn btn-default" action="#{usuarioBean.Modificar}"
-									value="Modificar" id="registrar"></h:commandButton>
+					<h:commandButton class="btn btn-default" action="#{usuarioBean.modificar}"
+									value="Modificar" id="modificar"></h:commandButton>									
 				</div>
+				</h:form>
 		</fieldset>
 		</div>
 		<div class="col-md-5">
 			<fieldset>
 				<legend>Cambia tu contraseña</legend>
 				<h:form>
-				<h:messages/>
 					<div class="form-group">
 						<label for="email">Contrasenia actual</label> <h:inputSecret value="#{usuarioBean.contrasenaVieja}"
 							placeholder="Correo electrónico" class="form-control"></h:inputSecret>

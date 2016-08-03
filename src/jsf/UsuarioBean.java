@@ -64,9 +64,20 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	public String redireccionModificar(){
-		this.setUsr(FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId()));		
+		this.setUsr(FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId()));
 		return "editarUsuario.xhtml?faces-redirect=true";
 	}
+	
+	public String modificar(){
+		if(this.validarVariablesUsr()){
+			FactoryService.getUsuarioService().modificar(usr);
+			this.crearMensaje("Se modificaron los datos!");
+		}else{
+			this.crearMensaje("Completa todos los campos");
+		}
+		return null;
+	}
+	
 	
 	public String modificarContrasena(){
 		if(this.validarVariablesContrasena()){
@@ -89,6 +100,26 @@ public class UsuarioBean implements Serializable {
 			
 		}
 		return null;
+	}
+	
+	private boolean validarVariablesUsr(){
+		if(Validator.stringNoVacio(this.getUsr().getDni())){
+			if(Validator.stringNoVacio(this.getUsr().getDomicilio())){
+				if(Validator.stringNoVacio(this.getUsr().getEmail())){
+					if(Validator.stringNoVacio(this.getUsr().getNombreCompleto())){
+						if(Validator.stringNoVacio(this.getUsr().getNombreUsuario())){
+							if(Validator.stringNoVacio(this.getUsr().getSexo())){
+								if(Validator.stringNoVacio(this.getUsr().getFechaNacimiento().toString())){
+									return true;
+								}								
+							}
+						}
+					}
+					
+				}
+			}
+		}
+		return false;
 	}
 	
 	private void crearMensaje(String mensaje){
