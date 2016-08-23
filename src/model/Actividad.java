@@ -14,13 +14,15 @@ public class Actividad {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String nombre;
+	private boolean habilitada;
 	
 	public Actividad(){
 		super();
 	}
 	
-	public Actividad(String nombre){
+	public Actividad(String nombre, boolean habiiltada){
 		setNombre(nombre);
+		setHabilitada(habiiltada);
 	}
 	
 	public String getNombre() {
@@ -37,6 +39,15 @@ public class Actividad {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public boolean isHabilitada() {
+		return habilitada;
+	}
+
+	public void setHabilitada(boolean habilitada) {
+		this.habilitada = habilitada;
+	}
+	
 	
 	
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -12,6 +13,7 @@ import javax.faces.context.FacesContext;
 import model.Administrador;
 import model.Usuario;
 import util.FactoryService;
+import util.Mensaje;
 import util.SessionUtil;
 import util.Validator;
 
@@ -23,6 +25,9 @@ public class LoginBean implements Serializable {
 	
 	private String username;
 	private String password;
+	
+	@ManagedProperty(value="#{adminBean}")
+	private AdminBean admin;
 	
 	public String login(){
 		if(this.validarVariables()){
@@ -36,27 +41,19 @@ public class LoginBean implements Serializable {
 				if(admin!=null){
 					SessionUtil.getSession().setAttribute("name", admin.getNombreUsuario());
 					SessionUtil.getSession().setAttribute("id", admin.getId());
-					return "listarActividades?faces-redirect=true";
+					return this.admin.listarActividades();
 				}
 			}
 		}else{
-			this.crearMensaje("Completa todos los campos");
+			Mensaje.crearMensaje("Completa todos los campos");
 		}
-		this.crearMensaje("Los datos son incorrectos");
+		Mensaje.crearMensaje("Los datos son incorrectos");
 		return null;
 	}
 	
-	private void crearMensaje(String mensaje){
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_WARN,
-						mensaje,
-						mensaje));
-	}
-	
 	public void logout() throws IOException{
-		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-	    ec.invalidateSession();
-	    ec.redirect(ec.getRequestContextPath() + "/");
+		ExternalContext ec= SessionUtil.terminateSession();
+		ec.redirect(ec.getRequestContextPath() + "/");
 	}
 	
 	private boolean validarVariables(){
@@ -80,5 +77,14 @@ public class LoginBean implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public AdminBean getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(AdminBean admin) {
+		this.admin = admin;
+	}
+	
 
 }

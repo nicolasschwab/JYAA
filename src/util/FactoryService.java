@@ -1,5 +1,6 @@
 package util;
 
+import service.ActividadService;
 import service.AdministradorService;
 import service.UsuarioService;
 
@@ -7,6 +8,7 @@ public class FactoryService {
 
 	private static UsuarioService usuarioService;
 	private static AdministradorService adminService;
+	private static ActividadService actividadService;
 	
 	public static UsuarioService getUsuarioService(){
 		if(usuarioService==null){
@@ -20,6 +22,13 @@ public class FactoryService {
 			adminService=new AdministradorService();
 		}
 		return adminService;
+	}
+	
+	public static ActividadService getActividadService(){
+		if(actividadService==null){
+			actividadService=new ActividadService();
+		}
+		return actividadService;
 	}
 	
 }

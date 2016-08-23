@@ -29,138 +29,86 @@
 					Habilitadas</a></li>
 			<li id="liDes"><a href="#">Actividades Deshabilitadas</a></li>
 			<li class="nav navbar-nav navbar-right ">
-				<form class="form-inline" action="login" method="post">
+				<h:form class="form-inline"  method="post">
 
 					<div class="form-group">
-						<input type="text" name="username"
-							placeholder="Nombre actividad nueva" class="form-control" />
+						<label>Nombre de la actividad</label>
+						<h:inputText value="#{adminBean.actividad.nombre}"  class="form-control"></h:inputText>
 					</div>
 					<div class="form-group">
-						<label><input type="checkbox" name="habilitada" />
-							Habilitada</label>
+						<label>Habilitada</label>
+						<h:selectBooleanCheckbox value="#{adminBean.actividad.habilitada}">
+						</h:selectBooleanCheckbox>
 					</div>
-					<input class="btn btn-primary" type="button"
-						value="Crear Actividad" />
-
-				</form>
-
+					<h:commandButton class="btn btn-primary" action="#{adminBean.altaActividad}" value="Crear Actividad" />
+				</h:form>
 			</li>
 		</ul>
 
 		<div class="well well-lg" id="tablaHabilitada">
-
-
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="col-md-5">
-						<h4>Mountain Bike</h4>
+			<ui:repeat var="actividad" value="#{adminBean.listadoDeActividadesHabilitadas}">
+			
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-md-5">
+							<h4>#{actividad.nombre}</h4>
+						</div>
+						<div class="col-md-2 btn-group-vertical">
+							<h:form>
+								<h:commandButton action="#{actividad.id}"
+								class="btn btn-warning" value="Modificar" />
+							</h:form>	
+						</div>
+						<div class="col-md-2 btn-group-vertical">
+							<h:form>
+								<h:commandButton action="#{actividad.id}"
+								class="btn btn-default" value="Deshabilitar" />
+							</h:form>	
+						</div>
+						<div class="col-md-2 btn-group-vertical">
+							<h:form>
+								<h:commandButton action="#{actividad.id}"
+								class="btn btn-default" value="Eliminar" />
+							</h:form>	
+						</div>
+	
 					</div>
-					<div class="col-md-2 btn-group-vertical">
-
-						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Deshabilitar" />
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Eliminar"
-							disabled="disabled" />
-					</div>
-
 				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="col-md-5">
-						<h4>Cicloturismo</h4>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-
-						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Deshabilitar" />
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Eliminar"
-							disabled="disabled" />
-					</div>
-
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="col-md-5">
-						<h4>Senderismo</h4>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-
-						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Deshabilitar" />
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Eliminar" />
-					</div>
-
-				</div>
-			</div>
+			</ui:repeat>
 		</div>
 
 
 
 		<div class="well well-lg" style="display: none"
 			id="tablaDeshabilitada">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="col-md-5">
-						<h4>Esquí</h4>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Habilitar" />
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Eliminar" />
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="col-md-5">
-						<h4>Kayac</h4>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Habilitar" />
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Eliminar"
-							disabled="disabled" />
+			<ui:repeat var="actividad" value="#{adminBean.listadoDeActividadesDeshabilitadas}">			
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-md-5">
+							<h4>#{actividad.nombre}</h4>
+						</div>
+						<div class="col-md-2 btn-group-vertical">
+							<h:form>
+								<h:commandButton action="#{actividad.id}"
+								class="btn btn-warning" value="Modificar" />
+							</h:form>	
+						</div>
+						<div class="col-md-2 btn-group-vertical">
+							<h:form>
+								<h:commandButton action="#{actividad.id}"
+								class="btn btn-default" value="Deshabilitar" />
+							</h:form>	
+						</div>
+						<div class="col-md-2 btn-group-vertical">
+							<h:form>
+								<h:commandButton action="#{actividad.id}"
+								class="btn btn-default" value="Eliminar" />
+							</h:form>	
+						</div>
+	
 					</div>
 				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="col-md-5">
-						<h4>Motociclismo</h4>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<a href="altaActividad" class="btn btn-warning" role="button">Modificar</a>
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Habilitar" />
-					</div>
-					<div class="col-md-2 btn-group-vertical">
-						<input type="button" class="btn btn-default" value="Eliminar" />
-					</div>
-				</div>
-			</div>
+			</ui:repeat>
 		</div>
 
 

@@ -35,8 +35,7 @@ public class ActividadResource {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public void createAnimal(@FormParam("nombre") String nombre,
 			@Context HttpServletResponse servletResponse) throws IOException {
-		Actividad actividad = new Actividad(nombre);
-		actividadService.createActividad(actividad);
+		actividadService.createActividad(nombre,true);
 		servletResponse.sendRedirect("./listarActividades/");
 	}
 }
