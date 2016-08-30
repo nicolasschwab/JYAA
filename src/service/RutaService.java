@@ -29,4 +29,9 @@ public class RutaService {
 	public List<Ruta> getRutas(){
 		return rutaDAO.getAll();
 	}
+
+	public List<Ruta> getRutasConActividad(String nombre) {
+		return rutaDAO.getRutasConActividad(nombre);
+		
+	}
 }

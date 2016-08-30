@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>JRuteros | Administrador</title>
@@ -46,69 +47,70 @@
 		</ul>
 
 		<div class="well well-lg" id="tablaHabilitada">
-			<ui:repeat var="actividad" value="#{adminBean.listadoDeActividadesHabilitadas}">
+			<c:forEach var="actividad" items="#{adminBean.listadoDeActividadesHabilitadas}">
 			
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<div class="col-md-5">
-							<h4>#{actividad.nombre}</h4>
-						</div>
+						<h:form>
+							<div class="col-md-5">
+								<h4><h:inputText value="#{actividad.nombre}" name="nombre"></h:inputText></h4>
+							</div>
+							<div class="col-md-2 btn-group-vertical">							
+								<h:commandButton action="#{adminBean.modificarActividad(actividad)}"
+								class="btn btn-warning" value="Modificar" />							
+							</div>
+						</h:form>
 						<div class="col-md-2 btn-group-vertical">
 							<h:form>
-								<h:commandButton action="#{actividad.id}"
-								class="btn btn-warning" value="Modificar" />
-							</h:form>	
-						</div>
-						<div class="col-md-2 btn-group-vertical">
-							<h:form>
-								<h:commandButton action="#{actividad.id}"
+								<h:commandButton action="#{adminBean.deshabilitarActividad(actividad)}"
 								class="btn btn-default" value="Deshabilitar" />
 							</h:form>	
 						</div>
 						<div class="col-md-2 btn-group-vertical">
 							<h:form>
-								<h:commandButton action="#{actividad.id}"
+								<h:commandButton action="#{adminBean.eliminarActividad(actividad)}"
 								class="btn btn-default" value="Eliminar" />
 							</h:form>	
 						</div>
 	
 					</div>
 				</div>
-			</ui:repeat>
+			</c:forEach>
 		</div>
 
 
 
 		<div class="well well-lg" style="display: none"
 			id="tablaDeshabilitada">
-			<ui:repeat var="actividad" value="#{adminBean.listadoDeActividadesDeshabilitadas}">			
+			<c:forEach var="actividad" items="#{adminBean.listadoDeActividadesDeshabilitadas}">			
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<div class="col-md-5">
-							<h4>#{actividad.nombre}</h4>
-						</div>
+						<h:form>
+							<div class="col-md-5">
+								<h4><h:inputText value="#{actividad.nombre}" name=""></h:inputText></h4>
+							</div>
+							<div class="col-md-2 btn-group-vertical">							
+								<h:commandButton action="#{adminBean.modificarActividad(actividad)}"
+								class="btn btn-warning" value="Modificar" />							
+							</div>
+						</h:form>
 						<div class="col-md-2 btn-group-vertical">
 							<h:form>
-								<h:commandButton action="#{actividad.id}"
-								class="btn btn-warning" value="Modificar" />
+								<h:inputHidden name="id" value="#{actividad.id}"></h:inputHidden>
+								<h:commandButton action="#{adminBean.habilitarActividad(actividad)}"
+								class="btn btn-default" value="Habilitar" />
 							</h:form>	
 						</div>
 						<div class="col-md-2 btn-group-vertical">
 							<h:form>
-								<h:commandButton action="#{actividad.id}"
-								class="btn btn-default" value="Deshabilitar" />
-							</h:form>	
-						</div>
-						<div class="col-md-2 btn-group-vertical">
-							<h:form>
-								<h:commandButton action="#{actividad.id}"
+								<h:commandButton action="#{adminBean.eliminarActividad(actividad)}"
 								class="btn btn-default" value="Eliminar" />
 							</h:form>	
 						</div>
 	
 					</div>
 				</div>
-			</ui:repeat>
+			</c:forEach>
 		</div>
 
 

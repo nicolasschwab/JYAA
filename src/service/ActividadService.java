@@ -10,7 +10,7 @@ import dao.ActividadDAO;
 public class ActividadService {
 
 	private ActividadDAO actividadDAO;
-	
+
 	public ActividadService(){
 		actividadDAO = FactoryDAO.getActividadDAO();
 	}
@@ -34,6 +34,22 @@ public class ActividadService {
 
 	public List<Actividad> listDeshabilitadas() {
 		return actividadDAO.getAllByHabilitada(false);
+	}
+
+	public boolean eliminar(Actividad actividad) {
+		if(actividad!=null){
+			actividadDAO.delete(actividad.getId());
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean modificar(Actividad actividad) {
+		if(actividad!=null){
+			actividadDAO.edit(actividad);
+			return true;
+		}
+		return false;
 	}
 	
 }

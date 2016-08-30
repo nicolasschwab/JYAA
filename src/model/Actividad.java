@@ -47,6 +47,14 @@ public class Actividad {
 	public void setHabilitada(boolean habilitada) {
 		this.habilitada = habilitada;
 	}
+
+	public void deshabilitar() {
+		this.habilitada=false;		
+	}
+	
+	public void habilitar() {
+		this.habilitada=true;		
+	}
 	
 	
 	

@@ -2,6 +2,7 @@ package util;
 
 import service.ActividadService;
 import service.AdministradorService;
+import service.RutaService;
 import service.UsuarioService;
 
 public class FactoryService {
@@ -9,6 +10,7 @@ public class FactoryService {
 	private static UsuarioService usuarioService;
 	private static AdministradorService adminService;
 	private static ActividadService actividadService;
+	private static RutaService rutaService;
 	
 	public static UsuarioService getUsuarioService(){
 		if(usuarioService==null){
@@ -29,6 +31,13 @@ public class FactoryService {
 			actividadService=new ActividadService();
 		}
 		return actividadService;
+	}
+
+	public static RutaService getRutaService() {
+		if(rutaService==null){
+			rutaService=new RutaService();
+		}
+		return rutaService;
 	}
 	
 }

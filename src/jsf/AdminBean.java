@@ -54,10 +54,52 @@ public class AdminBean implements Serializable{
 		return this.listarActividades();
 	}
 	
-	public String deshabilitarActividad(){
+	public String deshabilitarActividad(Actividad actividad){
 		if(SessionUtil.hasSession()){
-			
+			if(this.actividad.deshabilitar(actividad)){
+				Mensaje.crearMensaje("Se deshabilitó la actividad");
+			}else{
+				Mensaje.crearMensaje("La actividad no existe");
+			}
 		}
+		this.listarActividades();
+		return null;
+	}
+	
+	public String eliminarActividad(Actividad actividad){
+		if(SessionUtil.hasSession()){
+			if(this.actividad.eliminar(actividad)){
+				Mensaje.crearMensaje("Se eliminó la actividad");
+			}else{
+				Mensaje.crearMensaje("Hay rutas con esta actividad asignada");
+			}
+		}
+		this.listarActividades();
+		return null;
+	}
+	
+	public String modificarActividad(Actividad actividad){
+		if(SessionUtil.hasSession()){
+			if(this.actividad.modificar(actividad)){
+				Mensaje.crearMensaje("Se modificó la actividad");
+			}else{
+				Mensaje.crearMensaje("La actividad no existe");
+			}
+		}
+		this.listarActividades();
+		return null;
+	}
+	
+	public String habilitarActividad(Actividad actividad){
+		if(SessionUtil.hasSession()){
+			if(this.actividad.habilitar(actividad)){
+				Mensaje.crearMensaje("Se habilitó la activdad");
+			}
+			else{
+				Mensaje.crearMensaje("La actividad no existe!");
+			}
+		}
+		this.listarActividades();
 		return null;
 	}
 

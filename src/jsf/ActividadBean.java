@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import model.Actividad;
@@ -15,6 +16,8 @@ public class ActividadBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@ManagedProperty(value="#{rutaBean}")
+	private RutaBean rutaBean;
 	private int id;
 	private String nombre;
 	private boolean habilitada;
@@ -53,6 +56,27 @@ public class ActividadBean implements Serializable{
 
 	public List<Actividad> listarTodasDeshabilitadas() {
 		return FactoryService.getActividadService().listDeshabilitadas();
+	}
+
+	public boolean deshabilitar(Actividad actividad) {
+		actividad.setHabilitada(false);
+		return FactoryService.getActividadService().modificar(actividad);
+	}
+	
+	public boolean habilitar(Actividad actividad) {
+		actividad.setHabilitada(true);
+		return FactoryService.getActividadService().modificar(actividad);
+	}
+
+	public boolean eliminar(Actividad actividad) {
+		if(rutaBean.hayRutasConActividad(actividad.getNombre())){
+			return FactoryService.getActividadService().eliminar(actividad);
+		}
+		return false;		
+	}
+	
+	public boolean modificar(Actividad actividad) {		
+		return FactoryService.getActividadService().modificar(actividad);
 	}
 	
 	
