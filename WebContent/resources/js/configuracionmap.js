@@ -21,34 +21,41 @@ function initialize() {
 		agregarMarker(e.latLng, map);
 
 	});
-
 	puntos = [];
+	var puntosActuales = $(".puntos").text();
+	if(puntosActuales != "" && puntosActuales != null){
+		arrayPuntos = puntosActuales.split(",");
+		arrayPuntos.forEach(function(value){
+			if(value != ""){
+				latLong = value.split("_");
+				punto = {
+					lat : parseInt(latLong[0]),
+					lng : parseInt(latLong[1])
+				};
+				puntos.push(punto);
+			}
+		});
+	}
+	
 	obtenerMarkers();
+	
 }
 
 // Obtiene markers y los dibuja
-function obtenerMarkers(dibujar) {
+function obtenerMarkers() {
 
-	$.ajax({
-		dataType : "json",
-		url : myURI,
+	console.log("result " + puntos);
+	$.each(puntos, function(i, dato) {
+		console.log("dato" + i + dato);
+		dibujarMarker(dato);
 
-		success : function(result) {
-			console.log("result " + result);
-			puntos = [];
-			$.each(result, function(i, dato) {
-				console.log("dato" + i + dato);
-				dibujarMarker(dato);
-
-			});
-			dibujarRecorrido();
-		}
 	});
+	dibujarRecorrido();
 }
 
 function dibujarMarker(dato) {
 
-	var position = new google.maps.LatLng(dato.latitud, dato.longitud);
+	var position = new google.maps.LatLng(dato.lat, dato.lng);
 
 	var marker = new google.maps.Marker({
 		position : position,
@@ -56,7 +63,7 @@ function dibujarMarker(dato) {
 		      path: google.maps.SymbolPath.CIRCLE,
 		      scale: 3
 		    },
-		id : dato.id
+		//id : dato.id
 	});
 
 	marker.addListener("rightclick", function(point) {
@@ -65,7 +72,7 @@ function dibujarMarker(dato) {
 		marker.setMap(null);
 	});
 
-	puntos[puntos.length] = position;
+	//puntos[puntos.length] = position;
 
 	marker.setMap(map);
 }
@@ -73,19 +80,12 @@ function dibujarMarker(dato) {
 function agregarMarker(latLng) {
 	var punto = {
 		lat : latLng.lat(),
-		lon : latLng.lng()
+		lng : latLng.lng()
 	};
-	$.ajax({
-
-		data : punto,
-		url : myURI,
-		type : "POST",
-		success : function(result) {
-			obtenerMarkers();
-
-		}
-	});
-
+	$(".lat-long").attr("value", latLng.lat()+"_"+latLng.lng());
+	$(".lat-long").change();
+	puntos.push(punto);
+	obtenerMarkers();
 }
 
 function dibujarRecorrido() {
@@ -136,17 +136,17 @@ function limpiarMapa() {
 
 }
 
-function borrarMarker(id) {
-	console.log("borrar marker " + id);
-	punto = {
-		id : id
-	};
-	$.ajax({
-		data : punto,
-		url : myURI ,
-		type : "DELETE",
-		success : function(result) {
-			initialize();
-		}
-	});
-}
+//function borrarMarker(id) {
+//	console.log("borrar marker " + id);
+//	punto = {
+//		id : id
+//	};
+//	$.ajax({
+//		data : punto,
+//		url : myURI ,
+//		type : "DELETE",
+//		success : function(result) {
+//			initialize();
+//		}
+//	});
+//}

@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JRuteros | Mis Rutas</title>
@@ -20,99 +21,38 @@
 	</ui:insert>
 
 	<div class="container">
-
 		<h4>Mis Rutas</h4>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Nombre</th>
-					<th>Detalle</th>
-					<th>Fotos</th>
+					<th>Actividades</th>
+					<th>Dificultad</th>
 					<th>Modificacion</th>
 					<th>Eliminacion</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>Ruta 1</td>
-					<td><div class="btn-group">
-							<button type="button" class="btn btn-default dropdown-toggle"
-								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">
-								Detalle <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li class="dropdown-header">Detalles</li>
-								<li>Descripcion de ruta 1</li>
-								<li>Privacidad: privada</li>
-								<li>Formato: circular</li>
-								<li>Distancia: 15km</li>
-								<li>Dificultad: facil</li>
-								<li>Actividad: ciclismo</li>
-								<li>Tiempo estimado: 5 hrs</li>
-								<li>Fecha realizacion</li>
-							</ul>
-						</div></td>
-					<td><input type="button" class="btn btn-default"
-						value="Ver fotos" /></td>
-					<td><form action="altaRuta"><input type="submit" class="btn btn-warning"
-						value="Modificar" /> </form></td>
-					<td><input type="button" class="btn btn-default"
-						value="Eliminar" /></td>
-				</tr>
-				<tr>
-					<td>Ruta 2</td>
-					<td><div class="btn-group">
-							<button type="button" class="btn btn-default dropdown-toggle"
-								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">
-								Detalle <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li class="dropdown-header">Detalles</li>
-								<li>Descripcion de ruta 2</li>
-								<li>Privacidad: publica</li>
-								<li>Formato: circular</li>
-								<li>Distancia: 5km</li>
-								<li>Dificultad: dificil</li>
-								<li>Actividad: alpinismo</li>
-								<li>Tiempo estimado: 15 hrs</li>
-								<li>Fecha realizacion</li>
-							</ul>
-						</div></td>
-					<td><input type="button" class="btn btn-default"
-						value="Ver fotos" /></td>
-					<td><form action="altaRuta"><input type="submit" class="btn btn-warning"
-						value="Modificar" /> </form></td>
-					<td><input type="button" class="btn btn-default"
-						value="Eliminar" /></td>
-				</tr>
-				<tr>
-					<td>Ruta 3</td>
-					<td><div class="btn-group">
-							<button type="button" class="btn btn-default dropdown-toggle"
-								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">
-								Detalle <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								<li class="dropdown-header">Detalles</li>
-								<li>Descripcion de ruta 3</li>
-								<li>Privacidad: privada</li>
-								<li>Formato: ida</li>
-								<li>Distancia: 10km</li>
-								<li>Dificultad: moderado</li>
-								<li>Actividad: motociclismo</li>
-								<li>Tiempo estimado: 4 hrs</li>
-								<li>Fecha realizacion</li>
-							</ul>
-						</div></td>
-					<td><input type="button" class="btn btn-default"
-						value="Ver fotos" /></td>
-					<td><form action="altaRuta"><input type="submit" class="btn btn-warning"
-						value="Modificar" /> </form></td>
-					<td><input type="button" class="btn btn-default"
-						value="Eliminar" /></td>
+					<c:forEach var="ruta" items="#{usuarioBean.misRutas}">
+						<td>
+							<h:outputText value="#{ruta.nombre}"></h:outputText>
+						</td>
+						<td>
+							<h:outputText value="#{ruta.actividad.nombre} "></h:outputText>
+						</td>
+						<td>
+							<h:outputText value="#{ruta.dificultad} "></h:outputText>
+						</td>
+						<td>
+							<h:form>
+								<h:commandButton class="btn btn-warning" action="#{rutaBean.showModificar(ruta)}" value="Modificar" />
+							</h:form>
+						</td>
+					    <td>
+					    	<input type="button" class="btn btn-default" value="Eliminar" />
+					    </td>
+					</c:forEach>
 				</tr>
 			</tbody>
 		</table>

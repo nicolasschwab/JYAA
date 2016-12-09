@@ -27,8 +27,8 @@ public class TestDAOCrear extends TestCase{
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		actividad = new Actividad("Mountain Bike");
-		actividad2 = new Actividad("Kajac");
+		actividad = new Actividad("Mountain Bike", true);
+		actividad2 = new Actividad("Kajac", true);
 		administrador = new Administrador();
 		administrador.setNombreUsuario("admin");
 		administrador.setContrasenia("1234");

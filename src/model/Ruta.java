@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +33,7 @@ public class Ruta {
 	private String tiempoEstimado;
 	private Date fechaRealizacion;
 	@OneToOne(fetch = FetchType.EAGER)
-	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
+	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
 	private Actividad actividad;
 	@OneToMany(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
@@ -172,6 +172,29 @@ public class Ruta {
 		Collection<Punto> puntos=this.getPuntos();
 		this.setPuntos(new ArrayList<Punto>());
 		return puntos;
+	}
+
+	public void modificar(String nombre, String comentario, boolean privada, String formato, Double distancia,
+			String dificultad, String tiempoEstimado, Date fecha, Actividad actividad, List<Foto> fotos,
+			List<Punto> puntos) {
+		setNombre(nombre);
+		setDescripcion(comentario);
+		String privacidad;
+		if(privada){
+			privacidad = "privada";
+		}
+		else{
+			privacidad = "publica";
+		}
+		setPrivacidad(privacidad);
+		setFormato(formato);
+		setDistancia(distancia);
+		setDificultad(dificultad);
+		setTiempoEstimado(tiempoEstimado);
+		setFechaRealizacion(fecha);
+		setActividad(actividad);
+		setFotos(fotos);
+		setPuntos(puntos);
 	}
 	
 }

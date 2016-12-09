@@ -77,11 +77,9 @@ public class LoginBean implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public AdminBean getAdmin() {
 		return admin;
 	}
-
 	public void setAdmin(AdminBean admin) {
 		this.admin = admin;
 	}

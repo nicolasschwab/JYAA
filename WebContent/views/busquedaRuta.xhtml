@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 <title>JRuteros</title>
 	<ui:insert name="heads">
@@ -18,40 +19,33 @@
 		<ui:include src="menuViajero.xhtml"/>
 	</ui:insert>
 
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 formBusqueda">
-			<form>
+			<h:form class="form-inline"  method="post">
 				<div class="row busquedaArriba">
 					<div class="col-md-4"></div>
-					<div class="col-md-6 left">
-						<input placeholder="Nombre de la ruta" class="buscarNombre" />
-						<input type="submit" value="Buscar" class="botonBuscar" />
+					<div class="col-md-6 left" >
+						<h:inputText id="prueba" value="#{rutaBean.nombre}"  class="buscarNombre" placeholder="nombre"></h:inputText>
+						<h:commandButton class="botonBuscar" action="#{rutaBean.buscar}" value="Buscar" />
 					</div>
 					
 				</div>
 				<div class="row">
 					<div class="col-md-4"></div>
 					<div class="col-md-6 left">
-						<select class="segundaFila">
-							<option>Elige una actividad</option>
-							<option>Mountain bike</option>
-							<option>Ciclismo</option>
-							<option>Cicloturismo</option>
-							<option>Senderismo</option>
-							<option>Alpinismo</option>
-							<option>Motociclismo</option>
-							<option>Cuatriciclo</option>
-							<option>Esqu�</option>
-							<option>Kayac</option>
-							<option>Vela</option>
-							<option>A caballo</option>			
-						</select>
-						<input placeholder="Fecha del viaje" type="date" class="busquedaFecha segundaFila" />
+						<h:selectOneMenu class="segundaFila" value="#{rutaBean.actividad.nombre}">
+							<f:selectItem itemValue="" itemLabel="" />
+							<c:forEach var="act" items="#{rutaBean.actividades}">
+								<f:selectItem itemValue="#{act.nombre}" itemLabel="#{act.nombre}" />
+							</c:forEach>
+						</h:selectOneMenu>
+						<h:inputText value="#{rutaBean.fecha}">
+						    <f:convertDateTime pattern="MM/dd/yyyy" />
+						</h:inputText>
 					</div>
 				</div>
-			</form>
+			</h:form>
 		</div>
 	</div>
 	
@@ -66,13 +60,13 @@
 						<label>Dificultad</label>
 					</div>
 					<div>
-						<select>
-							<option>Facil</option>
-							<option>Moderado</option>
-							<option>Dificil</option>
-							<option>Muy Dificil</option>
-							<option>Solo expertos</option>
-						</select>
+						<h:selectOneMenu value="#{buscarBean.ruta.dificultad}">
+							<f:selectItem itemValue="Facil" itemLabel="Facil"></f:selectItem>
+							<f:selectItem itemValue="Moderado" itemLabel="Moderado"></f:selectItem>
+							<f:selectItem itemValue="Dificil" itemLabel="Dificil"></f:selectItem>
+							<f:selectItem itemValue="Muy Dificil" itemLabel="Muy Dificil"></f:selectItem>
+							<f:selectItem itemValue="Solo expertos" itemLabel="Solo expertos"></f:selectItem>
+						</h:selectOneMenu>
 					</div>
 				</section>
 				<section>			
@@ -80,10 +74,10 @@
 						<label>�viaje de ida o circular?</label>
 					</div>
 					<div>
-						<input class="formatoRuta" id="ida" type="radio" name="viajeForma" value="ida" />
-						<label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label>
-						<input class="formatoRuta" id="circular" type="radio" name="viajeForma" value="circular" />
-						<label for="circular" title="circular"><i class="fa fa-refresh"></i></label>
+						<h:selectOneRadio value="#{buscarBean.ruta.formato}">
+							<f:selectItem itemValue="ida" itemLabel="ida"></f:selectItem>
+							<f:selectItem itemValue="circular" itemLabel="Circular"></f:selectItem>
+						</h:selectOneRadio>
 					</div>
 				</section>
 				<section>
@@ -91,15 +85,15 @@
 						<label>Cantidad de Km</label>
 					</div>
 					<div>
-						<input type="number" />
+						<h:inputText value="#{buscarBean.ruta.distancia}"></h:inputText>
 					</div>
 				</section>
 				<section>
 					<div class="row">
-						<label>Tiempo estimado</label>
+						<label>Tiempo estimado (hrs:mins)</label>
 					</div>
 					<div>
-						<input type="text"  name="timepo" placeholder="hrs:mins" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$" />
+						<h:inputText value="#{buscarBean.ruta.tiempoEstimado}"></h:inputText>
 					</div>	
 				</section>
 			</div>

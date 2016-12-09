@@ -25,7 +25,7 @@
 				<div class="col-md-12">
 					<div class="col-md-2">
 						<div class="form-group">
-							<h:outputText class="puntos" value="#{rutaBean.puntos}"></h:outputText>
+							
 								<div clas="row">
 									<label>Subi fotos de la ruta!</label>
 								</div>
@@ -187,16 +187,7 @@
 					<div id="map-canvas" style="height: 500px"></div>
 				</div>
 			</div>
-			<c:choose>
-			    <c:when test="#{rutaBean.modificar}">
-			    	<h:inputHidden value="#{rutaBean.id}"></h:inputHidden>
-			        <h:commandButton class="botonBuscar" action="#{rutaBean.doModificar}" value="Modificar" />
-			    </c:when>    
-			    <c:otherwise>
-			        <h:commandButton class="botonBuscar" action="#{rutaBean.crear}" value="Crear!" />
-			    </c:otherwise>
-			</c:choose>
-			
+			<h:commandButton class="botonBuscar" action="#{rutaBean.crear}" value="Crear!" />
 	</h:form>
 			<input type="button" id="borrarMarcadores" value="Borrar todos los puntos" />
 				

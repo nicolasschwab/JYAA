@@ -16,16 +16,25 @@ public class ActividadBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManagedProperty(value="#{rutaBean}")
-	private RutaBean rutaBean;
 	private int id;
 	private String nombre;
 	private boolean habilitada;
 	
+	private RutaBean rutaBean;
+	
+	public List<Actividad> getHabilitadas(){
+		return FactoryService.getActividadService().listHabilitadas();
+	}
 	
 	public void alta(){
 		FactoryService.getActividadService().createActividad(this.getNombre(),this.isHabilitada());
-	}	
+	}
+	
+	public void nombreCualquiera() {
+		if(this.nombre == "" || this.nombre == null){
+			this.nombre = "%";
+		}		
+	}
 	
 	public String getNombre() {
 		return nombre;

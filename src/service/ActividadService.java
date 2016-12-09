@@ -52,4 +52,8 @@ public class ActividadService {
 		return false;
 	}
 	
+	public Actividad getActividad(String nombre){
+		return actividadDAO.get(nombre).get(0);
+	}
+	
 }

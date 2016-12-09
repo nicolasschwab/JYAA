@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @XmlRootElement
 @Entity
 public class Usuario extends Perfil {
@@ -24,6 +27,15 @@ public class Usuario extends Perfil {
 	
 	public Usuario(){
 		super();
+	}
+	
+	public boolean esMiRuta(Long id){
+		for(Ruta ruta : misRutas){
+			if(ruta.getId()==id){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Usuario(String nombreUsuario, String dni, 

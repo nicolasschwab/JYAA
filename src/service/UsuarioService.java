@@ -2,8 +2,10 @@ package service;
 
 import java.util.List;
 
+import model.Ruta;
 import model.Usuario;
 import util.FactoryDAO;
+import util.SessionUtil;
 import dao.UsuarioDAO;
 
 public class UsuarioService {
@@ -45,5 +47,12 @@ public class UsuarioService {
 	
 	public List<Usuario> getAllByActivo(Boolean activo){
 		return usuarioDAO.getAllByActivo(activo);
+	}
+
+	public void nuevaRuta(Ruta ruta) {
+		Long id = SessionUtil.getUserId();
+		Usuario user = usuarioDAO.get(id);
+		user.addRuta(ruta);
+		usuarioDAO.edit(user);		
 	}
 }

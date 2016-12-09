@@ -54,8 +54,7 @@ public class Actividad {
 	
 	public void habilitar() {
 		this.habilitada=true;		
-	}
-	
+	}	
 	
 	
 }

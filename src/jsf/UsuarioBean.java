@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,7 +13,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
+import model.Ruta;
 import model.Usuario;
 import service.UsuarioService;
 import util.FactoryService;
@@ -23,7 +27,7 @@ import util.Validator;
 public class UsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String contrasena="cambiala123";
+	private final String contrasena="cambiala123";
 	private Usuario usr;
 
 	private String username;	
@@ -33,6 +37,7 @@ public class UsuarioBean implements Serializable {
 	private String nacimiento;
 	private String sexo;
 	private String email;
+	private List<Ruta> misRutas;
 	
 	private String contrasenaVieja;
 	private String nuevaContrasena;
@@ -82,11 +87,9 @@ public class UsuarioBean implements Serializable {
 		return "altaRuta?faces-redirect=true";
 	}
 	
-	public String redireccionarBusquedaRuta(){
-		return "busquedaRuta?faces-redirect=true";
-	}
-	
 	public String redireccionarListadoRutas(){
+		Usuario user = FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId());
+		misRutas = user.getMisRutas();
 		return "listarRutasUsuario?faces-redirect=true";
 	}
 	
@@ -265,6 +268,16 @@ public class UsuarioBean implements Serializable {
 	public void setNuevaAgain(String nuevaAgain) {
 		this.nuevaAgain = nuevaAgain;
 	}
+
+	public List<Ruta> getMisRutas() {
+		return misRutas;
+	}
+
+	public void setMisRutas(List<Ruta> misRutas) {
+		this.misRutas = misRutas;
+	}
+	
+	
 	
 	
 	
