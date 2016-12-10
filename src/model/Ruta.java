@@ -1,5 +1,8 @@
 package model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -12,10 +15,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.servlet.http.Part;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @XmlRootElement
 @Entity
@@ -26,7 +32,7 @@ public class Ruta {
 	private Long id;
 	private String nombre;
 	private String descripcion;
-	private String privacidad;
+	private boolean privacidad;
 	private String formato;
 	private Double distancia;
 	private String dificultad;
@@ -35,20 +41,28 @@ public class Ruta {
 	@OneToOne(fetch = FetchType.EAGER)
 	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
 	private Actividad actividad;
-	@OneToMany(fetch = FetchType.LAZY)
-	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
-	private Collection<Foto> fotos;
+	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
+	private Foto foto1;
+	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
+	private Foto foto2;
+	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
+	private Foto foto3;
 	@OneToMany(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
 	private Collection<Punto> puntos;
 	
 	public Ruta() {
 		super();
-		setFotos(new ArrayList<Foto>());
 		setPuntos(new ArrayList<Punto>());
+		setFoto1(new Foto());
+		setFoto2(new Foto());
+		setFoto3(new Foto());
 	}
 	
-	public Ruta(String nombre, String descripcion, String privacidad,
+	public Ruta(String nombre, String descripcion, boolean privacidad,
 			String formato, Double distancia, String dificultad,
 			String tiempoEstimado, Date fechaRealizacion,
 			Actividad actividad) {
@@ -62,8 +76,42 @@ public class Ruta {
 		setTiempoEstimado(tiempoEstimado);
 		setFechaRealizacion(fechaRealizacion);
 		setActividad(actividad);
-		setFotos(new ArrayList<Foto>());
+		setFoto1(new Foto());
+		setFoto2(new Foto());
+		setFoto3(new Foto());
 		setPuntos(new ArrayList<Punto>());
+	}
+	
+	public StreamedContent getShowFoto1() throws IOException{		
+		if(this.foto1 != null && this.foto1.getContenido() != null && this.foto1.getContenido().length == 0){
+			Foto foto = (Foto) this.foto1;
+			return genericGetFoto(foto);
+		}
+		return null;
+	}
+	
+	public StreamedContent getShowFoto2() throws IOException{		
+		if(this.foto2 != null  && this.foto2.getContenido() != null && this.foto2.getContenido().length == 0){
+			Foto foto = (Foto) this.foto2;
+			return genericGetFoto(foto);
+		}
+		return null;
+	}
+	
+	public StreamedContent getShowFoto3() throws IOException{		
+		if(this.foto3 != null && this.foto3.getContenido() != null && this.foto3.getContenido().length == 0){
+			Foto foto = (Foto) this.foto3;
+			return genericGetFoto(foto);
+		}
+		return null;
+	}
+	
+	private StreamedContent genericGetFoto(Foto foto) throws IOException{
+		if(foto != null){
+			InputStream inputStream = new ByteArrayInputStream(foto.getContenido());
+			return new DefaultStreamedContent(inputStream);	
+		}
+		return null;
 	}
 	
 	
@@ -75,9 +123,6 @@ public class Ruta {
 		//getHacedores().put(usuario, puntaje);
 	}	
 	
-	public void addFoto(Foto foto){
-		getFotos().add(foto);
-	}
 	public void addPunto(Punto punto){
 		getPuntos().add(punto);
 	}
@@ -100,10 +145,10 @@ public class Ruta {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getPrivacidad() {
+	public boolean getPrivacidad() {
 		return privacidad;
 	}
-	public void setPrivacidad(String privacidad) {
+	public void setPrivacidad(boolean privacidad) {
 		this.privacidad = privacidad;
 	}
 	public String getFormato() {
@@ -142,11 +187,23 @@ public class Ruta {
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
 	}
-	public Collection<Foto> getFotos() {
-		return fotos;
+	public Foto getFoto1() {
+		return foto1;
 	}
-	public void setFotos(Collection<Foto> fotos) {
-		this.fotos = fotos;
+	public void setFoto1(Foto foto1) {
+		this.foto1 = foto1;
+	}
+	public Foto getFoto2() {
+		return foto2;
+	}
+	public void setFoto2(Foto foto2) {
+		this.foto2 = foto2;
+	}
+	public Foto getFoto3() {
+		return foto3;
+	}
+	public void setFoto3(Foto foto3) {
+		this.foto3 = foto3;
 	}
 	public Collection<Punto> getPuntos() {
 		return puntos;
@@ -172,29 +229,6 @@ public class Ruta {
 		Collection<Punto> puntos=this.getPuntos();
 		this.setPuntos(new ArrayList<Punto>());
 		return puntos;
-	}
-
-	public void modificar(String nombre, String comentario, boolean privada, String formato, Double distancia,
-			String dificultad, String tiempoEstimado, Date fecha, Actividad actividad, List<Foto> fotos,
-			List<Punto> puntos) {
-		setNombre(nombre);
-		setDescripcion(comentario);
-		String privacidad;
-		if(privada){
-			privacidad = "privada";
-		}
-		else{
-			privacidad = "publica";
-		}
-		setPrivacidad(privacidad);
-		setFormato(formato);
-		setDistancia(distancia);
-		setDificultad(dificultad);
-		setTiempoEstimado(tiempoEstimado);
-		setFechaRealizacion(fecha);
-		setActividad(actividad);
-		setFotos(fotos);
-		setPuntos(puntos);
 	}
 	
 }

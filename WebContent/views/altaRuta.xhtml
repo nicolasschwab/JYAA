@@ -36,7 +36,7 @@
 												<h:inputFile id="file1" class="file" value="#{rutaBean.foto1}">	
 													<f:ajax execute="file1" render="img1"></f:ajax>												
 												</h:inputFile>
-												<p:graphicImage id="img1" styleClass="imgRuta" value="#{rutaBean.showFoto1}"></p:graphicImage>
+												<p:graphicImage id="img1" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto1}"></p:graphicImage>
 											</div>
 										</a>
 									</li>
@@ -46,7 +46,7 @@
 												<h:inputFile id="file2" class="file" value="#{rutaBean.foto2}">
 													<f:ajax execute="file2" render="img2"></f:ajax>														
 												</h:inputFile>
-												<p:graphicImage id="img2" styleClass="imgRuta" value="#{rutaBean.showFoto2}"></p:graphicImage>
+												<p:graphicImage id="img2" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto2}"></p:graphicImage>
 											</div>
 										</a>
 									</li>
@@ -56,7 +56,7 @@
 												<h:inputFile id="file3" class="file" value="#{rutaBean.foto3}">
 													<f:ajax execute="file3" render="img3"></f:ajax>														
 												</h:inputFile>
-												<p:graphicImage id="img3" styleClass="imgRuta" value="#{rutaBean.showFoto3}"></p:graphicImage>
+												<p:graphicImage id="img3" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto3}"></p:graphicImage>
 											</div>
 										</a>
 									</li>
@@ -73,7 +73,7 @@
 										<label for="nombre">Dele un nombre a su ruta!</label>
 									</div>
 									<div>
-										<h:inputText id="prueba" value="#{rutaBean.nombre}"  class="buscarNombre" placeholder="nombre"></h:inputText>
+										<h:inputText id="prueba" value="#{rutaBean.ruta.nombre}"  class="buscarNombre" placeholder="nombre"></h:inputText>
 									</div>	
 								</div>
 							</div>
@@ -83,7 +83,7 @@
 										<label for="descripcion">Coment� un poco sobre su viaje</label>
 									</div>
 									<div>
-										<h:inputTextarea id="descripcion" value="#{rutaBean.comentario}"></h:inputTextarea>
+										<h:inputTextarea id="descripcion" value="#{rutaBean.ruta.descripcion}"></h:inputTextarea>
 									</div>	
 								</div>
 							</div>
@@ -96,7 +96,7 @@
 										<label>Tiempo estimado (hrs:mins)</label>
 									</div>
 									<div>
-										<h:inputText value="#{rutaBean.tiempoEstimado}">
+										<h:inputText value="#{rutaBean.ruta.tiempoEstimado}">
 										</h:inputText>
 									</div>							
 								</div>
@@ -105,7 +105,7 @@
 										<label>�Qu� d�a es el viaje?</label>
 									</div>
 									<div>
-										<h:inputText value="#{rutaBean.fecha}">
+										<h:inputText value="#{rutaBean.ruta.fechaRealizacion}">
 										    <f:convertDateTime pattern="MM/dd/yyyy" />
 										</h:inputText>
 									</div>						
@@ -133,7 +133,7 @@
 										<label>Indic� la dificultad</label>
 									</div>
 									<div>
-										<h:selectOneMenu value="#{rutaBean.dificultad}">
+										<h:selectOneMenu value="#{rutaBean.ruta.dificultad}">
 											<f:selectItem itemValue="Facil" itemLabel="Facil"></f:selectItem>
 											<f:selectItem itemValue="Moderado" itemLabel="Moderado"></f:selectItem>
 											<f:selectItem itemValue="Dificil" itemLabel="Dificil"></f:selectItem>
@@ -148,7 +148,7 @@
 										<label>�Quer�s una ruta privada?</label>
 									</div>
 									<div>
-										<h:selectBooleanCheckbox value="#{rutaBean.privada}"></h:selectBooleanCheckbox>
+										<h:selectBooleanCheckbox value="#{rutaBean.ruta.privacidad}"></h:selectBooleanCheckbox>
 									</div>			
 								</div>
 								<div class="form-group ">
@@ -156,7 +156,7 @@
 										<label>�Es un viaje de ida o circular?</label>
 									</div>
 									<div>
-										<h:selectOneMenu value="#{rutaBean.formato}">
+										<h:selectOneMenu value="#{rutaBean.ruta.formato}">
 											<f:selectItem itemValue="ida" itemLabel="ida"></f:selectItem>
 											<f:selectItem itemValue="circular" itemLabel="Circular"></f:selectItem>
 										</h:selectOneMenu>
@@ -169,7 +169,7 @@
 										<label>�C�antos km son?</label>
 									</div>
 									<div>
-										<h:inputText value="#{rutaBean.distancia}"></h:inputText>
+										<h:inputText value="#{rutaBean.ruta.distancia}"></h:inputText>
 									</div>							
 								</div>								
 							</div>
@@ -189,7 +189,6 @@
 			</div>
 			<c:choose>
 			    <c:when test="#{rutaBean.modificar}">
-			    	<h:inputHidden value="#{rutaBean.id}"></h:inputHidden>
 			        <h:commandButton class="botonBuscar" action="#{rutaBean.doModificar}" value="Modificar" />
 			    </c:when>    
 			    <c:otherwise>

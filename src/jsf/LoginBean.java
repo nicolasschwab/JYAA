@@ -29,13 +29,16 @@ public class LoginBean implements Serializable {
 	@ManagedProperty(value="#{adminBean}")
 	private AdminBean admin;
 	
+	@ManagedProperty(value="#{usuarioBean}")
+	private UsuarioBean usuario;
+	
 	public String login(){
 		if(this.validarVariables()){
 			Usuario usr=FactoryService.getUsuarioService().encontrar(this.getUsername(),this.getPassword());
 			if(usr!=null){
 				SessionUtil.getSession().setAttribute("name", usr.getNombreUsuario());
 				SessionUtil.getSession().setAttribute("id", usr.getId());
-				return "listarRutasUsuario?faces-redirect=true";
+				return this.usuario.redireccionarListadoRutas();
 			}else{//puede ser admin
 				Administrador admin=FactoryService.getAdministradorService().encontrar(this.getUsername(),this.getPassword());
 				if(admin!=null){
@@ -83,6 +86,15 @@ public class LoginBean implements Serializable {
 	public void setAdmin(AdminBean admin) {
 		this.admin = admin;
 	}
+
+	public UsuarioBean getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioBean usuario) {
+		this.usuario = usuario;
+	}
+	
 	
 
 }

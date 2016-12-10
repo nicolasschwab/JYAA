@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -44,26 +45,28 @@ public class UsuarioBean implements Serializable {
 	private String nuevaAgain;
 	
 	public String registrar(){
-		if(this.validarVariables()){			
-			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		    Date nacimientoDate = null;
-		    try
-		    {
-		    	nacimientoDate = formatter.parse(getNacimiento());           
-		    } 
-		    catch (java.text.ParseException e)
-		    {
-		         e.printStackTrace();
-		    }
-			Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
-			//se crea una contrasenia por defecto
-			usuarioNuevo.setContrasenia(contrasena);
-			FactoryService.getUsuarioService().persistirUsuario(usuarioNuevo);
-			this.crearMensaje("El usuario se creo correctamente!");
-			this.crearMensaje("La contrasena es '"+contrasena+"'");
-			System.out.println("Se creó un nuevo usuario!");			
-		}else{
-			this.crearMensaje("debes completar todos los campos");
+		if(!SessionUtil.hasSession()){
+			if(this.validarVariables()){			
+				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			    Date nacimientoDate = null;
+			    try
+			    {
+			    	nacimientoDate = formatter.parse(getNacimiento());           
+			    } 
+			    catch (java.text.ParseException e)
+			    {
+			         e.printStackTrace();
+			    }
+				Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
+				//se crea una contrasenia por defecto
+				usuarioNuevo.setContrasenia(contrasena);
+				FactoryService.getUsuarioService().persistirUsuario(usuarioNuevo);
+				this.crearMensaje("El usuario se creo correctamente!");
+				this.crearMensaje("La contrasena es '"+contrasena+"'");
+				System.out.println("Se creó un nuevo usuario!");			
+			}else{
+				this.crearMensaje("debes completar todos los campos");
+			}
 		}
 		return null;
 	}
@@ -81,10 +84,6 @@ public class UsuarioBean implements Serializable {
 			this.crearMensaje("Completa todos los campos");
 		}
 		return null;
-	}
-	
-	public String redireccionarRutaNueva(){
-		return "altaRuta?faces-redirect=true";
 	}
 	
 	public String redireccionarListadoRutas(){

@@ -33,15 +33,12 @@ public class TestDAOCrear extends TestCase{
 		administrador.setNombreUsuario("admin");
 		administrador.setContrasenia("1234");
 		administrador.setNombreCompleto("juan perez");
-		foto = new Foto();
-		foto.setNombre("Una foto para una ruta");
 		puntaje = new Puntaje();
 		puntoInicial = new Punto();
 		puntoInicial.setDescripcion("Punto de inicio de la ruta");
 		puntoFinal = new Punto();
 		puntoFinal.setDescripcion("Punto de finalización de la ruta");
-		ruta = new Ruta("Ruta1", "Una ruta de prueba", "privada", "Ida", 33.3, "Normal", "24hrs", new Date(), actividad);
-		ruta.addFoto(foto);
+		ruta = new Ruta("Ruta1", "Una ruta de prueba", true, "Ida", 33.3, "Normal", "24hrs", new Date(), actividad);
 		ruta.addPunto(puntoFinal);
 		ruta.addPunto(puntoInicial);
 		usuario = new Usuario("Pepe","3333","Jose Luis","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");

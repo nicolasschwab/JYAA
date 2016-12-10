@@ -49,23 +49,4 @@ public class RutaService {
 		actividad.nombreCualquiera();
 		return rutaDAO.buscar(nombre ,actividad, fecha);
 	}
-
-	public void crear(String nombre, String descripcion, boolean privada,
-			String formato, Double distancia, String dificultad,
-			String tiempoEstimado, Date fechaRealizacion,
-			Actividad actividad, List<Foto> fotos, List<Punto> puntos) {
-		
-		String privacidad;
-		if(privada){
-			privacidad = "privada";
-		}
-		else{
-			privacidad = "publica";
-		}
-		Ruta ruta = new Ruta(nombre, descripcion, privacidad, formato, distancia, dificultad, tiempoEstimado, fechaRealizacion, actividad);
-		ruta.setFotos(fotos);
-		ruta.setPuntos(puntos);
-		ruta = rutaDAO.save(ruta);
-		FactoryService.getUsuarioService().nuevaRuta(ruta);
-	}
 }
