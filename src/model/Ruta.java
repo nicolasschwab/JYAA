@@ -42,13 +42,13 @@ public class Ruta {
 	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
 	private Actividad actividad;
 	@OneToOne(fetch = FetchType.EAGER)
-	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
+	@Cascade({CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DELETE})
 	private Foto foto1;
 	@OneToOne(fetch = FetchType.EAGER)
-	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
+	@Cascade({CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DELETE})
 	private Foto foto2;
 	@OneToOne(fetch = FetchType.EAGER)
-	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
+	@Cascade({CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DELETE})
 	private Foto foto3;
 	@OneToMany(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
@@ -83,7 +83,7 @@ public class Ruta {
 	}
 	
 	public StreamedContent getShowFoto1() throws IOException{		
-		if(this.foto1 != null && this.foto1.getContenido() != null && this.foto1.getContenido().length == 0){
+		if(this.foto1 != null && this.foto1.getContenido() != null){
 			Foto foto = (Foto) this.foto1;
 			return genericGetFoto(foto);
 		}
@@ -91,7 +91,7 @@ public class Ruta {
 	}
 	
 	public StreamedContent getShowFoto2() throws IOException{		
-		if(this.foto2 != null  && this.foto2.getContenido() != null && this.foto2.getContenido().length == 0){
+		if(this.foto2 != null  && this.foto2.getContenido() != null){
 			Foto foto = (Foto) this.foto2;
 			return genericGetFoto(foto);
 		}
@@ -99,7 +99,7 @@ public class Ruta {
 	}
 	
 	public StreamedContent getShowFoto3() throws IOException{		
-		if(this.foto3 != null && this.foto3.getContenido() != null && this.foto3.getContenido().length == 0){
+		if(this.foto3 != null && this.foto3.getContenido() != null){
 			Foto foto = (Foto) this.foto3;
 			return genericGetFoto(foto);
 		}

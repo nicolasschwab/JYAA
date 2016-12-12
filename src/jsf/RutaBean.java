@@ -154,18 +154,24 @@ public class RutaBean {
 	}
 
 	public void setFoto1(Part foto1) throws IOException {
-		Foto foto = fotoService.crear(foto1);
-		this.ruta.setFoto1(foto);
+		if(foto1 != null){
+			Foto foto = fotoService.crear(foto1);
+			this.ruta.setFoto1(foto);
+		}		
 	}
 
 	public void setFoto2(Part foto2) throws IOException {
-		Foto foto = fotoService.crear(foto2);
-		this.ruta.setFoto2(foto);
+		if(foto2 != null){
+			Foto foto = fotoService.crear(foto2);
+			this.ruta.setFoto2(foto);
+		}
 	}
 
 	public void setFoto3(Part foto3) throws IOException {
-		Foto foto = fotoService.crear(foto3);
-		this.ruta.setFoto3(foto);
+		if(foto3 != null){
+			Foto foto = fotoService.crear(foto3);
+			this.ruta.setFoto3(foto);
+		}
 	}
 
 	public String getLatLong() {

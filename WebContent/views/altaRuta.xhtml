@@ -189,10 +189,10 @@
 			</div>
 			<c:choose>
 			    <c:when test="#{rutaBean.modificar}">
-			        <h:commandButton class="botonBuscar" action="#{rutaBean.doModificar}" value="Modificar" />
+			        <h:commandButton class="botonBuscar" action="#{rutaBean.doModificar}" value="Modificar" ajax="false" />
 			    </c:when>    
 			    <c:otherwise>
-			        <h:commandButton class="botonBuscar" action="#{rutaBean.crear}" value="Crear!" />
+			        <h:commandButton class="botonBuscar" action="#{rutaBean.crear}" value="Crear!" ajax="false" />
 			    </c:otherwise>
 			</c:choose>
 			
