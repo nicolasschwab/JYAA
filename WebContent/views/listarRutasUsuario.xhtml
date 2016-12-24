@@ -50,7 +50,9 @@
 							</h:form>
 						</td>
 					    <td>
-					    	<input type="button" class="btn btn-default" value="Eliminar" />
+					    	<h:form>
+								<h:commandButton class="btn btn-warning" action="#{rutaBean.eliminar(ruta)}" value="Eliminar" />
+							</h:form>
 					    </td>
 					</c:forEach>
 				</tr>

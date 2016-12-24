@@ -45,7 +45,7 @@ public class RutaBean {
 			if(Validator.validateCreateRuta(ruta.getNombre(), ruta.getDescripcion(), ruta.getFormato(), ruta.getDificultad(), (List<Punto>) ruta.getPuntos() )){
 				Actividad act = actividadService.getActividad(actividad.getNombre());
 				ruta.setActividad(act);
-				rutaService.createPunto(ruta);
+				rutaService.create(ruta);
 				usuarioService.nuevaRuta(ruta);
 				return usuarioBean.redireccionarListadoRutas();
 			}
@@ -58,12 +58,31 @@ public class RutaBean {
 			if(Validator.validateCreateRuta(ruta.getNombre(), ruta.getDescripcion(), ruta.getFormato(), ruta.getDificultad(), (List<Punto>) ruta.getPuntos() )){
 				Actividad act = actividadService.getActividad(actividad.getNombre());
 				ruta.setActividad(act);
-				rutaService.editRuta(ruta);
+				try{
+					rutaService.editRuta(ruta);
+				}
+				catch(Exception e){
+					this.crearMensaje("No podes modificar esta ruta");
+					return "";
+				}
 				this.crearMensaje("La ruta se modifico con exito!");
 				return usuarioBean.redireccionarListadoRutas();			
 			}
 		}
 		return "";
+	}
+	
+	public String eliminar(Ruta ruta){
+		if(SessionUtil.hasSession()){
+			try{
+				rutaService.eliminar(ruta);
+			}
+			catch(Exception e){
+				this.crearMensaje("No podes eliminar esta ruta");
+				return "";
+			}
+		}
+		return usuarioBean.redireccionarListadoRutas();
 	}
 		
 	public boolean hayRutasConActividad(String nombre){

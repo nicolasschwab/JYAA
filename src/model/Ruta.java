@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.servlet.http.Part;
@@ -38,7 +39,7 @@ public class Ruta {
 	private String dificultad;
 	private String tiempoEstimado;
 	private Date fechaRealizacion;
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
 	private Actividad actividad;
 	@OneToOne(fetch = FetchType.EAGER)

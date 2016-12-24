@@ -50,7 +50,7 @@ public class RutaResource {
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	public Response putRuta(JAXBElement<Ruta> rutaElement) {
+	public Response putRuta(JAXBElement<Ruta> rutaElement) throws Exception {
 		Ruta ruta = rutaElement.getValue();
 		Response response;
 		response = Response.created(uriInfo.getAbsolutePath()).build();
@@ -60,7 +60,7 @@ public class RutaResource {
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-	public void createPunto(@FormParam("lat") double latitud, @FormParam("lon") double longitud  ) throws IOException {
+	public void createPunto(@FormParam("lat") double latitud, @FormParam("lon") double longitud  ) throws Exception {
 		Punto punto= new Punto(latitud,longitud);
 		Ruta ruta=rutaService.getRuta(id);
 		ruta.agregarPunto(punto);
@@ -69,7 +69,7 @@ public class RutaResource {
 
 	@DELETE
 	@Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-	public void borrarPunto(@FormParam("id") int idPunto){
+	public void borrarPunto(@FormParam("id") int idPunto) throws Exception{
 		Ruta ruta=rutaService.getRuta(id);
 		if(idPunto==0){
 			//Significa que apretaron el boton de borrar todos los puntos

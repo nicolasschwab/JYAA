@@ -23,6 +23,7 @@ public class Usuario extends Perfil {
 	private String email;
 	private Boolean activo;
 	@OneToMany
+	@Cascade({CascadeType.DELETE, CascadeType.REMOVE, CascadeType.SAVE_UPDATE, CascadeType.MERGE})
 	private List<Ruta> misRutas;
 	
 	public Usuario(){
@@ -65,6 +66,18 @@ public class Usuario extends Perfil {
 	
 	public void addRuta(Ruta ruta){
 		getMisRutas().add(ruta);
+	}
+	
+	public void eliminarRuta(Ruta ruta){
+		Ruta rutaToRemove = null;
+		for(Ruta miRuta: misRutas){
+			if(miRuta.getId() == ruta.getId()){
+				rutaToRemove = miRuta;
+			}
+		}
+		if(rutaToRemove != null){
+			misRutas.remove(rutaToRemove);
+		}
 	}
 	
 	public String getDni() {
