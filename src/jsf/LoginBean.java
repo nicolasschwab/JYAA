@@ -54,9 +54,10 @@ public class LoginBean implements Serializable {
 		return null;
 	}
 	
-	public void logout() throws IOException{
+	public String logout() throws IOException{
 		ExternalContext ec= SessionUtil.terminateSession();
 		ec.redirect(ec.getRequestContextPath() + "/");
+		return "?faces-redirect=true";
 	}
 	
 	private boolean validarVariables(){

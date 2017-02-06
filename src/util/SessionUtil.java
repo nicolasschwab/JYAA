@@ -2,18 +2,17 @@ package util;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SessionUtil {
 
 	public static HttpSession getSession() {
-		return (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
+		return (HttpSession) getExternalContext().getSession(false);
 	}
 	
 	public static String getUserName() {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
+		HttpSession session = getSession();
 		return session.getAttribute("name").toString();
 	}
 
@@ -26,17 +25,21 @@ public class SessionUtil {
 	}
 	
 	public static boolean hasSession(){
-		HttpSession session =(HttpSession) FacesContext.getCurrentInstance()
-		.getExternalContext().getSession(false);
-		if(session!=null){
+		HttpSession session = getSession();
+		Long id = (Long) session.getAttribute("id");
+		if(id != null && id > 0){
 			return true;
 		}
 		return false;
 	}
 	
 	public static ExternalContext terminateSession(){
-		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ExternalContext ec = getExternalContext();
 	    ec.invalidateSession();
 	    return ec;
+	}
+	
+	private static ExternalContext getExternalContext(){
+		return FacesContext.getCurrentInstance().getExternalContext();
 	}
 }
