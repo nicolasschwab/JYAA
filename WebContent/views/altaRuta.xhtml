@@ -20,185 +20,188 @@
 	</ui:insert>
 <div class="container">
 
-	<h:form enctype="multipart/form-data" method="POST">
+	
 			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-2">
+						<h:form enctype="multipart/form-data" method="POST">
 						<div class="form-group">
 							<h:outputText class="puntos" value="#{rutaBean.puntos}"></h:outputText>
-								<div clas="row">
+								<div class="row">
 									<label>Subi fotos de la ruta!</label>
 								</div>
 								<ul class="columImg">
 									<li>				
-										<a class="imagen">
+										<div class="imagen">
 											<div class="cargarImagen">
 												<h:inputFile id="file1" class="file" value="#{rutaBean.foto1}">	
 													<f:ajax execute="file1" render="img1"></f:ajax>												
 												</h:inputFile>
 												<p:graphicImage id="img1" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto1}"></p:graphicImage>
 											</div>
-										</a>
+										</div>
 									</li>
 									<li>
-										<a class="imagen">
+										<div class="imagen">
 											<div class="cargarImagen">
 												<h:inputFile id="file2" class="file" value="#{rutaBean.foto2}">
 													<f:ajax execute="file2" render="img2"></f:ajax>														
 												</h:inputFile>
 												<p:graphicImage id="img2" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto2}"></p:graphicImage>
 											</div>
-										</a>
+										</div>
 									</li>
 									<li>
-										<a class="imagen">
+										<div class="imagen">
 											<div class="cargarImagen">
 												<h:inputFile id="file3" class="file" value="#{rutaBean.foto3}">
 													<f:ajax execute="file3" render="img3"></f:ajax>														
 												</h:inputFile>
 												<p:graphicImage id="img3" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto3}"></p:graphicImage>
 											</div>
-										</a>
+										</div>
 									</li>
 								</ul>
 											
 						</div>
+						</h:form>
 					</div>
-					<div class="col-md-5">
-						<fieldset class="fieldSetNuevaRuta">
-							<legend>Informacion General</legend>
-							<div class="row center ">
-								<div class="form-group">
-									<div class="row">
-										<label for="nombre">Dele un nombre a su ruta!</label>
+					<h:form enctype="multipart/form-data" method="POST">
+						<div class="col-md-5">
+							<fieldset class="fieldSetNuevaRuta">
+								<legend>Informacion General</legend>
+								<div class="row center ">
+									<div class="form-group">
+										<div class="row">
+											<label for="nombre">Dele un nombre a su ruta!</label>
+										</div>
+										<div>
+											<h:inputText id="prueba" value="#{rutaBean.ruta.nombre}"  class="buscarNombre" placeholder="nombre"></h:inputText>
+										</div>	
 									</div>
-									<div>
-										<h:inputText id="prueba" value="#{rutaBean.ruta.nombre}"  class="buscarNombre" placeholder="nombre"></h:inputText>
-									</div>	
 								</div>
-							</div>
-							<div class="row center ">
-								<div class="form-group">
-									<div class="row">
-										<label for="descripcion">Coment� un poco sobre su viaje</label>
+								<div class="row center ">
+									<div class="form-group">
+										<div class="row">
+											<label for="descripcion">Coment� un poco sobre su viaje</label>
+										</div>
+										<div>
+											<h:inputTextarea id="descripcion" value="#{rutaBean.ruta.descripcion}"></h:inputTextarea>
+										</div>	
 									</div>
-									<div>
-										<h:inputTextarea id="descripcion" value="#{rutaBean.ruta.descripcion}"></h:inputTextarea>
-									</div>	
 								</div>
-							</div>
-						</fieldset>
-						<fieldset class="fieldSetNuevaRuta">
-							<legend>Fechas</legend>
-							<div class="row  center">
-								<div class="form-group ">
-									<div class="row">
-										<label>Tiempo estimado (hrs:mins)</label>
+							</fieldset>
+							<fieldset class="fieldSetNuevaRuta">
+								<legend>Fechas</legend>
+								<div class="row  center">
+									<div class="form-group ">
+										<div class="row">
+											<label>Tiempo estimado (hrs:mins)</label>
+										</div>
+										<div>
+											<h:inputText value="#{rutaBean.ruta.tiempoEstimado}">
+											</h:inputText>
+										</div>							
 									</div>
-									<div>
-										<h:inputText value="#{rutaBean.ruta.tiempoEstimado}">
-										</h:inputText>
-									</div>							
+									<div class="form-group">
+										<div class="row">
+											<label>�Qu� d�a es el viaje?</label>
+										</div>
+										<div>
+											<h:inputText class="fecha" value="#{rutaBean.ruta.fechaRealizacion}">
+											    <f:convertDateTime pattern="MM/dd/yyyy" />
+											</h:inputText>
+										</div>						
+										
+									</div>
 								</div>
-								<div class="form-group">
-									<div class="row">
-										<label>�Qu� d�a es el viaje?</label>
+							</fieldset>
+						</div>
+						<div class="col-md-5">
+							<fieldset class="fieldSetNuevaRuta">
+								<legend>Caracteristicas</legend>
+								<div class="row center">
+									<div class="form-group">
+										<div>
+											<label>Indic� Actividad</label>
+										</div>
+										<h:selectOneMenu class="segundaFila" value="#{rutaBean.actividad.nombre}">
+											<c:forEach var="act" items="#{rutaBean.actividades}">
+												<f:selectItem itemValue="#{act.nombre}" itemLabel="#{act.nombre}" />
+											</c:forEach>
+										</h:selectOneMenu>
 									</div>
-									<div>
-										<h:inputText value="#{rutaBean.ruta.fechaRealizacion}">
-										    <f:convertDateTime pattern="MM/dd/yyyy" />
-										</h:inputText>
-									</div>						
+									<div class="form-group ">
+										<div>
+											<label>Indic� la dificultad</label>
+										</div>
+										<div>
+											<h:selectOneMenu value="#{rutaBean.ruta.dificultad}">
+												<f:selectItem itemValue="Facil" itemLabel="Facil"></f:selectItem>
+												<f:selectItem itemValue="Moderado" itemLabel="Moderado"></f:selectItem>
+												<f:selectItem itemValue="Dificil" itemLabel="Dificil"></f:selectItem>
+												<f:selectItem itemValue="Muy Dificil" itemLabel="Muy Dificil"></f:selectItem>
+												<f:selectItem itemValue="Solo expertos" itemLabel="Solo expertos"></f:selectItem>
+											</h:selectOneMenu>
+										</div>						
+									</div>
 									
+									<div class="form-group ">
+										<div>
+											<label>�Quer�s una ruta privada?</label>
+										</div>
+										<div>
+											<h:selectBooleanCheckbox value="#{rutaBean.ruta.privacidad}"></h:selectBooleanCheckbox>
+										</div>			
+									</div>
+									<div class="form-group ">
+										<div>
+											<label>�Es un viaje de ida o circular?</label>
+										</div>
+										<div>
+											<h:selectOneMenu value="#{rutaBean.ruta.formato}">
+												<f:selectItem itemValue="ida" itemLabel="ida"></f:selectItem>
+												<f:selectItem itemValue="circular" itemLabel="Circular"></f:selectItem>
+											</h:selectOneMenu>
+										</div>						
+									</div>
 								</div>
+								<div class="row center">
+									<div class="form-group ">
+										<div class="row">
+											<label>�C�antos km son?</label>
+										</div>
+										<div>
+											<h:inputText value="#{rutaBean.ruta.distancia}"></h:inputText>
+										</div>							
+									</div>								
+								</div>
+							</fieldset>
+							
+								<h:inputText id="lat-long" class="lat-long" value="#{rutaBean.latLong}" >
+									<f:ajax event="change" render="@none" execute="lat-long"></f:ajax>
+								</h:inputText>
+													
+						</div>
+						<div class="row">		
+							<div class="col-md-12">
+								<div id="map-canvas" style="height: 500px"></div>
 							</div>
-						</fieldset>
-					</div>
-					<div class="col-md-5">
-						<fieldset class="fieldSetNuevaRuta">
-							<legend>Caracteristicas</legend>
-							<div class="row center">
-								<div class="form-group">
-									<div>
-										<label>Indic� Actividad</label>
-									</div>
-									<h:selectOneMenu class="segundaFila" value="#{rutaBean.actividad.nombre}">
-										<c:forEach var="act" items="#{rutaBean.actividades}">
-											<f:selectItem itemValue="#{act.nombre}" itemLabel="#{act.nombre}" />
-										</c:forEach>
-									</h:selectOneMenu>
-								</div>
-								<div class="form-group ">
-									<div>
-										<label>Indic� la dificultad</label>
-									</div>
-									<div>
-										<h:selectOneMenu value="#{rutaBean.ruta.dificultad}">
-											<f:selectItem itemValue="Facil" itemLabel="Facil"></f:selectItem>
-											<f:selectItem itemValue="Moderado" itemLabel="Moderado"></f:selectItem>
-											<f:selectItem itemValue="Dificil" itemLabel="Dificil"></f:selectItem>
-											<f:selectItem itemValue="Muy Dificil" itemLabel="Muy Dificil"></f:selectItem>
-											<f:selectItem itemValue="Solo expertos" itemLabel="Solo expertos"></f:selectItem>
-										</h:selectOneMenu>
-									</div>						
-								</div>
+						</div>
+						<c:choose>
+						    <c:when test="#{rutaBean.modificar}">
+						        <h:commandButton class="botonBuscar" action="#{rutaBean.doModificar}" value="Modificar" ajax="false" />
+						    </c:when>    
+						    <c:otherwise>
+						        <h:commandButton class="botonBuscar" action="#{rutaBean.crear}" value="Crear!" ajax="false" />
+						    </c:otherwise>
+						</c:choose>
 								
-								<div class="form-group ">
-									<div>
-										<label>�Quer�s una ruta privada?</label>
-									</div>
-									<div>
-										<h:selectBooleanCheckbox value="#{rutaBean.ruta.privacidad}"></h:selectBooleanCheckbox>
-									</div>			
-								</div>
-								<div class="form-group ">
-									<div>
-										<label>�Es un viaje de ida o circular?</label>
-									</div>
-									<div>
-										<h:selectOneMenu value="#{rutaBean.ruta.formato}">
-											<f:selectItem itemValue="ida" itemLabel="ida"></f:selectItem>
-											<f:selectItem itemValue="circular" itemLabel="Circular"></f:selectItem>
-										</h:selectOneMenu>
-									</div>						
-								</div>
-							</div>
-							<div class="row center">
-								<div class="form-group ">
-									<div class="row">
-										<label>�C�antos km son?</label>
-									</div>
-									<div>
-										<h:inputText value="#{rutaBean.ruta.distancia}"></h:inputText>
-									</div>							
-								</div>								
-							</div>
-						</fieldset>
-						
-							<h:inputText id="lat-long" class="lat-long" value="#{rutaBean.latLong}" >
-								<f:ajax event="change" render="@none" execute="lat-long"></f:ajax>
-							</h:inputText>
-												
-					</div>								
-				</div>
+						</h:form>
 			</div>
-			<div class="row">		
-				<div class="col-md-12">
-					<div id="map-canvas" style="height: 500px"></div>
-				</div>
-			</div>
-			<c:choose>
-			    <c:when test="#{rutaBean.modificar}">
-			        <h:commandButton class="botonBuscar" action="#{rutaBean.doModificar}" value="Modificar" ajax="false" />
-			    </c:when>    
-			    <c:otherwise>
-			        <h:commandButton class="botonBuscar" action="#{rutaBean.crear}" value="Crear!" ajax="false" />
-			    </c:otherwise>
-			</c:choose>
 			
-	</h:form>
-			<input type="button" id="borrarMarcadores" value="Borrar todos los puntos" />
-				
+			<input type="button" id="borrarMarcadores" value="Borrar todos los puntos" />								
+				</div>				
 	</div>
 	
 	<ui:insert name="footer">
@@ -206,7 +209,7 @@
 	</ui:insert>
 	<script type="text/javascript">
 		$(function() {
-			$('#fecha').datepicker();
+			$('.fecha').datepicker();
 		});
 	</script>
 </h:body>

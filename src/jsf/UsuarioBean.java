@@ -89,11 +89,11 @@ public class UsuarioBean implements Serializable {
 	public String redireccionarListadoRutas(){
 		Usuario user = FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId());
 		misRutas = user.getMisRutas();
-		return "listarRutasUsuario?faces-redirect=true";
+		return "listarRutasUsuario.xhtml?faces-redirect=true";
 	}
 	
 	public String redireccionarDetalleRuta(){
-		return "detalleRuta?faces-redirect=true";
+		return "detalleRuta.xhtml?faces-redirect=true";
 	}
 	
 	public String modificarContrasena(){
