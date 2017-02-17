@@ -15,12 +15,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
  * Inicializa el mapa
  */
 function initialize() {
-	map = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
+	
+	genericInitialiaze();
 
 	map.addListener('click', function(e) {
 		agregarMarker(e.latLng, map);
 
 	});
+	
+}
+
+function genericInitialiaze(){
+	
+	map = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
+	
 	puntos = [];
 	var puntosActuales = $(".puntos").text();
 	if(puntosActuales != "" && puntosActuales != null){
@@ -39,7 +47,7 @@ function initialize() {
 	
 	obtenerMarkers();
 	
-}
+} 
 
 // Obtiene markers y los dibuja
 function obtenerMarkers() {

@@ -2,16 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 <title>JRuteros</title>
 	<ui:insert name="heads">
 		<ui:include src="head.xhtml"/>
 	</ui:insert>
 </h:head>
-<h:body onload="inicializarRegistroViaje()">
+<h:body onload="genericInitialiaze()">
 
 <ui:insert name="menuViajero">
 		<ui:include src="menuViajero.xhtml"/>
@@ -22,19 +24,33 @@
 				<div class="col-md-12">
 					<div class="col-md-2">
 						<div class="form-group">
+						<h:outputText class="puntos" value="#{rutaBean.puntos}"></h:outputText>
 							<div clas="row">
-								<label>Subi fotos de la ruta!</label>
+								<label>Estas son las fotos de la ruta!</label>
 							</div>
 							<ul class="columImg">
-								<li>				
-									<div class="img" style="background:url('#{request.contextPath}/resources/img/bike-3.jpg'); background-size: cover;  background-repeat:no-repeat; height:96px; width:96px;">
-									</div>
-								</li>
-								<li>
-									<div class="img" style="background:url('#{request.contextPath}/resources/img/bike-1.jpg'); background-size: cover;  background-repeat:no-repeat; height:96px; width:96px;">
-									</div>
-								</li>
-							</ul>				
+									<li>				
+										<div class="imagen">
+											<div class="cargarImagen">
+												<p:graphicImage id="img1" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto1}"></p:graphicImage>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="imagen">
+											<div class="cargarImagen">
+												<p:graphicImage id="img2" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto2}"></p:graphicImage>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="imagen">
+											<div class="cargarImagen">
+												<p:graphicImage id="img3" styleClass="imgRuta" value="#{rutaBean.ruta.showFoto3}"></p:graphicImage>
+											</div>
+										</div>
+									</li>
+								</ul>				
 						</div>
 					</div>
 					<div class="col-md-5">
@@ -43,20 +59,20 @@
 							<div class="row center ">
 								<div class="form-group">
 									<div class="row">
-										<label for="nombre">Dele un nombre a su ruta!</label>
+										<label for="nombre">Nombre de la ruta!</label>
 									</div>
 									<div>
-										<span>Nombre de la ruta</span>
+										<span><h:outputText value="#{rutaBean.ruta.nombre}"></h:outputText></span>
 									</div>	
 								</div>
 							</div>
 							<div class="row center ">
 								<div class="form-group">
 									<div class="row">
-										<label for="descripcion">Coment� un poco sobre su viaje</label>
+										<label for="descripcion">Descripcion del viaje</label>
 									</div>
 									<div>
-										<span>Esta es la descripcion de la ruta</span>
+										<span><h:outputText value="#{rutaBean.ruta.descripcion}"></h:outputText></span>
 									</div>	
 								</div>
 							</div>
@@ -66,18 +82,20 @@
 							<div class="row  center">
 								<div class="form-group ">
 									<div class="row">
-										<label>Tiempo estimado</label>
+										<label>Tiempo estimado de duracion del viaje</label>
 									</div>
 									<div>
-										<span>19:00</span>
+										<span><h:outputText value="#{rutaBean.ruta.tiempoEstimado}"></h:outputText></span>
 									</div>							
 								</div>
 								<div class="form-group">
 									<div class="row">
-										<label>�Que dia es el viaje?</label>
+										<label>Fecha de realizacion del viaje</label>
 									</div>
 									<div>
-										<span>03/02/2016</span>
+										<span><h:outputText value="#{rutaBean.ruta.fechaRealizacion}">
+											<f:convertDateTime pattern="MM/dd/yyyy" />
+										</h:outputText></span>
 									</div>						
 									
 								</div>
@@ -93,7 +111,7 @@
 										<label>Actividad</label>
 									</div>
 									<div>
-										<span>Ciclismo</span>
+										<span><h:outputText value="#{rutaBean.ruta.actividad.nombre}"></h:outputText></span>
 									</div>
 								</div>
 								<div class="form-group ">
@@ -101,7 +119,7 @@
 										<label>Dificultad</label>
 									</div>
 									<div>
-										<span>Facil</span>
+										<span><h:outputText value="#{rutaBean.ruta.dificultad}"></h:outputText></span>
 									</div>						
 								</div>
 								<div class="form-group">
@@ -109,7 +127,7 @@
 										<label>Tipo de viaje</label>
 									</div>
 									<div>										
-										<label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label>
+										<span><h:outputText value="#{rutaBean.ruta.formato}"></h:outputText></span>
 									</div>						
 								</div>
 							</div>
@@ -119,13 +137,13 @@
 										<label>Cantidad de km</label>
 									</div>
 									<div>
-										<span>10km</span>
+										<span><h:outputText value="#{rutaBean.ruta.distancia}"></h:outputText></span>
 									</div>							
 								</div>								
 							</div>
 						</fieldset>
 						<fieldset class="fieldSetNuevaRuta">
-							<legend>Calif�calo!</legend>
+							<legend>Calificalo!</legend>
 							<form>
 								<div class="col-md-6 calificacion">											
 									<input class="radioCalificacion" id="radio1" type="radio" name="calificacionnro" value="5" />

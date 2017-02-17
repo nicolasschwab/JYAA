@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
@@ -12,43 +13,50 @@
 		<ui:include src="head.xhtml"/>
 	</ui:insert>
 </h:head>
-<h:body onload="">
-
+<h:body>
 
 	<ui:insert name="menuViajero">
 		<ui:include src="menuViajero.xhtml"/>
 	</ui:insert>
 
-<div class="container">
 	<div class="row">
 		<div class="col-md-12 formBusqueda">
 			<h:form class="form-inline"  method="post">
 				<div class="row busquedaArriba">
-					<div class="col-md-4"></div>
-					<div class="col-md-6 left" >
-						<h:inputText id="prueba" value="#{rutaBean.nombre}"  class="buscarNombre" placeholder="nombre"></h:inputText>
+					<div class="col-md-3"></div>
+					<div class="col-md-7 left" >
+						<div class="buscarNombre divFechaBusqueda ">
+							<label class="  labelFechaBusqueda">Busca por nombre</label>
+							<h:inputText id="prueba" value="#{rutaBean.ruta.nombre}"  class="buscarNombreInput" placeholder="nombre"></h:inputText>
+						</div>
 						<h:commandButton class="botonBuscar" action="#{rutaBean.buscar}" value="Buscar" />
 					</div>
 					
 				</div>
 				<div class="row">
-					<div class="col-md-4"></div>
-					<div class="col-md-6 left">
-						<h:selectOneMenu class="segundaFila" value="#{rutaBean.actividad.nombre}">
-							<f:selectItem itemValue="" itemLabel="" />
-							<c:forEach var="act" items="#{rutaBean.actividades}">
-								<f:selectItem itemValue="#{act.nombre}" itemLabel="#{act.nombre}" />
-							</c:forEach>
-						</h:selectOneMenu>
-						<h:inputText value="#{rutaBean.fecha}">
-						    <f:convertDateTime pattern="MM/dd/yyyy" />
-						</h:inputText>
+					<div class="col-md-3"></div>
+					<div class="col-md-7 left">
+						<div class="divFechaBusquedaArriba">
+							<label class="labelFechaBusqueda">Selecciona una actividad</label>
+							<h:selectOneMenu class="selectBusqueda segundaFila floatLeft" value="#{rutaBean.actividad.nombre}">
+								<f:selectItem itemValue="" itemLabel="Busca una actividad" />
+								<c:forEach var="act" items="#{rutaBean.actividades}">
+									<f:selectItem itemValue="#{act.nombre}" itemLabel="#{act.nombre}" />
+								</c:forEach>
+							</h:selectOneMenu>
+						</div>
+						<div class="divFechaBusqueda">
+							<label class="labelFechaBusqueda">Selecciona una fecha</label>
+							<h:inputText class="fechaBusqueda" value="#{rutaBean.ruta.fechaRealizacion}">
+							    <f:convertDateTime pattern="yyyy-MM-dd" />
+							</h:inputText>
+						</div>
 					</div>
 				</div>
 			</h:form>
 		</div>
 	</div>
-	
+<div class="container">	
 	<div class="row resultados">
 		<div class="col-md-3 contenedor">
 			<div class="row menuFiltros">				
@@ -60,13 +68,17 @@
 						<label>Dificultad</label>
 					</div>
 					<div>
-						<h:selectOneMenu value="#{buscarBean.ruta.dificultad}">
-							<f:selectItem itemValue="Facil" itemLabel="Facil"></f:selectItem>
-							<f:selectItem itemValue="Moderado" itemLabel="Moderado"></f:selectItem>
-							<f:selectItem itemValue="Dificil" itemLabel="Dificil"></f:selectItem>
-							<f:selectItem itemValue="Muy Dificil" itemLabel="Muy Dificil"></f:selectItem>
-							<f:selectItem itemValue="Solo expertos" itemLabel="Solo expertos"></f:selectItem>
-						</h:selectOneMenu>
+						<h:form>
+							<h:selectOneMenu id="dificultad" value="#{rutaBean.ruta.dificultad}">
+								<f:selectItem itemValue="" itemLabel=""></f:selectItem>
+								<f:selectItem itemValue="Facil" itemLabel="Facil"></f:selectItem>
+								<f:selectItem itemValue="Normal" itemLabel="Moderado"></f:selectItem>
+								<f:selectItem itemValue="Dificil" itemLabel="Dificil"></f:selectItem>
+								<f:selectItem itemValue="Muy Dificil" itemLabel="Muy Dificil"></f:selectItem>
+								<f:selectItem itemValue="Solo expertos" itemLabel="Solo expertos"></f:selectItem>
+								<f:ajax execute="dificultad" render=""></f:ajax>
+							</h:selectOneMenu>
+						</h:form>
 					</div>
 				</section>
 				<section>			
@@ -74,10 +86,13 @@
 						<label>�viaje de ida o circular?</label>
 					</div>
 					<div>
-						<h:selectOneRadio value="#{buscarBean.ruta.formato}">
-							<f:selectItem itemValue="ida" itemLabel="ida"></f:selectItem>
-							<f:selectItem itemValue="circular" itemLabel="Circular"></f:selectItem>
-						</h:selectOneRadio>
+						<h:form>
+							<h:selectOneRadio id="formato" value="#{rutaBean.ruta.formato}">
+								<f:selectItem itemValue="ida" itemLabel="ida"></f:selectItem>
+								<f:selectItem itemValue="circular" itemLabel="Circular"></f:selectItem>
+								<f:ajax execute="formato" render=""></f:ajax>
+							</h:selectOneRadio>
+						</h:form>
 					</div>
 				</section>
 				<section>
@@ -85,7 +100,11 @@
 						<label>Cantidad de Km</label>
 					</div>
 					<div>
-						<h:inputText value="#{buscarBean.ruta.distancia}"></h:inputText>
+						<h:form>
+							<h:inputText value="#{rutaBean.ruta.distancia}" id="distancia">
+									<f:ajax execute="distancia" render=""></f:ajax>
+							</h:inputText>
+						</h:form>
 					</div>
 				</section>
 				<section>
@@ -93,99 +112,66 @@
 						<label>Tiempo estimado (hrs:mins)</label>
 					</div>
 					<div>
-						<h:inputText value="#{buscarBean.ruta.tiempoEstimado}"></h:inputText>
+						<h:form>
+							<h:inputText value="#{rutaBean.ruta.tiempoEstimado}" id="tiempo">
+								<f:ajax execute="tiempo" render=""></f:ajax>
+							</h:inputText>
+						</h:form>
 					</div>	
 				</section>
 			</div>
 			
 		</div>
 		<div class="col-md-7 contenedor">
-			<div class="row unaRuta">
-				<div class="col-md-3 img" style="background:url('#{request.contextPath}/resources/img/bike-3.jpg'); background-size: cover;  background-repeat:no-repeat;">
-				</div>
-				<div class="col-md-6 img">
-					<div class="row">
-						<div class="col-md-12 borderBottom tamanioLetra">
-							<b>Ruta los 7 lagos</b>
+			<c:forEach var="unaRuta" items="#{rutaBean.rutasBusqueda}">
+				<div class="row unaRuta">
+					<div class="col-md-2 img">
+<!-- 						<h:form enctype="multipart/form-data"> -->
+<!-- 							<p:graphicImage styleClass="imgRuta" enctype="multipart/form-data" value="#{unaRuta.showFoto}"></p:graphicImage> -->
+<!-- 						</h:form> -->
+					</div>
+
+					<div class="col-md-6 img">
+						<div class="row">
+							<div class="col-md-12 borderBottom tamanioLetra">
+								<b><h:outputText value="#{unaRuta.nombre}" name="nombre"></h:outputText></b>
+							</div>
+						</div>
+						
+						<div class="col-md-12">						
+							<div class="col-md-6">Dificultad</div>
+							<div class="col-md-6"><h:outputText value="#{unaRuta.dificultad}" name="dificultad"></h:outputText></div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-6">Actividad</div>
+							<div class="col-md-6"><h:outputText value="#{unaRuta.actividad.nombre}" name="actividad"></h:outputText></div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-6">Tipo</div>
+							<div class="col-md-6"><h:outputText value="#{unaRuta.formato}" name="formato"></h:outputText></div>
+						</div>
+						<div class="col-md-12 borderBottom">				
+							<div class="col-md-6">Veces realizado</div>
+							<div class="col-md-6"> 10</div>
+						</div>
+						
+						<div class="col-md-12">
+							<div class="col-md-6"><label for="ida" title="Fecha"><i class="fa fa-calendar"></i></label> <h:outputText value="#{unaRuta.fechaRealizacion}" name="fecha"></h:outputText></div>
+							<div class="col-md-6"><label for="ida" title="Hora"><i class="fa fa-clock-o"></i></label> <h:outputText value="#{unaRuta.tiempoEstimado}" name="duracion"></h:outputText></div>
 						</div>
 					</div>
-					
-					<div class="col-md-12">						
-						<div class="col-md-6">Dificultad</div>
-						<div class="col-md-6">Alta</div>
+					<div class="col-md-2 paddingTop">
+						<h:form>
+							<h:commandButton class="btn btn-warning" action="#{rutaBean.showDetalle(unaRuta)}" value="Ver Detalle" />
+						</h:form>
+	<!-- 					<form action="detalleRuta"> -->
+	<!-- 						<input type="hidden" /> -->
+	<!-- 						<input type="submit" value="ver detalle" /> -->
+	<!-- 					</form> -->
 					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">Actividad</div>
-						<div class="col-md-6">Ciclismo</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">Tipo</div>
-						<div class="col-md-6"><label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label></div>
-					</div>
-					<div class="col-md-12 borderBottom">				
-						<div class="col-md-6">Veces realizado</div>
-						<div class="col-md-6"> 10</div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="col-md-6"><label for="ida" title="Fecha"><i class="fa fa-calendar"></i></label> 18/05/2016</div>
-						<div class="col-md-6"><label for="ida" title="Hora"><i class="fa fa-clock-o"></i></label> 05:00</div>
-					</div>
-					
 				</div>
-				<div class="col-md-2 paddingTop">
-					<h:form>
-						<h:commandLink action="#{usuarioBean.redireccionarDetalleRuta}">Ver detalle</h:commandLink>
-					</h:form>
-<!-- 					<form action="detalleRuta"> -->
-<!-- 						<input type="hidden" /> -->
-<!-- 						<input type="submit" value="ver detalle" /> -->
-<!-- 					</form> -->
-				</div>
-			</div>
-			<div class="row unaRuta">
-				<div class="col-md-3 img" style="background:url('#{request.contextPath}/resources/img/bike-1.jpg'); background-size: cover;  background-repeat:no-repeat;">
-				</div>
-				<div class="col-md-6 img">
-					<div class="row">
-						<div class="col-md-12 borderBottom tamanioLetra">
-							<b>Ruta los 7 lagos</b>
-						</div>
-					</div>
-					
-					<div class="col-md-12">						
-						<div class="col-md-6">Dificultad</div>
-						<div class="col-md-6">Alta</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">Actividad</div>
-						<div class="col-md-6">Ciclismo</div>
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">Tipo</div>
-						<div class="col-md-6"><label for="ida" title="solo de ida"><i class="fa fa-level-up"></i></label></div>
-					</div>
-					<div class="col-md-12 borderBottom">				
-						<div class="col-md-6">Veces realizado</div>
-						<div class="col-md-6"> 10</div>
-					</div>
-					
-					<div class="col-md-12">
-						<div class="col-md-6"><label for="ida" title="Fecha"><i class="fa fa-calendar"></i></label> 18/05/2016</div>
-						<div class="col-md-6"><label for="ida" title="Hora"><i class="fa fa-clock-o"></i></label> 05:00</div>
-					</div>
-					
-				</div>
-				<div class="col-md-2 paddingTop">
-					<h:form>
-						<h:commandLink action="#{usuarioBean.redireccionarDetalleRuta}">Ver detalle</h:commandLink>
-					</h:form>
-<!-- 					<form action="detalleRuta"> -->
-<!-- 						<input type="hidden" /> -->
-<!-- 						<input type="submit" value="ver detalle" /> -->
-<!-- 					</form> -->
-				</div>
-			</div>
+			</c:forEach>
+			
 		</div>
 		<div class="col-md-2">
 			<!-- Order -->
@@ -195,15 +181,16 @@
 			<div class="col-md-12">
 				<section>
 					<div>
-						<form action="">
-							<select class="ordenar">
-								<option>Distancia</option>
-								<option>Dificultad</option>
-								<option>Puntuacion</option>
-								<option>Veces realizada</option>
-							</select>
-							<input type="submit" value="ordenar" />
-						</form>
+						<h:form>
+							<h:selectOneMenu id="ordenar" class="ordenar" value="#{rutaBean.ordenar}">
+								<f:selectItem itemValue="" itemLabel=""></f:selectItem>
+								<f:selectItem itemValue="Distancia" itemLabel="Distancia"></f:selectItem>
+								<f:selectItem itemValue="Dificultad" itemLabel="Dificultad"></f:selectItem>
+								<f:selectItem itemValue="Puntuacion" itemLabel="Puntuacion"></f:selectItem>
+								<f:selectItem itemValue="VecesRealizada" itemLabel="Veces realizada"></f:selectItem>
+								<f:ajax execute="ordenar" render=""></f:ajax>
+							</h:selectOneMenu>
+						</h:form>
 					</div>
 				</section>
 			</div>
@@ -214,5 +201,11 @@
 <ui:insert name="footer">
 		<ui:include src="footer.xhtml"/>
 	</ui:insert>
+	
+	<script type="text/javascript">
+		$(function() {
+			$('.fechaBusqueda').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+		});
+	</script>
 </h:body>
 </html>

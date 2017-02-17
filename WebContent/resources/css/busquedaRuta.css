@@ -3,20 +3,64 @@
 	background: #37454d;
     padding: 10px;
 }
+.formBusqueda input, .formBusqueda select{
+	height: 50px;
+}
 .busquedaFecha{
 	line-height: inherit !important;
 }
 .buscarNombre{
-	width:250px;
+	width: 70% !important;
+	border-radius: 0px;
+}
+.buscarNombreInput{
+	padding:0px;
+	width:100%;
+	border:none;
+	height: auto !important;
 }
 .left{
 	text-align: left;
 }
 .segundaFila{
-	width:200px;
+	width: 50%;
+	margin-right: 2%;
+}
+.floatLeft{
+	float:left;
+}
+.selectBusqueda{
+	width:100%;
+}
+.fechaBusqueda{
+	height: auto !important;
+	border: none;
+	width: 100%;
+	padding: 0px;
+}
+.selectBusqueda{
+	width: 100%;
+	height: 30px !important;
+	border: none;
+}
+.divFechaBusquedaArriba{
+	margin-right: 4%;
+}
+.divFechaBusqueda, .divFechaBusquedaArriba{
+	background: white;
+	width: 48%;
+	float: left;
+	height: 50px;
+}
+.labelFechaBusqueda{
+	width: 100%;
+	font-size: 12px;
+	margin-bottom: 0px;
 }
 .botonBuscar{
-	width: 150px;
+	width: 30%;
+	border-radius: 0px;
+	border-left: 0px;
     font-size: 14px;
     font-weight: 700;
     background-color: #007fad;
@@ -67,9 +111,17 @@ section{
 .ordenar{
 	margin-bottom: 10px;
 }
-.radioCalificacion:checked ~ label {
-  color: orange;
+.calificacion {
+  unicode-bidi: bidi-override;
+  direction: rtl;
 }
+.calificacion > .radioCalificacion:checked ~ label,
+.calificacion > .radioCalificacion:checked ~ label:before {
+   color: orange;
+}
+/* .radioCalificacion:checked ~ label:before { */
+/*   color: orange; */
+/* } */
 .radioCalificacion {
   display: none;
 }

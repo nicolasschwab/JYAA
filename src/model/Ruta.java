@@ -3,7 +3,10 @@ package model;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.servlet.http.Part;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -23,6 +28,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+
+import util.Validator;
 
 @XmlRootElement
 @Entity
@@ -38,9 +45,9 @@ public class Ruta {
 	private Double distancia;
 	private String dificultad;
 	private String tiempoEstimado;
+	@Temporal(TemporalType.DATE)
 	private Date fechaRealizacion;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Cascade({CascadeType.MERGE, CascadeType.DELETE})
 	private Actividad actividad;
 	@OneToOne(fetch = FetchType.EAGER)
 	@Cascade({CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DELETE})
@@ -107,6 +114,24 @@ public class Ruta {
 		return null;
 	}
 	
+	public StreamedContent getShowFoto() throws IOException{
+		StreamedContent foto = this.getShowFoto1();
+		if(foto != null ){
+			return foto;
+		}else{
+			foto = this.getShowFoto2();
+			if(foto != null){
+				return foto;
+			}else{
+				foto = this.getShowFoto3();
+				if(foto != null){
+					return foto;
+				}
+			}
+		}
+		return new DefaultStreamedContent();
+	} 
+	
 	private StreamedContent genericGetFoto(Foto foto) throws IOException{
 		if(foto != null){
 			InputStream inputStream = new ByteArrayInputStream(foto.getContenido());
@@ -126,6 +151,37 @@ public class Ruta {
 	
 	public void addPunto(Punto punto){
 		getPuntos().add(punto);
+	}
+	
+	public String getBuscarNombre(){
+		return Validator.stringNoVacio(this.getNombre()) ? this.getNombre() : "%";
+	}
+	
+	public String getBuscarDificultad(){
+		return Validator.stringNoVacio(this.getDificultad()) ? this.getDificultad() : "%";
+	}
+	
+	public String getBuscarFormato(){
+		return Validator.stringNoVacio(this.getFormato()) ? this.getFormato() : "%";
+	}
+	
+	public Double getBuscarDistancia(){
+		return this.getDistancia() != null ? this.getDistancia() : null;
+	}
+	
+	public String getBuscarTiempoEstimado(){
+		return Validator.stringNoVacio(this.getTiempoEstimado()) ? this.getTiempoEstimado() : "%";
+	}
+	
+	public Date getBuscarFecha() throws ParseException{
+		if (this.getFechaRealizacion() != null){ 
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(fechaRealizacion.getTime());
+			cal.add(Calendar.DATE, 1);
+			return new Date(cal.getTimeInMillis());
+		}else{
+			return null;
+		}
 	}
 	
 	public Long getId() {

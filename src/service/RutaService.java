@@ -1,5 +1,6 @@
 package service;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -47,12 +48,8 @@ public class RutaService {
 		
 	}
 	
-	public List<Ruta> buscar(String nombre, ActividadBean actividad, Date fecha){
-		if(!Validator.stringNoVacio(nombre)){
-			nombre = "%";
-		}
-		actividad.nombreCualquiera();
-		return rutaDAO.buscar(nombre ,actividad, fecha);
+	public List<Ruta> buscar(Ruta ruta, ActividadBean actividad, String ordenar) throws ParseException{
+		return rutaDAO.buscar(ruta, actividad, ordenar);
 	}
 	
 	public void eliminar(Ruta ruta) throws Exception{

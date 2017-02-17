@@ -72,49 +72,62 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	public String redireccionModificar(){
-		this.setUsr(FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId()));
-		return "editarUsuario.xhtml?faces-redirect=true";
+		if(SessionUtil.hasSession()){
+			this.setUsr(FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId()));
+			return "editarUsuario.xhtml?faces-redirect=true";
+		}
+		return "";
 	}
 	
 	public String modificar(){
-		if(this.validarVariablesUsr()){
-			FactoryService.getUsuarioService().modificar(usr);
-			this.crearMensaje("Se modificaron los datos!");
-		}else{
-			this.crearMensaje("Completa todos los campos");
+		if(SessionUtil.hasSession()){
+			if(this.validarVariablesUsr()){
+				FactoryService.getUsuarioService().modificar(usr);
+				this.crearMensaje("Se modificaron los datos!");
+			}else{
+				this.crearMensaje("Completa todos los campos");
+			}
 		}
 		return null;
 	}
 	
 	public String redireccionarListadoRutas(){
-		Usuario user = FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId());
-		misRutas = user.getMisRutas();
-		return "listarRutasUsuario.xhtml?faces-redirect=true";
+		if(SessionUtil.hasSession()){
+			Usuario user = FactoryService.getUsuarioService().encontrar(SessionUtil.getUserId());
+			misRutas = user.getMisRutas();
+			return "listarRutasUsuario.xhtml?faces-redirect=true";
+		}
+		return "";
 	}
 	
 	public String redireccionarDetalleRuta(){
-		return "detalleRuta.xhtml?faces-redirect=true";
+		if(SessionUtil.hasSession()){
+			return "detalleRuta.xhtml?faces-redirect=true";
+		}
+		return "";
 	}
 	
 	public String modificarContrasena(){
-		if(this.validarVariablesContrasena()){
-			if(this.getContrasenaVieja().equals(this.getUsr().getContrasenia())){
-				if(this.getNuevaContrasena().equals(this.getNuevaAgain())){
-					if(!this.getContrasenaVieja().equals(this.getNuevaAgain())){
-						this.getUsr().setContrasenia(this.getNuevaAgain());
-						FactoryService.getUsuarioService().modificar(usr);
-						this.crearMensaje("Se cambio la contrase�a cn exito!");
+		if(SessionUtil.hasSession()){
+			if(this.validarVariablesContrasena()){
+				if(this.getContrasenaVieja().equals(this.getUsr().getContrasenia())){
+					if(this.getNuevaContrasena().equals(this.getNuevaAgain())){
+						if(!this.getContrasenaVieja().equals(this.getNuevaAgain())){
+							this.getUsr().setContrasenia(this.getNuevaAgain());
+							FactoryService.getUsuarioService().modificar(usr);
+							this.crearMensaje("Se cambio la contrase�a cn exito!");
+						}else{
+							this.crearMensaje("Las contrase�as nuevas y viejas no pueden coincidir");
+						}
 					}else{
-						this.crearMensaje("Las contrase�as nuevas y viejas no pueden coincidir");
+						this.crearMensaje("Las nuevas contrasenas no coinciden");
 					}
 				}else{
-					this.crearMensaje("Las nuevas contrasenas no coinciden");
+					this.crearMensaje("La contrasena actual no es la correcta");
 				}
 			}else{
-				this.crearMensaje("La contrasena actual no es la correcta");
+				
 			}
-		}else{
-			
 		}
 		return null;
 	}

@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import model.Actividad;
 import util.FactoryService;
+import util.Validator;
 
 @ManagedBean
 @SessionScoped
@@ -86,6 +87,10 @@ public class ActividadBean implements Serializable{
 	
 	public boolean modificar(Actividad actividad) {		
 		return FactoryService.getActividadService().modificar(actividad);
+	}
+
+	public String getBuscarNombre() {
+		return Validator.stringNoVacio(this.getNombre()) ? this.getNombre() : "%" ;
 	}
 	
 	

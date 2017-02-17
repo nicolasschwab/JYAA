@@ -27,13 +27,16 @@ input, textarea, select{
 .fecha{
 	width:auto;
 }
-.imagen{
+.imagenBackgorund{
 	background-image: url(../img/simboloMas.png);
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 20px;
     border: 2px dashed #dcdee3;
     border-radius: 2px;
+    
+}
+.imagen{
     box-sizing: border-box;
     display: inline-block;
     height: 150px;

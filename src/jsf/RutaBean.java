@@ -1,6 +1,7 @@
 package jsf;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -31,6 +32,7 @@ public class RutaBean {
 	private FotoService fotoService = FactoryService.getFotoService();
 	private ActividadService actividadService = FactoryService.getActividadService();
 	private Ruta ruta;
+	private List<Ruta> rutasBusqueda;
 	@ManagedProperty(value="#{actividadBean}")
 	private ActividadBean actividad;
 	@ManagedProperty(value="#{usuarioBean}")
@@ -39,6 +41,7 @@ public class RutaBean {
 	private List<Actividad> actividades;
 	private String latLong;
 	private boolean modificar;
+	private String ordenar;
 	
 	public String crear() throws IOException{
 		if(SessionUtil.hasSession()){
@@ -109,6 +112,14 @@ public class RutaBean {
 		return "";
 	}
 	
+	public String showDetalle(Ruta ruta){
+		if(SessionUtil.hasSession()){
+			this.ruta = ruta;
+			return "detalleRuta?faces-redirect=true";
+		}
+		return "";
+	}
+	
 	public String redireccionarRutaNueva(){
 		if(SessionUtil.hasSession()){
 			this.ruta = new Ruta();
@@ -137,14 +148,17 @@ public class RutaBean {
 	
 	public String redireccionarBusquedaRuta(){
 		if(SessionUtil.hasSession()){
+			this.ruta = new Ruta();
 			return "busquedaRuta?faces-redirect=true";
 		}
 		return "";
 	}
 	
-	public String buscar(){
-		//rutaService.buscar(nombre, actividad, fecha);
-		return this.redireccionarBusquedaRuta();
+	public String buscar() throws ParseException{
+		if(SessionUtil.hasSession()){
+			this.setRutasBusqueda( rutaService.buscar(ruta, actividad, ordenar) );
+		}
+		return "";
 	}
 
 	public ActividadBean getActividad() {
@@ -227,6 +241,22 @@ public class RutaBean {
 
 	public void setRuta(Ruta ruta) {
 		this.ruta = ruta;
+	}
+
+	public String getOrdenar() {
+		return ordenar;
+	}
+
+	public void setOrdenar(String ordenar) {
+		this.ordenar = ordenar;
+	}
+
+	public List<Ruta> getRutasBusqueda() {
+		return rutasBusqueda;
+	}
+
+	public void setRutasBusqueda(List<Ruta> rutasBusqueda) {
+		this.rutasBusqueda = rutasBusqueda;
 	}
 	
 	

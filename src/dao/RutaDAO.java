@@ -1,5 +1,6 @@
 package dao;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,6 @@ public interface RutaDAO extends GenericDAO<Ruta> {
 
 	List<Ruta> getRutasConActividad(String nombre);
 
-	List<Ruta> buscar(String nombre, ActividadBean actividad, Date fecha);
+	List<Ruta> buscar(Ruta ruta, ActividadBean actividad, String ordenar) throws ParseException;
 
 }
