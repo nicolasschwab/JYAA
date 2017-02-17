@@ -51,15 +51,16 @@ public class RutaDAOImpl extends GenericDAOImpl<Ruta> implements RutaDAO {
 		List<Ruta> resultado=null;
 		try{
 			etx.begin();
-			String dateQuery = ruta.getBuscarFecha() != null ? " and fechaRealizacion = :fecha" : "" ;
-			String orderQuery = ordenar != "" ? " order by :ordenar" : "" ;
+			String dateQuery = ruta.getBuscarFecha() != null ? " and fechaRealizacion = :fecha " : "" ;
+			ordenar = ordenar == null ? "e.distancia ASC" :"e."+ordenar+" ASC";
 			Query consulta = em.createQuery(
-					"select e from " + getPersistentClass().getSimpleName() + " e where e.actividad.nombre like :nombreActividad and e.nombre like :nombre and e.dificultad like :dificultad and e.formato like :formato and e.distancia >= :distancia and e.tiempoEstimado like :tiempoEstimado" + dateQuery + orderQuery
+					"select e from " + getPersistentClass().getSimpleName() + " e where e.actividad.nombre like :nombreActividad and e.nombre like :nombre and e.dificultad like :dificultad and e.formato like :formato and e.distancia >= :distancia and e.tiempoEstimado like :tiempoEstimado " + dateQuery + "ORDER BY "+ordenar
 			);
 			consulta.setParameter("nombre", ruta.getBuscarNombre());
 			consulta.setParameter("nombreActividad", actividad.getBuscarNombre());
 			consulta.setParameter("dificultad", ruta.getBuscarDificultad());
 			consulta.setParameter("formato", ruta.getBuscarFormato());
+			
 			Double distancia = ruta.getBuscarDistancia();
 			if(distancia != null){
 				consulta.setParameter("distancia", distancia);
@@ -69,9 +70,6 @@ public class RutaDAOImpl extends GenericDAOImpl<Ruta> implements RutaDAO {
 			consulta.setParameter("tiempoEstimado", ruta.getBuscarTiempoEstimado());
 			if(ruta.getBuscarFecha() != null){
 				consulta.setParameter("fecha", ruta.getBuscarFecha(), TemporalType.DATE);
-			}
-			if(ordenar != ""){
-				consulta.setParameter("ordenar", ordenar);
 			}
 			em.flush();
 			resultado = (List<Ruta>) consulta.getResultList();

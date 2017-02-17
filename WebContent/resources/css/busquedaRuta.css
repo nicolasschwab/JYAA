@@ -112,7 +112,6 @@ section{
 	margin-bottom: 10px;
 }
 .calificacion {
-  unicode-bidi: bidi-override;
   direction: rtl;
 }
 .calificacion > .radioCalificacion:checked ~ label,

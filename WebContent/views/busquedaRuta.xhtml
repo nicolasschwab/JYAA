@@ -183,11 +183,10 @@
 					<div>
 						<h:form>
 							<h:selectOneMenu id="ordenar" class="ordenar" value="#{rutaBean.ordenar}">
-								<f:selectItem itemValue="" itemLabel=""></f:selectItem>
-								<f:selectItem itemValue="Distancia" itemLabel="Distancia"></f:selectItem>
-								<f:selectItem itemValue="Dificultad" itemLabel="Dificultad"></f:selectItem>
-								<f:selectItem itemValue="Puntuacion" itemLabel="Puntuacion"></f:selectItem>
-								<f:selectItem itemValue="VecesRealizada" itemLabel="Veces realizada"></f:selectItem>
+								<f:selectItem itemValue="distancia" itemLabel="Distancia"></f:selectItem>
+								<f:selectItem itemValue="dificultad" itemLabel="Dificultad"></f:selectItem>
+								<f:selectItem itemValue="puntuacion" itemLabel="Puntuacion"></f:selectItem>
+								<f:selectItem itemValue="vecesRealizada" itemLabel="Veces realizada"></f:selectItem>
 								<f:ajax execute="ordenar" render=""></f:ajax>
 							</h:selectOneMenu>
 						</h:form>

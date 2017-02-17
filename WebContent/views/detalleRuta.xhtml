@@ -144,7 +144,7 @@
 						</fieldset>
 						<fieldset class="fieldSetNuevaRuta">
 							<legend>Calificalo!</legend>
-							<form>
+							<h:form>
 								<div class="col-md-6 calificacion">											
 									<input class="radioCalificacion" id="radio1" type="radio" name="calificacionnro" value="5" />
 								    <label class="labelCalificacion" for="radio1"><i class="fa fa-star"></i></label>
@@ -160,9 +160,9 @@
 								<div class="col-md-6">
 									<label>Yo lo recorri!</label>
 									<input type="checkbox" />									
-									<input type="submit" value="Enviar" />
+									<h:commandButton class="btn btn-warning" action="#{rutaBean.showDetalle(unaRuta)}" value="Enviar" />
 								</div>
-							</form>
+							</h:form>
 						</fieldset>
 					</div>								
 				</div>
