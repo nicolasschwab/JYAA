@@ -15,6 +15,7 @@ import model.Actividad;
 import model.Foto;
 import model.Punto;
 import model.Ruta;
+import model.Usuario;
 import service.ActividadService;
 import service.FotoService;
 import service.RutaService;
@@ -42,13 +43,31 @@ public class RutaBean {
 	private String latLong;
 	private boolean modificar;
 	private String ordenar;
+	private int calificacion;
+	
+	public String calificar() throws Exception{
+		if(SessionUtil.hasSession()){
+			ruta.valorar(calificacion, usuarioService.encontrar(SessionUtil.getUserId()));
+			rutaService.editRutaAjena(ruta);
+		}
+		return "";
+	}
+	
+	public boolean yaCalifico(){
+		if(SessionUtil.hasSession()){
+			return ruta.yaCalifico(usuarioService.encontrar(SessionUtil.getUserId()));
+		}
+		return false;
+	}
 	
 	public String crear() throws IOException{
 		if(SessionUtil.hasSession()){
 			if(Validator.validateCreateRuta(ruta.getNombre(), ruta.getDescripcion(), ruta.getFormato(), ruta.getDificultad(), (List<Punto>) ruta.getPuntos() )){
 				Actividad act = actividadService.getActividad(actividad.getNombre());
 				ruta.setActividad(act);
-				rutaService.create(ruta);
+				Usuario usr= usuarioService.encontrar(SessionUtil.getUserId());
+				ruta.setOwner(usr);
+				//rutaService.create(ruta);
 				usuarioService.nuevaRuta(ruta);
 				return usuarioBean.redireccionarListadoRutas();
 			}
@@ -62,6 +81,7 @@ public class RutaBean {
 				Actividad act = actividadService.getActividad(actividad.getNombre());
 				ruta.setActividad(act);
 				try{
+					//usuarioService.modificar(usuarioService.encontrar(SessionUtil.getUserId()));
 					rutaService.editRuta(ruta);
 				}
 				catch(Exception e){
@@ -122,7 +142,7 @@ public class RutaBean {
 	
 	public String redireccionarRutaNueva(){
 		if(SessionUtil.hasSession()){
-			this.ruta = new Ruta();
+			this.ruta = new Ruta(usuarioService.encontrar(SessionUtil.getUserId()));
 			this.setModificar(false);
 			return "altaRuta?faces-redirect=true";
 		}
@@ -156,7 +176,7 @@ public class RutaBean {
 	
 	public String buscar() throws ParseException{
 		if(SessionUtil.hasSession()){
-			this.setRutasBusqueda( rutaService.buscar(ruta, actividad, ordenar) );
+			this.setRutasBusqueda( rutaService.buscar(ruta, actividad, ordenar, usuarioService.encontrar(SessionUtil.getUserId())) );
 		}
 		return "";
 	}
@@ -258,6 +278,15 @@ public class RutaBean {
 	public void setRutasBusqueda(List<Ruta> rutasBusqueda) {
 		this.rutasBusqueda = rutasBusqueda;
 	}
+
+	public int getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(int calificacion) {
+		this.calificacion = calificacion;
+	}
+	
 	
 	
 	

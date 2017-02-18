@@ -111,16 +111,3 @@ section{
 .ordenar{
 	margin-bottom: 10px;
 }
-.calificacion {
-  direction: rtl;
-}
-.calificacion > .radioCalificacion:checked ~ label,
-.calificacion > .radioCalificacion:checked ~ label:before {
-   color: orange;
-}
-/* .radioCalificacion:checked ~ label:before { */
-/*   color: orange; */
-/* } */
-.radioCalificacion {
-  display: none;
-}

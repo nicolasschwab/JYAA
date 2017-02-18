@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,6 +29,15 @@ public class Usuario extends Perfil {
 	
 	public Usuario(){
 		super();
+	}
+	
+	@Override
+	public boolean equals(Object object){
+		if(object instanceof Usuario){
+			Usuario usr = (Usuario) object;
+			return usr.getId() == this.getId();
+		}
+		return false;
 	}
 	
 	public boolean esMiRuta(Long id){

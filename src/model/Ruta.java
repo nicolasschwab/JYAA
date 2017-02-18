@@ -11,11 +11,15 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -61,19 +65,31 @@ public class Ruta {
 	@OneToMany(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.PERSIST,CascadeType.MERGE, CascadeType.DELETE})
 	private Collection<Punto> puntos;
+	private int puntajeTotal;
+	@ManyToMany  
+	private Collection<Usuario> hacedores;
+	@ManyToOne
+	private Usuario owner;
 	
-	public Ruta() {
+	public Ruta (){
+		
+	}
+	
+	public Ruta(Usuario usr) {
 		super();
 		setPuntos(new ArrayList<Punto>());
+		setHacedores(new ArrayList<Usuario>());
+		this.getHacedores().add(usr);
 		setFoto1(new Foto());
 		setFoto2(new Foto());
 		setFoto3(new Foto());
+		setPuntajeTotal(0);
 	}
 	
 	public Ruta(String nombre, String descripcion, boolean privacidad,
 			String formato, Double distancia, String dificultad,
 			String tiempoEstimado, Date fechaRealizacion,
-			Actividad actividad) {
+			Actividad actividad, Usuario usr) {
 		super();
 		setNombre(nombre);
 		setDescripcion(descripcion);
@@ -88,6 +104,10 @@ public class Ruta {
 		setFoto2(new Foto());
 		setFoto3(new Foto());
 		setPuntos(new ArrayList<Punto>());
+		setPuntajeTotal(0);
+		setOwner(usr);
+		setHacedores(new ArrayList<Usuario>());
+		this.getHacedores().add(usr);
 	}
 	
 	public StreamedContent getShowFoto1() throws IOException{		
@@ -140,14 +160,27 @@ public class Ruta {
 		return null;
 	}
 	
-	
-	public void hiceEstaRuta(Usuario usuario){
-		//getHacedores().put(usuario, -1);
+	public void valorar(Integer puntaje, Usuario usuario){
+		if(!this.getHacedores().contains(usuario)){
+			this.getHacedores().add( usuario );
+			this.setPuntajeTotal( puntajeTotal+puntaje );
+		}		
 	}
 	
-	public void valorar(Integer puntaje, Usuario usuario){
-		//getHacedores().put(usuario, puntaje);
-	}	
+	public Double getCalificacion(){
+		if(this.getHacedores().size() == 1){
+			return 0.0;
+		}
+		return (double) (this.getPuntajeTotal() / (this.getHacedores().size() - 1));
+	}
+	
+	public boolean yaCalifico(Usuario usr){
+		return this.getHacedores().contains(usr);
+	}
+	
+	public int getCantHacedores(){
+		return this.getHacedores().size();
+	}
 	
 	public void addPunto(Punto punto){
 		getPuntos().add(punto);
@@ -287,5 +320,31 @@ public class Ruta {
 		this.setPuntos(new ArrayList<Punto>());
 		return puntos;
 	}
+
+	public int getPuntajeTotal() {
+		return puntajeTotal;
+	}
+
+	public void setPuntajeTotal(int puntajeTotal) {
+		this.puntajeTotal = puntajeTotal;
+	}
+
+	public Collection<Usuario> getHacedores() {
+		return hacedores;
+	}
+
+	public void setHacedores(Collection<Usuario> hacedores) {
+		this.hacedores = hacedores;
+	}
+
+	public Usuario getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Usuario owner) {
+		this.owner = owner;
+	}
+	
+	
 	
 }

@@ -35,6 +35,10 @@ public class RutaService {
 		this.rutaDAO.edit(ruta);
 	}
 	
+	public void editRutaAjena(Ruta ruta) throws Exception{
+		this.rutaDAO.edit(ruta);
+	}
+	
 	public Ruta getRuta(Long id){
 		return rutaDAO.get(id);
 	}
@@ -48,8 +52,8 @@ public class RutaService {
 		
 	}
 	
-	public List<Ruta> buscar(Ruta ruta, ActividadBean actividad, String ordenar) throws ParseException{
-		return rutaDAO.buscar(ruta, actividad, ordenar);
+	public List<Ruta> buscar(Ruta ruta, ActividadBean actividad, String ordenar, Usuario usr) throws ParseException{
+		return rutaDAO.buscar(ruta, actividad, ordenar, usr);
 	}
 	
 	public void eliminar(Ruta ruta) throws Exception{

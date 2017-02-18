@@ -28,6 +28,8 @@
 					<th>Nombre</th>
 					<th>Actividades</th>
 					<th>Dificultad</th>
+					<th>Veces Realizada</th>
+					<th>Calificacion</th>
 					<th>Modificacion</th>
 					<th>Eliminacion</th>
 				</tr>
@@ -43,6 +45,12 @@
 						</td>
 						<td>
 							<h:outputText value="#{ruta.dificultad} "></h:outputText>
+						</td>
+						<td>
+							<h:outputText value="#{ruta.cantHacedores} "></h:outputText>
+						</td>
+						<td>
+							<h:outputText value="#{ruta.calificacion} "></h:outputText>
 						</td>
 						<td>
 							<h:form>

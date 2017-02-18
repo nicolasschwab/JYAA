@@ -2,6 +2,7 @@ package dao.impl;
 
 import model.Actividad;
 import model.Ruta;
+import model.Usuario;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -45,7 +46,7 @@ public class RutaDAOImpl extends GenericDAOImpl<Ruta> implements RutaDAO {
 	}
 
 	@Override
-	public List<Ruta> buscar(Ruta ruta, ActividadBean actividad, String ordenar) throws ParseException {
+	public List<Ruta> buscar(Ruta ruta, ActividadBean actividad, String ordenar, Usuario usr) throws ParseException {
 		EntityManager em = getEntityManager();
 		EntityTransaction etx = em.getTransaction();
 		List<Ruta> resultado=null;
@@ -54,12 +55,13 @@ public class RutaDAOImpl extends GenericDAOImpl<Ruta> implements RutaDAO {
 			String dateQuery = ruta.getBuscarFecha() != null ? " and fechaRealizacion = :fecha " : "" ;
 			ordenar = ordenar == null ? "e.distancia ASC" :"e."+ordenar+" ASC";
 			Query consulta = em.createQuery(
-					"select e from " + getPersistentClass().getSimpleName() + " e where e.actividad.nombre like :nombreActividad and e.nombre like :nombre and e.dificultad like :dificultad and e.formato like :formato and e.distancia >= :distancia and e.tiempoEstimado like :tiempoEstimado " + dateQuery + "ORDER BY "+ordenar
+					"select e from " + getPersistentClass().getSimpleName() + " e where e.owner.id != :userId and e.actividad.nombre like :nombreActividad and e.nombre like :nombre and e.dificultad like :dificultad and e.formato like :formato and e.distancia >= :distancia and e.tiempoEstimado like :tiempoEstimado " + dateQuery + "ORDER BY "+ordenar
 			);
 			consulta.setParameter("nombre", ruta.getBuscarNombre());
 			consulta.setParameter("nombreActividad", actividad.getBuscarNombre());
 			consulta.setParameter("dificultad", ruta.getBuscarDificultad());
 			consulta.setParameter("formato", ruta.getBuscarFormato());
+			consulta.setParameter("userId", usr.getId());
 			
 			Double distancia = ruta.getBuscarDistancia();
 			if(distancia != null){
@@ -84,3 +86,4 @@ public class RutaDAOImpl extends GenericDAOImpl<Ruta> implements RutaDAO {
 		return resultado;
 	}
 }
+

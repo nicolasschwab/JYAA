@@ -10,7 +10,7 @@ import model.Punto;
 public class Validator {
 
 	enum valoresDificultad {
-			Facil("Facil"), Moderado("Moderado"), Dificil("Dificil"), Muy_Dificil("Muy Dificil"), Solo_Expertos("Solo Expertos");
+			Facil("Facil"), Moderado("Moderado"), Dificil("Dificil"), MuyDificil("Muy Dificil"), SoloExpertos("Solo Expertos");
 		
 			private String name;
 			valoresDificultad(String name){

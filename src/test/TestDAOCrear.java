@@ -33,35 +33,35 @@ public class TestDAOCrear extends TestCase{
 		administrador.setNombreUsuario("admin");
 		administrador.setContrasenia("1234");
 		administrador.setNombreCompleto("juan perez");
-		puntaje = new Puntaje();
 		puntoInicial = new Punto();
 		puntoInicial.setDescripcion("Punto de inicio de la ruta");
 		puntoFinal = new Punto();
 		puntoFinal.setDescripcion("Punto de finalización de la ruta");
-		ruta = new Ruta("Ruta1", "Una ruta de prueba", true, "Ida", 33.3, "Normal", "24hrs", new Date(), actividad);
+		usuario = new Usuario("Pepe","3333","Jose Luis","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
+		ruta = new Ruta("Ruta1", "Una ruta de prueba", true, "Ida", 33.3, "Normal", "24hrs", new Date(), actividad, usuario);
 		ruta.addPunto(puntoFinal);
 		ruta.addPunto(puntoInicial);
-		usuario = new Usuario("Pepe","3333","Jose Luis","Calle 1 y 50", new Date(),"Masculino","pepe@luis.com");
-		puntaje.setCalificacion(4);
-		puntaje.setCalificador(usuario);
-		puntaje.setRuta(ruta);
+		//usuario.addRuta(ruta);
 	}
 	
-	public void testPersistir() {		
+	public void testPersistir() {
+		FactoryDAO.getActividadDAO().save(actividad);
 		FactoryDAO.getActividadDAO().save(actividad2);
 		FactoryDAO.getAdministradorDAO().save(administrador);
 		FactoryDAO.getUsuarioDAO().save(usuario);
-		FactoryDAO.getRutaDAO().save(ruta);
-		FactoryDAO.getPuntajeDAO().save(puntaje);
+		usuario.addRuta(ruta);
+		FactoryDAO.getUsuarioDAO().edit(usuario);
+		ruta = usuario.getMisRutas().get(0);
+		//FactoryDAO.getRutaDAO().save(ruta);
 		
 		assertNotNull(FactoryDAO.getActividadDAO().get(actividad.getId()));
 		assertNotNull(FactoryDAO.getAdministradorDAO().get(administrador.getId()));
-		assertNotNull(FactoryDAO.getFotoDAO().get(foto.getId()));
-		assertNotNull(FactoryDAO.getPuntoDAO().get(puntoInicial.getId()));
-		assertNotNull(FactoryDAO.getPuntoDAO().get(puntoFinal.getId()));
-		assertNotNull(FactoryDAO.getRutaDAO().get(ruta.getId()));
+		//assertNotNull(FactoryDAO.getFotoDAO().get(foto.getId()));
+//		for(Punto punto: ruta.getPuntos()){
+//			assertNotNull(FactoryDAO.getPuntoDAO().get(punto.getId()));
+//		}
+//		assertNotNull(FactoryDAO.getRutaDAO().get(ruta.getId()));
 		assertNotNull(FactoryDAO.getUsuarioDAO().get(usuario.getId()));
-		assertNotNull(FactoryDAO.getPuntajeDAO().get(puntaje.getId()));
 	}
 
 }

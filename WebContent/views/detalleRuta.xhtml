@@ -144,25 +144,31 @@
 						</fieldset>
 						<fieldset class="fieldSetNuevaRuta">
 							<legend>Calificalo!</legend>
-							<h:form>
-								<div class="col-md-6 calificacion">											
-									<input class="radioCalificacion" id="radio1" type="radio" name="calificacionnro" value="5" />
-								    <label class="labelCalificacion" for="radio1"><i class="fa fa-star"></i></label>
-								    <input class="radioCalificacion" id="radio2" type="radio" name="calificacionnro" value="4" />
-								    <label class="labelCalificacion" for="radio2"><i class="fa fa-star"></i></label>
-								    <input class="radioCalificacion" id="radio3" type="radio" name="calificacionnro" value="3" />
-								    <label class="labelCalificacion" for="radio3"><i class="fa fa-star"></i></label>
-								    <input class="radioCalificacion" id="radio4" type="radio" name="calificacionnro" value="2" />
-								    <label class="labelCalificacion" for="radio4"><i class="fa fa-star"></i></label>
-								    <input class="radioCalificacion" id="radio5" type="radio" name="calificacionnro" value="1" />
-								    <label class="labelCalificacion" for="radio5"><i class="fa fa-star"></i></label>
-								</div>
-								<div class="col-md-6">
-									<label>Yo lo recorri!</label>
-									<input type="checkbox" />									
-									<h:commandButton class="btn btn-warning" action="#{rutaBean.showDetalle(unaRuta)}" value="Enviar" />
-								</div>
-							</h:form>
+							<c:choose>
+								<c:when test="#{rutaBean.yaCalifico()}">
+									<div class="col-md-6 ">
+										<label>Ya Calificaste esta ruta!</label>
+										<br></br>
+										<label>La calificacion actual es:
+										<h:outputText value="#{rutaBean.ruta.calificacion}"></h:outputText></label>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<h:form>
+										<div class="col-md-6 ">
+											<label>¿Hiciste esta ruta?</label>
+											<br></br>
+											<label>Calificala!</label>
+											
+										</div>
+										<div class="col-md-6 calificacion">
+											<p:rating value="#{rutaBean.calificacion}"></p:rating>
+											<h:commandButton class="btn btn-warning" action="#{rutaBean.calificar()}" value="Enviar" />
+										</div>
+									</h:form>
+								</c:otherwise>
+							</c:choose>
+							
 						</fieldset>
 					</div>								
 				</div>
