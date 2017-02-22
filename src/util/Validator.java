@@ -41,7 +41,7 @@ public class Validator {
 	}
 	
 	public static boolean stringNoVacio(String string){
-		if(string != null && string != "" && string.length() > 0){
+		if(string != null && string != "" && string.trim().length() > 0){
 			return true;
 		}
 		return false;

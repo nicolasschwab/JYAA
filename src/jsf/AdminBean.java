@@ -12,6 +12,7 @@ import util.Mensaje;
 import util.SessionUtil;
 import util.Validator;
 import model.Actividad;
+import model.Administrador;
 import model.Usuario;
 
 @ManagedBean
@@ -33,26 +34,32 @@ public class AdminBean implements Serializable{
 	
 	public String deshabilitar(Long id){
 		if(SessionUtil.hasSession()){
-			FactoryService.getUsuarioService().deshabilitarUsuario(id);
-			this.asignarListadosUsuario();
+			if(isAdmin()){
+				FactoryService.getUsuarioService().deshabilitarUsuario(id);
+				this.asignarListadosUsuario();
+			}
 		}
 		return null;
 	}
 	
 	public String habilitar(Long id){
 		if(SessionUtil.hasSession()){
-			FactoryService.getUsuarioService().habilitarUsuario(id);
-			this.asignarListadosUsuario();
+			if(isAdmin()){
+				FactoryService.getUsuarioService().habilitarUsuario(id);
+				this.asignarListadosUsuario();
+			}
 		}
 		return null;
 	}
 	
 	public String altaActividad(){
-		if(SessionUtil.hasSession()){		
-			if(Validator.validateActividad(this.getActividad().getNombre())){
-				this.getActividad().alta();
-			}else{
-				Mensaje.crearMensaje("Debes darle un nombre a la actividad");
+		if(SessionUtil.hasSession()){
+			if(isAdmin()){
+				if(Validator.validateActividad(this.getActividad().getNombre())){
+					this.getActividad().alta();
+				}else{
+					Mensaje.crearMensaje("Debes darle un nombre a la actividad");
+				}
 			}
 		}
 		return this.listarActividades();
@@ -60,71 +67,93 @@ public class AdminBean implements Serializable{
 	
 	public String deshabilitarActividad(Actividad actividad){
 		if(SessionUtil.hasSession()){
-			if(this.actividad.deshabilitar(actividad)){
-				Mensaje.crearMensaje("Se deshabilitó la actividad");
-			}else{
-				Mensaje.crearMensaje("La actividad no existe");
+			if(isAdmin()){
+				if(this.actividad.deshabilitar(actividad)){
+					Mensaje.crearMensaje("Se deshabilitó la actividad");
+				}else{
+					Mensaje.crearMensaje("La actividad no existe");
+				}
+				this.listarActividades();
 			}
 		}
-		this.listarActividades();
 		return null;
 	}
 	
 	public String eliminarActividad(Actividad actividad){
 		if(SessionUtil.hasSession()){
-			if(this.actividad.eliminar(actividad)){
-				Mensaje.crearMensaje("Se eliminó la actividad");
-			}else{
-				Mensaje.crearMensaje("Hay rutas con esta actividad asignada");
+			if(isAdmin()){
+				if(this.actividad.eliminar(actividad)){
+					Mensaje.crearMensaje("Se eliminó la actividad");
+				}else{
+					Mensaje.crearMensaje("Hay rutas con esta actividad asignada");
+				}
+				this.listarActividades();
 			}
 		}
-		this.listarActividades();
 		return null;
 	}
 	
 	public String modificarActividad(Actividad actividad){
 		if(SessionUtil.hasSession()){
-			if(Validator.validateActividad(actividad.getNombre())){
-				if(this.actividad.modificar(actividad)){
-					Mensaje.crearMensaje("Se modificó la actividad");
+			if(isAdmin()){
+				if(Validator.validateActividad(actividad.getNombre())){
+					if(this.actividad.modificar(actividad)){
+						Mensaje.crearMensaje("Se modificó la actividad");
+					}else{
+						Mensaje.crearMensaje("La actividad no existe");
+					}
 				}else{
-					Mensaje.crearMensaje("La actividad no existe");
+					Mensaje.crearMensaje("La actividad debe tener un nombre");
 				}
-			}else{
-				Mensaje.crearMensaje("La actividad debe tener un nombre");
+				this.listarActividades();
 			}
 		}
-		this.listarActividades();
 		return null;
 	}
 	
 	public String habilitarActividad(Actividad actividad){
 		if(SessionUtil.hasSession()){
-			if(this.actividad.habilitar(actividad)){
-				Mensaje.crearMensaje("Se habilitó la activdad");
-			}
-			else{
-				Mensaje.crearMensaje("La actividad no existe!");
+			if(isAdmin()){
+				if(this.actividad.habilitar(actividad)){
+					Mensaje.crearMensaje("Se habilitó la activdad");
+				}
+				else{
+					Mensaje.crearMensaje("La actividad no existe!");
+				}
+				this.listarActividades();
 			}
 		}
-		this.listarActividades();
 		return null;
 	}
 
 	public String listarUsuarios(){
-		if(SessionUtil.hasSession()){		
-			return "listarUsuarios?faces-redirect";
+		if(SessionUtil.hasSession()){
+			if(isAdmin()){
+				return "listarUsuarios?faces-redirect";
+			}
 		}
 		return null;
 	}
 
 	public String listarActividades(){
-		if(SessionUtil.hasSession()){			
-			this.asignarListadoActividadesHabilitadas();
-			this.asignarListadoActividadesDeshabilitadas();
-			return "listarActividades?faces-redirect=true";
+		if(SessionUtil.hasSession()){
+			if(isAdmin()){
+				this.asignarListadoActividadesHabilitadas();
+				this.asignarListadoActividadesDeshabilitadas();
+				return "listarActividades?faces-redirect=true";
+			}
 		}
 		return null;
+	}
+	
+	private boolean isAdmin(){
+		Administrador admin = FactoryService.getAdministradorService().encontrar(SessionUtil.getUserId());
+		if(admin != null){
+			if(admin.getId() == SessionUtil.getUserId()){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private void asignarListadosUsuario(){
