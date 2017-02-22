@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import model.Actividad;
 import util.FactoryService;
+import util.SessionUtil;
 import util.Validator;
 
 @ManagedBean
@@ -24,11 +25,16 @@ public class ActividadBean implements Serializable{
 	private RutaBean rutaBean;
 	
 	public List<Actividad> getHabilitadas(){
-		return FactoryService.getActividadService().listHabilitadas();
+		if(SessionUtil.hasSession()){
+			return FactoryService.getActividadService().listHabilitadas();
+		}
+		return null;
 	}
 	
 	public void alta(){
-		FactoryService.getActividadService().createActividad(this.getNombre(),this.isHabilitada());
+		if(SessionUtil.hasSession()){
+			FactoryService.getActividadService().createActividad(this.getNombre(),this.isHabilitada());			
+		}
 	}
 	
 	public void nombreCualquiera() {
@@ -57,40 +63,64 @@ public class ActividadBean implements Serializable{
 	}
 
 	public List<Actividad> listarTodas() {
-		return FactoryService.getActividadService().listAll();		
+		if(SessionUtil.hasSession()){
+			return FactoryService.getActividadService().listAll();
+		}
+		return null;
 	}
 
 	public List<Actividad> listarTodasHabilitadas() {
-		return FactoryService.getActividadService().listHabilitadas();
+		if(SessionUtil.hasSession()){
+			return FactoryService.getActividadService().listHabilitadas();
+		}
+		return null;
 	}
 
 	public List<Actividad> listarTodasDeshabilitadas() {
-		return FactoryService.getActividadService().listDeshabilitadas();
+		if(SessionUtil.hasSession()){
+			return FactoryService.getActividadService().listDeshabilitadas();
+		}
+		return null;
 	}
 
 	public boolean deshabilitar(Actividad actividad) {
-		actividad.setHabilitada(false);
-		return FactoryService.getActividadService().modificar(actividad);
+		if(SessionUtil.hasSession()){
+			actividad.setHabilitada(false);
+			return FactoryService.getActividadService().modificar(actividad);
+		}
+		return false;
 	}
 	
 	public boolean habilitar(Actividad actividad) {
-		actividad.setHabilitada(true);
-		return FactoryService.getActividadService().modificar(actividad);
+		if(SessionUtil.hasSession()){
+			actividad.setHabilitada(true);
+			return FactoryService.getActividadService().modificar(actividad);
+		}
+		return false;
 	}
 
 	public boolean eliminar(Actividad actividad) {
-		if(rutaBean.hayRutasConActividad(actividad.getNombre())){
-			return FactoryService.getActividadService().eliminar(actividad);
+		if(SessionUtil.hasSession()){
+			if(rutaBean.hayRutasConActividad(actividad.getNombre())){
+				return FactoryService.getActividadService().eliminar(actividad);
+			}
+			return false;
 		}
-		return false;		
+		return false;
 	}
 	
-	public boolean modificar(Actividad actividad) {		
-		return FactoryService.getActividadService().modificar(actividad);
+	public boolean modificar(Actividad actividad) {
+		if(SessionUtil.hasSession()){
+			return FactoryService.getActividadService().modificar(actividad);
+		}
+		return false;
 	}
 
 	public String getBuscarNombre() {
-		return Validator.stringNoVacio(this.getNombre()) ? this.getNombre() : "%" ;
+		if(SessionUtil.hasSession()){
+			return Validator.stringNoVacio(this.getNombre()) ? this.getNombre() : "%" ;
+		}
+		return null;
 	}
 	
 	

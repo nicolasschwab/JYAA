@@ -18,6 +18,13 @@ public class Punto {
 	@XmlElement private double longitud;
 	private String descripcion;
 	
+	public boolean validarLatLong(double lat, double lon){
+		if(this.latitud == lat && this.longitud == lon){
+			return true;
+		}
+		return false;
+	}
+	
 	public Punto(){
 		super();
 	}

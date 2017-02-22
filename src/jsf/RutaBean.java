@@ -44,6 +44,7 @@ public class RutaBean {
 	private boolean modificar;
 	private String ordenar;
 	private int calificacion;
+	private String removePunto;
 	
 	public String calificar() throws Exception{
 		if(SessionUtil.hasSession()){
@@ -147,6 +148,26 @@ public class RutaBean {
 			return "altaRuta?faces-redirect=true";
 		}
 		return "";
+	}
+	
+	public String getRemovePunto(){
+		return "";
+	}
+	
+	public void setRemovePunto(String latLong){
+		String[] arrayLatLong = latLong.split("\\_");
+		Punto puntoBorrar = null;
+		if(arrayLatLong.length == 2){
+			for(Punto punto : this.ruta.getPuntos()){
+				if(punto.validarLatLong(Double.parseDouble(arrayLatLong[0]), Double.parseDouble(arrayLatLong[1]))){
+					puntoBorrar = punto;
+					break;
+				}
+			}
+			if(puntoBorrar != null){
+				this.ruta.getPuntos().remove(puntoBorrar);
+			}
+		}
 	}
 	
 	private void addPunto(){

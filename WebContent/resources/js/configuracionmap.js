@@ -7,6 +7,7 @@ var mapProp = {
 };
 
 var puntos = [];
+var flightPath;
 
 // Evento
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -37,8 +38,8 @@ function genericInitialiaze(){
 			if(value != ""){
 				latLong = value.split("_");
 				punto = {
-					lat : parseInt(latLong[0]),
-					lng : parseInt(latLong[1])
+					lat : parseFloat(latLong[0]),
+					lng : parseFloat(latLong[1])
 				};
 				puntos.push(punto);
 			}
@@ -76,7 +77,7 @@ function dibujarMarker(dato) {
 
 	marker.addListener("rightclick", function(point) {
 		console.log("rigthclick");
-		borrarMarker(dato.id);
+		borrarMarker(dato.lat, dato.lng);
 		marker.setMap(null);
 	});
 
@@ -93,12 +94,12 @@ function agregarMarker(latLng) {
 	$(".lat-long").attr("value", latLng.lat()+"_"+latLng.lng());
 	$(".lat-long").change();
 	puntos.push(punto);
-	obtenerMarkers();
+	deletePath();
 }
 
 function dibujarRecorrido() {
-
-	var flightPath = new google.maps.Polyline({
+	
+	flightPath = new google.maps.Polyline({
 		path : puntos,
 		strokeColor : "#0000FF",
 		strokeOpacity : 0.8,
@@ -108,20 +109,20 @@ function dibujarRecorrido() {
 	flightPath.setMap(map);
 }
 
-function dibujarRecorridoCircular() {
-
-	markers = puntos;
-	markers[markers.length] = puntos[0];
-
-	var flightPath = new google.maps.Polyline({
-		path : markers,
-		strokeColor : "#0000FF",
-		strokeOpacity : 0.8,
-		strokeWeight : 2
-	});
-
-	flightPath.setMap(map);
-}
+//function dibujarRecorridoCircular() {
+//
+//	markers = puntos;
+//	markers[markers.length] = puntos[0];
+//
+//	var flightPath = new google.maps.Polyline({
+//		path : markers,
+//		strokeColor : "#0000FF",
+//		strokeOpacity : 0.8,
+//		strokeWeight : 2
+//	});
+//
+//	flightPath.setMap(map);
+//}
 
 $(document).ready(function(){
 	$("#borrarMarcadores").click(function(){
@@ -144,17 +145,23 @@ function limpiarMapa() {
 
 }
 
-//function borrarMarker(id) {
-//	console.log("borrar marker " + id);
-//	punto = {
-//		id : id
-//	};
-//	$.ajax({
-//		data : punto,
-//		url : myURI ,
-//		type : "DELETE",
-//		success : function(result) {
-//			initialize();
-//		}
-//	});
-//}
+function borrarMarker(lat, lon) {
+	$(".lat-long2").attr("value", lat+"_"+lon);
+	$(".lat-long2").change();
+	index = -1;
+	$.each(puntos, function(i, dato) {
+		if(dato.lat == lat && dato.lng == lon){
+			index = i;
+		}
+	});
+	if(index != -1){
+		puntos.splice(index,1);
+		deletePath();
+	}
+	
+}
+
+function deletePath(){
+	flightPath.setMap(null);
+	obtenerMarkers();
+}

@@ -32,20 +32,24 @@ public class AdminBean implements Serializable{
 	}
 	
 	public String deshabilitar(Long id){
-		FactoryService.getUsuarioService().deshabilitarUsuario(id);
-		this.asignarListadosUsuario();
+		if(SessionUtil.hasSession()){
+			FactoryService.getUsuarioService().deshabilitarUsuario(id);
+			this.asignarListadosUsuario();
+		}
 		return null;
 	}
 	
 	public String habilitar(Long id){
-		FactoryService.getUsuarioService().habilitarUsuario(id);
-		this.asignarListadosUsuario();
+		if(SessionUtil.hasSession()){
+			FactoryService.getUsuarioService().habilitarUsuario(id);
+			this.asignarListadosUsuario();
+		}
 		return null;
 	}
 	
 	public String altaActividad(){
 		if(SessionUtil.hasSession()){		
-			if(Validator.stringNoVacio(getActividad().getNombre())){
+			if(Validator.validateActividad(this.getActividad().getNombre())){
 				this.getActividad().alta();
 			}else{
 				Mensaje.crearMensaje("Debes darle un nombre a la actividad");
@@ -80,10 +84,14 @@ public class AdminBean implements Serializable{
 	
 	public String modificarActividad(Actividad actividad){
 		if(SessionUtil.hasSession()){
-			if(this.actividad.modificar(actividad)){
-				Mensaje.crearMensaje("Se modificó la actividad");
+			if(Validator.validateActividad(actividad.getNombre())){
+				if(this.actividad.modificar(actividad)){
+					Mensaje.crearMensaje("Se modificó la actividad");
+				}else{
+					Mensaje.crearMensaje("La actividad no existe");
+				}
 			}else{
-				Mensaje.crearMensaje("La actividad no existe");
+				Mensaje.crearMensaje("La actividad debe tener un nombre");
 			}
 		}
 		this.listarActividades();

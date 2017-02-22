@@ -82,6 +82,6 @@ input, textarea, select{
     margin-bottom: 10px;
     padding-top: 10px;
 }
-.lat-long{
+.lat-long, .lat-long2{
 	display:none;
 }

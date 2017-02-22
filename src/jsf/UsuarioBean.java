@@ -46,16 +46,18 @@ public class UsuarioBean implements Serializable {
 	
 	public String registrar(){
 		if(!SessionUtil.hasSession()){
-			if(this.validarVariables()){			
+			if(Validator.validarNuevoUsuario(username, dni, domicilio, email, nombreCompleto, sexo)){			
 				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			    Date nacimientoDate = null;
 			    try
 			    {
-			    	nacimientoDate = formatter.parse(getNacimiento());           
+			    	nacimientoDate = formatter.parse(getNacimiento());
+			    	Validator.fechaAnterior(nacimientoDate, "fecha nacimiento");
+			    	
 			    } 
-			    catch (java.text.ParseException e)
+			    catch (Exception e)
 			    {
-			         e.printStackTrace();
+			         return "";
 			    }
 				Usuario usuarioNuevo =  new Usuario(getUsername(), getDni(), getNombreCompleto(), getDomicilio(), nacimientoDate, getSexo(), getEmail());
 				//se crea una contrasenia por defecto
@@ -81,7 +83,7 @@ public class UsuarioBean implements Serializable {
 	
 	public String modificar(){
 		if(SessionUtil.hasSession()){
-			if(this.validarVariablesUsr()){
+			if(Validator.validarNuevoUsuario(this.getUsr().getNombreUsuario(), this.getUsr().getDni(), this.getUsr().getDomicilio(), this.getUsr().getEmail(), this.getUsr().getNombreCompleto(), this.getUsr().getSexo())){
 				FactoryService.getUsuarioService().modificar(usr);
 				this.crearMensaje("Se modificaron los datos!");
 			}else{
@@ -115,9 +117,9 @@ public class UsuarioBean implements Serializable {
 						if(!this.getContrasenaVieja().equals(this.getNuevaAgain())){
 							this.getUsr().setContrasenia(this.getNuevaAgain());
 							FactoryService.getUsuarioService().modificar(usr);
-							this.crearMensaje("Se cambio la contrase�a cn exito!");
+							this.crearMensaje("Se cambio la contrasenia con exito!");
 						}else{
-							this.crearMensaje("Las contrase�as nuevas y viejas no pueden coincidir");
+							this.crearMensaje("Las contrasenias nuevas y viejas no pueden coincidir");
 						}
 					}else{
 						this.crearMensaje("Las nuevas contrasenas no coinciden");
@@ -130,26 +132,6 @@ public class UsuarioBean implements Serializable {
 			}
 		}
 		return null;
-	}
-	
-	private boolean validarVariablesUsr(){
-		if(Validator.stringNoVacio(this.getUsr().getDni())){
-			if(Validator.stringNoVacio(this.getUsr().getDomicilio())){
-				if(Validator.stringNoVacio(this.getUsr().getEmail())){
-					if(Validator.stringNoVacio(this.getUsr().getNombreCompleto())){
-						if(Validator.stringNoVacio(this.getUsr().getNombreUsuario())){
-							if(Validator.stringNoVacio(this.getUsr().getSexo())){
-								if(Validator.stringNoVacio(this.getUsr().getFechaNacimiento().toString())){
-									return true;
-								}								
-							}
-						}
-					}
-					
-				}
-			}
-		}
-		return false;
 	}
 	
 	private void crearMensaje(String mensaje){
@@ -166,25 +148,6 @@ public class UsuarioBean implements Serializable {
 					return true;
 				}
 			}
-		}
-		return false;
-	}
-	
-	private boolean validarVariables(){
-		if(Validator.stringNoVacio(this.getUsername())){
-			if(Validator.stringNoVacio(this.getDni())){
-				if(Validator.stringNoVacio(this.getDomicilio())){
-					if(Validator.stringNoVacio(this.getEmail())){
-						if(Validator.stringNoVacio(this.getNacimiento())){
-							if(Validator.stringNoVacio(this.getNombreCompleto())){
-								if(Validator.stringNoVacio(this.getSexo())){
-									return true;
-								}
-							}
-						}						
-					}
-				}
-			}			
 		}
 		return false;
 	}

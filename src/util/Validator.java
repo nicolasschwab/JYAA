@@ -1,6 +1,9 @@
 package util;
 
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -9,6 +12,9 @@ import model.Punto;
 
 public class Validator {
 
+	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	
 	enum valoresDificultad {
 			Facil("Facil"), Moderado("Moderado"), Dificil("Dificil"), MuyDificil("Muy Dificil"), SoloExpertos("Solo Expertos");
 		
@@ -29,13 +35,13 @@ public class Validator {
 		if(stringNoVacio(string)){
 			return true;
 		}else{
-			crearMensaje("el campo"+stringName+" no puede estar vacio");
+			crearMensaje("El campo "+stringName+" no puede estar vacio");
 			return false;
 		}
 	}
 	
 	public static boolean stringNoVacio(String string){
-		if(string != null && string != ""){
+		if(string != null && string != "" && string.length() > 0){
 			return true;
 		}
 		return false;
@@ -62,10 +68,59 @@ public class Validator {
 		return success;
 	}
 	
+	public static boolean validarNuevoUsuario(String nombreUsuario, String dni,String domicilio,String email, String nombreCompleto,String sexo ){
+		boolean paso = true;	
+		paso &= stringNoVacio(nombreUsuario, "Nombre de Usuario");
+		paso &= validarInt(dni, "dni");
+		paso &= stringNoVacio(domicilio, "Domicilio");
+		paso &= validateEmail(email, "Correo electronico");
+		paso &= stringNoVacio(nombreCompleto, "Nombre completo");
+		paso &= stringNoVacio(sexo, "Sexo");
+		return paso;
+	}
+	
+	private static boolean validarInt(String unInt, String nombreCampo){
+		try{
+			Integer.valueOf(unInt);
+			return true;
+		}catch(Exception e){
+			crearMensaje("El campo "+nombreCampo+ " debe ser un numero");
+			return false;
+		}
+	}
+	
+	public static void fechaAnterior(Date fecha, String nombreCampo) throws Exception{
+		boolean anterior = fecha.before(new Date());
+    	if(!anterior){
+    		crearMensaje("La fecha del campo "+ nombreCampo+ " no puede superior a la actual");
+    		throw new Exception();
+    	}
+	}
+	
 	private static void crearMensaje(String mensaje){
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN,
 						mensaje,
 						mensaje));
 	}
+	
+	public static boolean validateActividad(String nombre){
+		return stringNoVacio(nombre);
+	}
+	
+	private static boolean validateEmail(String email, String nombreCampo) {
+		 
+        // Compiles the given regular expression into a pattern.
+        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+ 
+        // Match the given input against this pattern
+        Matcher matcher = pattern.matcher(email);
+        if(matcher.matches()){
+        	return true;
+        }else{
+        	crearMensaje("El campo "+nombreCampo+ " debe ser un email");
+        	return false;
+        }
+ 
+    }
 }
