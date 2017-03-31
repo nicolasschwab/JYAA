@@ -3,9 +3,11 @@ package jsf;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.el.ELContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import model.Actividad;
 import util.FactoryService;
@@ -22,6 +24,7 @@ public class ActividadBean implements Serializable{
 	private String nombre;
 	private boolean habilitada;
 	
+//	@ManagedProperty(value="#{rutaBean}")
 	private RutaBean rutaBean;
 	
 	public List<Actividad> getHabilitadas(){
@@ -101,7 +104,10 @@ public class ActividadBean implements Serializable{
 
 	public boolean eliminar(Actividad actividad) {
 		if(SessionUtil.hasSession()){
-			if(rutaBean.hayRutasConActividad(actividad.getNombre())){
+			ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+			RutaBean rutaBean = (RutaBean) FacesContext.getCurrentInstance().getApplication()
+			    .getELResolver().getValue(elContext, null, "rutaBean");
+			if(!rutaBean.hayRutasConActividad(actividad.getNombre())){
 				return FactoryService.getActividadService().eliminar(actividad);
 			}
 			return false;
@@ -121,6 +127,14 @@ public class ActividadBean implements Serializable{
 			return Validator.stringNoVacio(this.getNombre()) ? this.getNombre() : "%" ;
 		}
 		return null;
+	}
+
+	public RutaBean getRutaBean() {
+		return rutaBean;
+	}
+
+	public void setRutaBean(RutaBean rutaBean) {
+		this.rutaBean = rutaBean;
 	}
 	
 	

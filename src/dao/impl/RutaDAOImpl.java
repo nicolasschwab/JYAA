@@ -30,7 +30,7 @@ public class RutaDAOImpl extends GenericDAOImpl<Ruta> implements RutaDAO {
 		try{			
 			etx.begin();
 			Query consulta = em.createQuery(
-					"select e from " + getPersistentClass().getSimpleName() + " e where e.actividad.nombre=:nombre");
+					"select e from " + getPersistentClass().getSimpleName() + " e join e.actividad a where a.nombre = :nombre");
 			consulta.setParameter("nombre", nombre);
 			em.flush();
 			resultado = (List<Ruta>) consulta.getResultList();
